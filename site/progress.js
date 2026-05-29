@@ -25,6 +25,97 @@
 (function () {
   var STORAGE_KEY = 'aifs:progress:v1';
   var listeners = [];
+  var cloudUserId = null;
+
+  function getSupabaseClient() {
+    return (window.AIFSAuth && window.AIFSAuth.getClient) ? window.AIFSAuth.getClient() : null;
+  }
+
+  // Pull all rows for this user from Supabase and merge into localStorage.
+  // Cloud wins for completedAt if local doesn't have it; local wins otherwise.
+  // After merge, push any locally-completed lessons the cloud is missing.
+  function syncFromCloud(userId) {
+    cloudUserId = userId;
+    var sb = getSupabaseClient();
+    if (!sb) return;
+
+    sb.from('progress').select('*').eq('user_id', userId).then(function (result) {
+      if (result.error) return;
+      var rows = result.data || [];
+      var state = read();
+      var cloudPaths = {};
+
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        var path = row.lesson_path;
+        cloudPaths[path] = true;
+        if (!state.lessons[path]) {
+          state.lessons[path] = { answers: {}, completedAt: null, visitedAt: 0 };
+        }
+        var local = state.lessons[path];
+        if (row.completed_at && !local.completedAt) {
+          local.completedAt = row.completed_at;
+        }
+        if ((row.visited_at || 0) > (local.visitedAt || 0)) {
+          local.visitedAt = row.visited_at || 0;
+        }
+        var cloudAnswers = row.answers || {};
+        if (typeof cloudAnswers === 'string') {
+          try { cloudAnswers = JSON.parse(cloudAnswers); } catch (_) { cloudAnswers = {}; }
+        }
+        for (var qid in cloudAnswers) {
+          if (!local.answers[qid]) local.answers[qid] = cloudAnswers[qid];
+        }
+      }
+
+      // Persist merged state and notify UI.
+      write(state);
+
+      // Push local completions that the cloud doesn't know about.
+      for (var localPath in state.lessons) {
+        if (!cloudPaths[localPath] && state.lessons[localPath].completedAt) {
+          pushRowToCloud(localPath, state.lessons[localPath]);
+        }
+      }
+    });
+  }
+
+  function pushRowToCloud(path, lessonData) {
+    if (!cloudUserId) return;
+    var sb = getSupabaseClient();
+    if (!sb) return;
+    sb.from('progress').upsert({
+      user_id: cloudUserId,
+      lesson_path: path,
+      completed_at: lessonData.completedAt || null,
+      visited_at: lessonData.visitedAt || 0,
+      answers: lessonData.answers || {}
+    }, { onConflict: 'user_id,lesson_path' }).then(function () {});
+  }
+
+  function deleteRowFromCloud(path) {
+    if (!cloudUserId) return;
+    var sb = getSupabaseClient();
+    if (!sb) return;
+    sb.from('progress').upsert({
+      user_id: cloudUserId,
+      lesson_path: path,
+      completed_at: null,
+      visited_at: 0,
+      answers: {}
+    }, { onConflict: 'user_id,lesson_path' }).then(function () {});
+  }
+
+  function clearCloudData() {
+    if (!cloudUserId) return;
+    var sb = getSupabaseClient();
+    if (!sb) return;
+    sb.from('progress').delete().eq('user_id', cloudUserId).then(function () {});
+  }
+
+  function clearCloudUser() {
+    cloudUserId = null;
+  }
 
   function emptyState() {
     return { lessons: {}, updatedAt: 0 };
@@ -84,6 +175,7 @@
     if (!lesson.completedAt) {
       lesson.completedAt = Date.now();
       write(state);
+      pushRowToCloud(path, lesson);
     }
   }
 
@@ -93,6 +185,7 @@
     if (state.lessons[path] && state.lessons[path].completedAt) {
       state.lessons[path].completedAt = null;
       write(state);
+      deleteRowFromCloud(path);
     }
   }
 
@@ -137,6 +230,7 @@
   }
 
   function reset() {
+    clearCloudData();
     try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
     for (var i = 0; i < listeners.length; i++) {
       try { listeners[i](emptyState()); } catch (_) {}
@@ -169,5 +263,7 @@
     totalCompleted: totalCompleted,
     reset: reset,
     onChange: onChange,
+    syncFromCloud: syncFromCloud,
+    clearCloudUser: clearCloudUser,
   };
 })();
