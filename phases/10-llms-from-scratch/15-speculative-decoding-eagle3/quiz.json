@@ -18,36 +18,36 @@
       "stage": "check",
       "question": "What does the acceptance rate α represent in the speedup formula?",
       "options": [
-        "The probability that the verifier accepts the draft model's token proposal",
         "The number of tokens generated per second",
+        "The probability that the verifier accepts the draft model's token proposal",
         "The ratio of draft model size to verifier size",
         "The temperature setting for sampling"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "α is the single biggest lever for speedup in speculative decoding. It measures how often the draft model's tokens match what the verifier would have produced, which determines how many draft tokens can be accepted without recomputation."
     },
     {
       "stage": "check",
       "question": "How does EAGLE-3 improve upon the original speculative decoding approach?",
       "options": [
-        "It introduces a learned draft model that conditionally generates token candidates based on the verifier's hidden states",
-        "It uses a larger draft model",
         "It skips the verification step entirely",
+        "It uses a larger draft model",
+        "It introduces a learned draft model that conditionally generates token candidates based on the verifier's hidden states",
         "It processes tokens in parallel regardless of acceptance"
       ],
-      "correct": 0,
+      "correct": 2,
       "explanation": "Original spec-decoding used a small independent draft model. EAGLE trains a draft head that reads the verifier's hidden states to predict which tokens the verifier is likely to accept, making the draft much more informed and raising the acceptance rate."
     },
     {
       "stage": "check",
       "question": "What happens to the KV cache when the verifier rejects a draft token?",
       "options": [
-        "The cache rolls back to the state before the rejected token was added, and a new token is sampled from the residual distribution",
+        "The entire cache is flushed and rebuilt",
         "The cache grows indefinitely with rejected tokens",
         "The rejected token is kept in the cache",
-        "The entire cache is flushed and rebuilt"
+        "The cache rolls back to the state before the rejected token was added, and a new token is sampled from the residual distribution"
       ],
-      "correct": 0,
+      "correct": 3,
       "explanation": "On rejection, the speculative loop must roll back the KV cache to the pre-rejection state to maintain correctness. It then samples a new token from the residual (q-p)+ distribution, which is what the verifier would have sampled if not for the draft proposal."
     },
     {
@@ -66,12 +66,12 @@
       "stage": "post",
       "question": "What is the bonus token in speculative decoding?",
       "options": [
-        "When all N draft tokens are accepted, the verifier generates one extra token without needing a new forward pass, effectively amortizing the cost over N+1 tokens",
         "A token generated at random when all drafts fail",
+        "When all N draft tokens are accepted, the verifier generates one extra token without needing a new forward pass, effectively amortizing the cost over N+1 tokens",
         "A token added to increase the sequence length",
         "A token used for padding sequences"
       ],
-      "correct": 0,
+      "correct": 1,
       "explanation": "Full acceptance means the verifier's forward pass validated N tokens at once. The verifier can then sample one more token before the next draft-verify round, giving N+1 tokens for the cost of one verifier pass. This bonus is why high acceptance rates are so valuable."
     }
   ]
