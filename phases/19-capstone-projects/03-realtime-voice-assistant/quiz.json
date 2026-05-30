@@ -1,6 +1,6 @@
 {
   "lesson": "03-realtime-voice-assistant",
-  "title": "Capstone 03 \u00e2\u20ac\u201d Real-Time Voice Assistant (ASR to LLM to TTS)",
+  "title": "Capstone 03 — Real-Time Voice Assistant (ASR to LLM to TTS)",
   "questions": [
     {
       "stage": "pre",
@@ -12,7 +12,7 @@
         "Mixes background music into the output stream"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "The VAD module detects speech boundaries and silence, triggering ASR only when speech is present and avoiding unnecessary processing of ambient noise."
     },
     {
       "stage": "check",
@@ -24,7 +24,7 @@
         "The agent raises the TTS volume to assert priority"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "Streaming Whisper processes audio in 30-second chunks with overlap, transcribing continuously while the user speaks for low-latency responses."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         "It improves WER on the next utterance"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "Symmetric VAD detects turn boundaries on both user and agent audio, enabling seamless back-and-forth conversation without explicit push-to-talk."
     },
     {
       "stage": "check",
@@ -48,7 +48,7 @@
         "200ms"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "The architecture minimizes first-audio-out latency by using streaming models, VAD-based triggering, and parallel ASR/LLM processing pipelines."
     },
     {
       "stage": "post",
@@ -60,7 +60,7 @@
         "False-cutoff rate"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "The capstone measures first-audio-out (time from user speech start to agent audio output), WER (word error rate on speech recognition), and MOS (mean opinion score on voice quality)."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "Restarting the LiveKit room"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "Robustness is tested with background noise tests, concurrent session stress tests, and interruption handling to ensure graceful degradation under adverse conditions."
     }
   ]
 }
