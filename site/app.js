@@ -10,17 +10,18 @@
   }
   updateThemeIcon();
 
-  document.addEventListener('DOMContentLoaded', function () {
-    initThemeToggle();
-    populateStats();
-    renderPhases();
-    initStaggerIndex();
-    initModal();
-    initCopyButton();
-    initSmoothScroll();
-    initFadeObserver();
-    initScrollExplode();
-  });
+   document.addEventListener('DOMContentLoaded', function () {
+     initThemeToggle();
+     populateStats();
+     renderPhases();
+     initStaggerIndex();
+     initModal();
+     initCopyButton();
+     initSmoothScroll();
+     initFadeObserver();
+     initScrollExplode();
+     initProgressButtons();
+   });
 
   function updateThemeIcon() {
     var icon = document.getElementById('themeIcon');
@@ -334,6 +335,53 @@
         revertTimer = setTimeout(function () { btn.textContent = originalLabel; }, 1500);
       });
     });
+  }
+
+  function initProgressButtons() {
+    if (!window.AIFSProgress) return;
+
+    var exportBtn = document.getElementById('exportBtn');
+    var importBtn = document.getElementById('importBtn');
+    var importFile = document.getElementById('importFile');
+
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function () {
+        try {
+          window.AIFSProgress.exportProgress();
+        } catch (e) {
+          console.error('Export failed:', e);
+          alert('Failed to export progress. Please try again.');
+        }
+      });
+    }
+
+    if (importBtn && importFile) {
+      importBtn.addEventListener('click', function () {
+        importFile.click();
+      });
+
+      importFile.addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        if (!file) return;
+
+        if (!window.confirm('Importing will replace all your current progress. Continue?')) {
+          importFile.value = '';
+          return;
+        }
+
+        window.AIFSProgress.importProgress(file, function (err) {
+          if (err) {
+            console.error('Import failed:', err);
+            alert('Failed to import progress: ' + (err.message || err));
+            importFile.value = '';
+          } else {
+            // Success - stats and modal will auto-refresh via onChange listener
+            alert('Progress imported successfully!');
+            importFile.value = '';
+          }
+        });
+      });
+    }
   }
 
   function initSmoothScroll() {

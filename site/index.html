@@ -20,31 +20,6 @@
   <link href="https://fonts.googleapis.com/css2?family=VT323&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260525a">
   <style>
-    .auth-toggle {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: none;
-      border: 1px solid var(--rule-soft);
-      border-radius: 4px;
-      padding: 3px 9px;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      color: var(--ink-mute);
-      white-space: nowrap;
-      transition: color 0.15s, border-color 0.15s;
-    }
-    .auth-toggle:hover {
-      color: var(--ink);
-      border-color: var(--ink-mute);
-    }
-    .auth-toggle[data-signed-in] {
-      border-color: var(--blueprint);
-      color: var(--blueprint);
-    }
-
     .manual-masthead {
       padding: 96px 0 24px;
       border-bottom: 1px solid var(--rule-soft);
@@ -670,10 +645,6 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </button>
-      <button class="auth-toggle" id="authToggle" type="button" title="Sign in with GitHub" aria-label="Sign in with GitHub">
-        <img id="authAvatar" src="" alt="" width="16" height="16" style="display:none;border-radius:50%;vertical-align:middle;">
-        <span id="authLabel">Sign in</span>
-      </button>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
         <span class="theme-icon" id="themeIcon">N</span>
       </button>
@@ -740,6 +711,15 @@
           <span class="stat-row-value" data-stat="glossary-count">···</span>
         </div>
       </div>
+      <div class="progress-actions" style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="progress-btn progress-btn--export" id="exportBtn" type="button" aria-label="Export progress to JSON file">
+          Export Progress
+        </button>
+        <button class="progress-btn progress-btn--import" id="importBtn" type="button" aria-label="Import progress from JSON file">
+          Import Progress
+        </button>
+        <input type="file" id="importFile" accept=".json" style="display:none;" aria-label="Select progress file">
+      </div>
     </section>
 
     <section class="toc container" id="contents">
@@ -799,10 +779,8 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="data.js?v=20260525a"></script>
   <script src="progress.js?v=20260525a"></script>
-  <script src="auth.js?v=20260525a"></script>
   <script src="header.js?v=20260525a" defer></script>
   <script src="cmdpalette.js?v=20260525a" defer></script>
   <script src="app.js?v=20260525a"></script>
