@@ -1,0 +1,41 @@
+---
+description: AIFS graph refresh, freshness gate, archive policy (graphify.mdc is graphify-owned)
+alwaysApply: true
+---
+
+# AIFS graphify protocol (this file — graphify never overwrites)
+
+`graphify-out/` is gitignored. Install: `py -3.12 -m pip install graphifyy`.
+
+**Stock query rule:** `.cursor/rules/graphify.mdc` (safe to refresh via `py -3.12 -m graphify cursor install`).
+
+**Do not read** `.cursor/_archive/` unless the user asks to restore something archived.
+
+## Query-first (Consultant / Otto — read-only)
+
+When `graphify-out/graph.json` exists, before broad grep or reading many files:
+
+```bash
+py -3.12 -m graphify query "<narrow question>"
+py -3.12 -m graphify path "<A>" "<B>"
+py -3.12 -m graphify explain "<concept>"
+```
+
+- Never load `graph.json` into context.
+- `GRAPH_REPORT.md`: Corpus/Summary, Graph Freshness, God Nodes, Surprising, Suggested Questions only.
+- May run `python3 scripts/check_graphify_freshness.py` (no `--strict`); never run `graphify update`.
+
+## Graph refresh (user + Cline)
+
+**Graph refresh:** `py -3.12 -m graphify update .` after lesson `code/`, `docs/`, `outputs/`, or `site/` edits.
+
+Skip when only README, ROADMAP, glossary, or `phases/**/quiz.json` changed.
+
+## Freshness gate (Cline)
+
+After graph refresh: `python3 scripts/check_graphify_freshness.py --strict` must exit 0.
+
+## Do not
+
+- Commit `graphify-out/`, run `graphify site`, add CI/hooks for graphify.
+- Edit `graphify.mdc` by hand — use `graphify cursor install` for upstream query-first wording.

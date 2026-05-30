@@ -25,7 +25,7 @@ Set mental mode: `focus.mode` would be `guidance` if they use `focus` in progres
 
 - Address doubts with specifics tied to **their** profile (`doubts`, `weaknesses`, `notes`).
 - Suggest concrete study adjustments (session length, build-first vs read-first) — not generic "believe in yourself."
-- Reference curriculum path when helpful: README phase order, `/find-your-level` if they are in the wrong phase.
+- Reference curriculum path when helpful: README phase order, `progress/learning-profile.json` if they are in the wrong phase.
 - Bridge to office hours when they ask a **technical** question: "That's content — want office hours on that topic?"
 - One small next step at the end (e.g. "one 45m block on lesson X" or "run learning-style-setup update").
 

@@ -99,6 +99,6 @@ Use their words in `notes` where possible.
 1. Show the JSON in one fenced `json` block.
 2. Tell them: save to `progress/learning-profile.json` and commit if they want agents on other machines to see it.
 3. Point to `/guidance-counselor` for meta conversations and `/student-handbook` for the full map.
-4. Suggest `/find-your-level` if they have not placed in the curriculum yet.
+4. If they have not chosen a starting phase, point to README phase tables and `progress/learning-profile.json` (not `/find-your-level` — archived).
 
 Do not start lesson content unless they redirect.

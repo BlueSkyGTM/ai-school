@@ -31,7 +31,7 @@ Handoff: Otto advises → user approves → Cline implements.
 
 ## Graphify (local)
 
-**Canonical rule:** `.cursor/rules/graphify.mdc` (query-first, graph refresh, freshness gate).
+**Rules:** `.cursor/rules/aifs-graphify.mdc` (protocol) + `graphify.mdc` (refresh via `graphify cursor install`).
 
 Install: `py -3.12 -m pip install graphifyy`. Checker: `python3 scripts/check_graphify_freshness.py`.
 

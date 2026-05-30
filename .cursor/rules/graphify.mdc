@@ -1,66 +1,11 @@
 ---
-description: graphify — query-first exploration, graph refresh, freshness gate (all agents)
+description: graphify knowledge graph context
 alwaysApply: true
 ---
 
-# Graphify (canonical — all agents read this; do not duplicate in AGENTS.md prose)
+This project has a graphify knowledge graph at graphify-out/.
 
-Local knowledge graph: `graphify-out/` (gitignored forever). Install: `py -3.12 -m pip install graphifyy`.
-
-## Query-first (Consultant / Otto / Auto — read-only)
-
-When `graphify-out/graph.json` exists, before broad grep or reading many files:
-
-```bash
-py -3.12 -m graphify query "<narrow question>"
-py -3.12 -m graphify path "<A>" "<B>"
-py -3.12 -m graphify explain "<concept>"
-```
-
-- Never load `graph.json` into context (~24k nodes; machine-only).
-- `GRAPH_REPORT.md`: read only **Corpus/Summary**, **Graph Freshness**, **God Nodes**, **Surprising Connections**, **Suggested Questions**. Skip Community Hubs and Communities.
-- If `graphify-out/wiki/index.md` exists, use it instead of raw file spelunking.
-- May run `python3 scripts/check_graphify_freshness.py` (no `--strict`) to report staleness.
-- **Must not** run `graphify update`, `graphify site`, or commit `graphify-out/`.
-
-## Graph refresh (user + Cline — after graph-relevant edits)
-
-**Graph refresh** = re-extract AST and rebuild the local graph (no LLM cost):
-
-```bash
-py -3.12 -m graphify update .
-```
-
-Run when you change lesson `code/`, `docs/`, `outputs/`, or anything under `site/`.
-
-**Skip graph refresh** when the session only touched README, ROADMAP, glossary, or `phases/**/quiz.json` (no `code/`, no `site/`).
-
-Optional long sessions: `py -3.12 -m graphify watch .` (continuous refresh on save).
-
-Do **not** run `graphify site` on this repo — full graph exceeds HTML viz limits; use query/path/explain.
-
-## Freshness gate (Cline / implementer — hard exit after refresh)
-
-After graph refresh (or when graph-relevant files changed vs HEAD):
-
-```bash
-python3 scripts/check_graphify_freshness.py --strict
-```
-
-Exit **0** required before marking the task done. Exit **1** = stale → run graph refresh again.
-
-Checker skips automatically for quiz-only / catalog-only work unless you pass `--always`.
-
-## Do not
-
-- Add CI, pre-commit hooks, or `.cursor/hooks.json` for graphify (agent-side rule + script only).
-- Run `graphify cursor install` here — it overwrites this file with the stock template.
-- Commit `graphify-out/` or use Obsidian/wiki unless the user explicitly asks later.
-
-## Quick reference
-
-| Who | Explore | Refresh graph | Verify |
-|-----|---------|---------------|--------|
-| User (Raymo) | query / path / explain | **graph refresh**: `graphify update .` | optional: `check_graphify_freshness.py --always` |
-| Otto | query only | never | optional, no `--strict` |
-| Cline | query when reviewing | update after code/site edits | `--strict` must pass |
+- For codebase or architecture questions, when `graphify-out/graph.json` exists, first run `graphify query "<question>"` (or `graphify path "<A>" "<B>"` / `graphify explain "<concept>"`). These return a scoped subgraph, usually much smaller than `GRAPH_REPORT.md` or raw grep output.
+- If graphify-out/wiki/index.md exists, navigate it instead of reading raw files
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context
+- After modifying code files in this session, run `graphify update .` to keep the graph current (AST-only, no API cost)

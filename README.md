@@ -124,13 +124,11 @@ python phases/01-math-foundations/01-linear-algebra-intuition/code/vectors.py
 
 ```bash
 /student-handbook          # map of skills, rules, progress files
-/find-your-level           # placement
 /learning-style-setup      # how you learn (optional, once)
 /guidance-counselor        # doubts & preferences (meta)
 ```
 
-Ten questions. Maps your knowledge to a starting phase, builds a personalized path with hour
-estimates. After each phase:
+Use README phase tables and `progress/learning-profile.json` for your starting phase. (One-time placement skill archived in `.cursor/_archive/`.)
 
 ```bash
 /check-understanding 3        # quiz yourself on phase 3
@@ -148,7 +146,6 @@ ls phases/03-deep-learning-core/05-loss-functions/outputs/
 
 | Skill | What it does |
 |---|---|
-| [`/find-your-level`](.cursor/skills/find-your-level/SKILL.md) | Ten-question placement quiz. Maps your knowledge to a starting phase and produces a personalized path with hour estimates. |
 | [`/check-understanding <phase>`](.cursor/skills/check-understanding/SKILL.md) | Per-phase quiz, eight questions, with feedback and specific lessons to review. |
 | [`curriculum-chat`](.cursor/rules/curriculum-chat.mdc) | Curriculum tutor — progress-aware context, office hours, lesson quiz flow. |
 | [`/lesson-planning`](.cursor/skills/lesson-planning/SKILL.md) | Plan or review lesson quizzes against doc/code; seven flagship insights for quality comparison. |

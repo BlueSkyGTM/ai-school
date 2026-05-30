@@ -25,7 +25,7 @@ Optional `focus` (user or site may add later):
 ```
 
 3. If `focus.currentLesson` is set, treat it as the working lesson unless the user overrides.
-4. If the file is missing or `lessons` is empty, say once that you have no saved progress yet; suggest `/find-your-level` if the user is new, or ask where they'd like to start.
+4. If the file is missing or `lessons` is empty, say once that you have no saved progress yet; suggest README phase tables or ask where they'd like to start.
 5. If `progress/learning-profile.json` exists (`setupComplete: true`), use it to tune tone (pace, feedback style) — do not recite the whole file.
 
 **Guidance counselor** is a separate skill (`/guidance-counselor`). If the user wants meta help (doubts, preferences, motivation), hand off to that skill — do not force lesson quiz flow.

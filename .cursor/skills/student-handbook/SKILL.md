@@ -18,7 +18,7 @@ You asked for a single map of **what exists and what it is for**. Present this s
 
 | Step | What | Invoke / open |
 |------|------|----------------|
-| 1 | Map prior knowledge → starting phase | `/find-your-level` |
+| 1 | Starting phase + path | README phase tables, `progress/learning-profile.json` |
 | 2 | How you learn best (preferences, doubts) | `/learning-style-setup` |
 | 3 | See all resources (this page) | `/student-handbook` |
 | 4 | Study with progress + bridges | Cursor rule `curriculum-chat` (automatic in Agent) |
@@ -36,7 +36,6 @@ You asked for a single map of **what exists and what it is for**. Present this s
 | Skill | Purpose | When |
 |-------|---------|------|
 | **student-handbook** | This index | Lost, onboarding, iterating your setup |
-| **find-your-level** | 10Q placement → phase + path | New or returning after a break |
 | **learning-style-setup** | Preferences, strengths, weaknesses, doubts → `progress/learning-profile.json` | Once, then when something changes |
 | **guidance-counselor** | Meta: doubt, pace, preference — not lesson drill | Stuck emotionally, "am I cut out for this", how to study |
 | **check-understanding** | Phase exam (8 Q) | After a phase |
@@ -53,7 +52,7 @@ Lesson **outputs** under `phases/**/outputs/` (hundreds of prompts/skills) are l
 | **curriculum-chat** | Read `progress/aifs-progress.json`; office hours vs lesson quiz flow; cross-phase bridges |
 | **lesson-planning-gate** | Before editing `quiz.json`, read lesson-planning skill |
 | **consultant-charter** | Otto = advise; Cline = implement |
-| **graphify.mdc** | Query-first, graph refresh, freshness gate (canonical) |
+| **graphify.mdc** + **aifs-graphify.mdc** | Query-first (graphify) + refresh/freshness gate (AIFS) |
 | **terminal-hygiene** | Cline backend terminal vs editor terminals |
 | **handoff-format** | One copy-paste block Otto → Cline |
 
@@ -126,7 +125,7 @@ Site does not write `learning-profile.json` or `focus` yet — edit in repo or a
 | **Lesson** | Open lesson path, "do this lesson", `focus.mode: lesson` | Pre → teach → check → post (`quiz.json`) |
 | **Office hours** | "office hours", broad topic | No forced lesson quiz; bridges from progress |
 | **Guidance** | `/guidance-counselor` | Meta: doubts, preferences; reads `learning-profile.json` |
-| **Placement** | `/find-your-level` | One-time path find |
+| **Placement** | README + `learning-profile.json` | Starting phase (placement skill archived) |
 | **Phase review** | `/check-understanding N` | End-of-phase quiz |
 
 ---
@@ -142,7 +141,13 @@ Document here so expectations stay honest:
 | **Resume workshop** | Not built | Same — tie to phase 19 + job counselor later |
 | **ROADMAP as career steps** | Partial | ROADMAP = curriculum shipping; career mapping = future job counselor |
 
-When the learner asks for these, say they are on the handbook backlog; offer guidance-counselor for study habits and find-your-level for path.
+When the learner asks for these, say they are on the handbook backlog; offer guidance-counselor for study habits and README phase tables for path.
+
+---
+
+## Archive (do not use)
+
+`.cursor/_archive/` — frozen one-time setup (e.g. placement skill). Agents skip unless user asks to restore. See `_archive/README.md`.
 
 ---
 
