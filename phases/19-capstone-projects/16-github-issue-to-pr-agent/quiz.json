@@ -1,6 +1,6 @@
 {
   "lesson": "16-github-issue-to-pr-agent",
-  "title": "Capstone 16 \u00e2\u20ac\u201d GitHub Issue-to-PR Autonomous Agent",
+  "title": "Capstone 16 — GitHub Issue-to-PR Autonomous Agent",
   "questions": [
     {
       "stage": "pre",
@@ -12,7 +12,7 @@
         "Apps require less code than PATs"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "The issue parser extracts structured information: problem description, reproduction steps, expected behavior, and relevant files from unstructured GitHub issue text."
     },
     {
       "stage": "check",
@@ -24,7 +24,7 @@
         "Disabling git on the worker"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "Solution planning uses the repo's codebase context (read via GitHub API) to understand the project structure and propose a step-by-step implementation plan."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         ".github/workflows is a virtual path"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "The agent reads, edits, and creates files via GitHub API commits, with diff previews showing exactly what changes will be made before applying them."
     },
     {
       "stage": "check",
@@ -48,7 +48,7 @@
         "The repo is force-pushed to main"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "Validation runs the project's test suite (if available) and checks for common issues (broken imports, syntax errors) before opening the PR."
     },
     {
       "stage": "post",
@@ -60,7 +60,7 @@
         "Only a turn cap"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "The capstone measures issue resolution accuracy (percentage of issues correctly addressed), PR quality (clean diffs, passing tests), and automation completeness (percentage of steps executed without human intervention)."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "Nothing; the PR has an empty body"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "Safety checks include permission validation (agent can only push to authorized branches), change limits (maximum files edited per issue), and rollback capability (automatic revert on test failures)."
     }
   ]
 }
