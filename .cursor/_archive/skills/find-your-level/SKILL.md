@@ -2,8 +2,7 @@
 name: find-your-level
 version: 1.0.0
 description: >
-  ARCHIVED — do not invoke. Placement results belong in progress/learning-profile.json.
-  See .cursor/_archive/README.md. Original: 10-question placement quiz for the curriculum.
+  ARCHIVED — do not invoke. Placement: README phase tables + progress/learning-profile.json.
 tags: [archived, assessment, onboarding]
 disable-model-invocation: true
 ---

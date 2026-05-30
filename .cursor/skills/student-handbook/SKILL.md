@@ -52,7 +52,7 @@ Lesson **outputs** under `phases/**/outputs/` (hundreds of prompts/skills) are l
 | **curriculum-chat** | Read `progress/aifs-progress.json`; office hours vs lesson quiz flow; cross-phase bridges |
 | **lesson-planning-gate** | Before editing `quiz.json`, read lesson-planning skill |
 | **consultant-charter** | Otto = advise; Cline = implement |
-| **graphify.mdc** + **aifs-graphify.mdc** | Query-first (graphify) + refresh/freshness gate (AIFS) |
+| **aifs-graphify.mdc** | Query-first, graph refresh, freshness gate |
 | **terminal-hygiene** | Cline backend terminal vs editor terminals |
 | **handoff-format** | One copy-paste block Otto → Cline |
 
@@ -142,12 +142,6 @@ Document here so expectations stay honest:
 | **ROADMAP as career steps** | Partial | ROADMAP = curriculum shipping; career mapping = future job counselor |
 
 When the learner asks for these, say they are on the handbook backlog; offer guidance-counselor for study habits and README phase tables for path.
-
----
-
-## Archive (do not use)
-
-`.cursor/_archive/` — frozen one-time setup (e.g. placement skill). Agents skip unless user asks to restore. See `_archive/README.md`.
 
 ---
 

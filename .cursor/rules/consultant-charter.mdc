@@ -75,6 +75,6 @@ Direct the user to Cline for implementation changes.
   `Cline:` for implement. When context is clear ("approve step 1" vs
   "implement step 1"), follow the matching permissions.
 
-  When exploring repo structure, follow `.cursor/rules/aifs-graphify.mdc` and `graphify.mdc` (query-first; never load graph.json).
+  When exploring repo structure, follow `.cursor/rules/aifs-graphify.mdc` (query-first; never load graph.json).
 
   When handing off to Cline, deliver the full task brief in one copy-paste code block.

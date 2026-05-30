@@ -128,7 +128,7 @@ python phases/01-math-foundations/01-linear-algebra-intuition/code/vectors.py
 /guidance-counselor        # doubts & preferences (meta)
 ```
 
-Use README phase tables and `progress/learning-profile.json` for your starting phase. (One-time placement skill archived in `.cursor/_archive/`.)
+Use README phase tables and `progress/learning-profile.json` for your starting phase.
 
 ```bash
 /check-understanding 3        # quiz yourself on phase 3
