@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 GRAPH_JSON = ROOT / "graphify-out" / "graph.json"
 GRAPH_REPORT = ROOT / "graphify-out" / "GRAPH_REPORT.md"
 BUILT_COMMIT_RE = re.compile(r"Built from commit: `([0-9a-f]{7,40})`")
+QUIZ_JSON_RE = re.compile(r"^phases/[^/]+/[^/]+/quiz\.json$")
 UPDATE_CMD = "py -3.12 -m graphify update ."
 
 
@@ -45,6 +46,19 @@ def _changed_paths() -> set[str]:
             continue
         paths.update(line.strip() for line in result.stdout.splitlines() if line.strip())
     return paths
+
+
+def _graph_relevant_changes(paths: set[str]) -> bool:
+    """True when edits need graphify update (code/, site/, docs/, etc.)."""
+    for raw in paths:
+        path = raw.replace("\\", "/")
+        if path.startswith("site/"):
+            return True
+        if QUIZ_JSON_RE.fullmatch(path):
+            continue
+        if path.startswith("phases/"):
+            return True
+    return False
 
 
 def _resolve_commit(ref: str) -> str | None:
@@ -81,9 +95,14 @@ def main(argv: list[str] | None = None) -> int:
         print("skip: not a git repository")
         return 0
 
-    if not args.always and not _changed_paths():
-        print("skip: no changes under phases/ or site/")
-        return 0
+    if not args.always:
+        changed = _changed_paths()
+        if not changed:
+            print("skip: no changes under phases/ or site/")
+            return 0
+        if not _graph_relevant_changes(changed):
+            print("skip: only quiz.json changes under phases/ (no code/ or site/)")
+            return 0
 
     if not GRAPH_JSON.is_file() or not GRAPH_REPORT.is_file():
         print(f"error: run: {UPDATE_CMD}")
