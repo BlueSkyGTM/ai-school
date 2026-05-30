@@ -1,6 +1,6 @@
 {
   "lesson": "09-code-migration-agent",
-  "title": "Capstone 09 \u00e2\u20ac\u201d Code Migration Agent (Repo-Level Language / Runtime Upgrade)",
+  "title": "Capstone 09 — Code Migration Agent (Repo-Level Language / Runtime Upgrade)",
   "questions": [
     {
       "stage": "pre",
@@ -12,7 +12,7 @@
         "Green CI in the sandbox without a coverage regression beyond a small threshold"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "Static analysis uses tree-sitter parsers to build an abstract syntax tree of the original codebase, identifying language constructs and dependencies for migration planning."
     },
     {
       "stage": "check",
@@ -24,7 +24,7 @@
         "30 minutes wall-clock, $8 cost, and 20 agent turns"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "The migration plan breaks down the project into phases: library translation, syntax refactoring, type system adaptation, and test suite migration, with dependency tracking between phases."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         "The agent automatically force-pushes a fix"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "The agent applies automated refactors (string replacement, AST transformations) followed by LLM-assisted semantic corrections for idiomatic language patterns."
     },
     {
       "stage": "check",
@@ -48,7 +48,7 @@
         "It satisfies a compliance checklist"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "Validation runs the test suite after each phase, with differential analysis to identify breaking changes and roll back failed migrations incrementally."
     },
     {
       "stage": "post",
@@ -60,7 +60,7 @@
         "ViDoRe v3"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "The capstone measures migration accuracy (percentage of code correctly translated), test pass rate (post-migration test suite success), and rollback frequency (number of phase reverts)."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "The fraction of fixes handled by OpenRewrite versus authored by the agent layer"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "Complexity metrics include lines of code migrated, number of semantic errors requiring manual review, and total migration time across the project."
     }
   ]
 }
