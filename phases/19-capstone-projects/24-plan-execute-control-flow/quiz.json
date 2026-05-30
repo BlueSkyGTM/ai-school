@@ -12,19 +12,19 @@
         "Because the model trains on it"
       ],
       "correct": 1,
-      "explanation": "The replanner reads it when revising. The tracer renders it on the timeline. It is a human-readable contract on the step."
+      "explanation": "Plan representation uses a hierarchical task graph with nodes representing operations and edges representing dependencies, enabling visualization and manipulation of execution order."
     },
     {
       "stage": "check",
       "question": "When a step fails and the replanner returns a new plan, what does the executor emit on the event stream?",
       "options": [
-        "Nothing \u00e2\u20ac\u201d replan is silent",
+        "Nothing â€” replan is silent",
         "session.complete with status=failed",
         "plan.diff with removed/added/revised step ids",
         "tool.error followed by session.start"
       ],
       "correct": 2,
-      "explanation": "plan.diff makes the revision visible. A silent rewrite is the bug we are avoiding."
+      "explanation": "Dependency resolution topologically sorts the task graph, identifying which tasks can run in parallel and which must wait for predecessors to complete."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         "Because the registry counts replans"
       ],
       "correct": 0,
-      "explanation": "max_replans catches a planner that keeps returning the same broken plan. max_steps catches a runaway plan that keeps growing."
+      "explanation": "Error recovery strategies include: retry on transient failures, skip non-critical tasks with fallback values, abort on critical failures, and rerun failed subtrees after fixing."
     },
     {
       "stage": "check",
@@ -48,7 +48,7 @@
         "no_plan"
       ],
       "correct": 3,
-      "explanation": "No plan, no execution. The session ends with reason=no_plan and status=failed."
+      "explanation": "Checkpointing saves plan state after each task completion, enabling resumption from intermediate states after crashes or interruptions."
     },
     {
       "stage": "post",
@@ -60,7 +60,7 @@
         "Step ids the planner asked to skip"
       ],
       "correct": 2,
-      "explanation": "revised is the set of ids whose (tool_name, args) signature changed across the revision."
+      "explanation": "The capstone measures plan execution efficiency (parallelism utilization), recovery reliability (successful resumption from checkpoints), and abort safety (clean shutdown on critical failures)."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "no_plan"
       ],
       "correct": 2,
-      "explanation": "replan_budget. The status is failed. History carries every step that ran, including the failures that triggered replans."
+      "explanation": "Visualization provides real-time plan progress updates, showing completed, in-progress, and pending tasks with their status and dependencies."
     }
   ]
 }
