@@ -40,15 +40,15 @@
     },
     {
       "stage": "check",
-      "question": "Which of the following is a correct implementation detail?",
+      "question": "How does the demo compose the four earlier Track D lessons?",
       "options": [
-        "Option A (placeholder)",
-        "Option B (placeholder)",
-        "Option C (placeholder)",
-        "Option D (placeholder)"
+        "By copying their source code into a single bundled file",
+        "By importing their public dataclasses and functions via sys.path adjustments",
+        "Through a plugin registry that discovers lessons at runtime",
+        "By calling their test suites and parsing the test output"
       ],
-      "correct": 0,
-      "explanation": ""
+      "correct": 1,
+      "explanation": "The demo imports each lesson's main.py by adjusting sys.path to the parent directory. This is the same import pattern the earlier lessons' own test files already use."
     },
     {
       "stage": "post",
