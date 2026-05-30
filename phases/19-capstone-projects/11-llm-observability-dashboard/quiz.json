@@ -1,6 +1,6 @@
 {
   "lesson": "11-llm-observability-dashboard",
-  "title": "Capstone 11 \u00e2\u20ac\u201d LLM Observability & Eval Dashboard",
+  "title": "Capstone 11 — LLM Observability & Eval Dashboard",
   "questions": [
     {
       "stage": "pre",
@@ -12,7 +12,7 @@
         "ClickHouse handles columnar analytics over spans while Postgres holds users, sessions, and app metadata"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "OpenTelemetry GenAI spans capture tool calls, token usage, and latency with semantic conventions, enabling standardized tracing across different model providers."
     },
     {
       "stage": "check",
@@ -24,7 +24,7 @@
         "Truncates spans below 100ms"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "Prometheus metrics include request rate, error rate, latency percentiles (p50, p95, p99), and token throughput, scraped at configurable intervals for alerting."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         "Counts unique trace IDs"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "The dashboard displays real-time metrics (current request rate, active sessions), historical trends (token usage over time), and cost breakdowns (spend per model per user)."
     },
     {
       "stage": "check",
@@ -48,7 +48,7 @@
         "Under 5 minutes from bug deployed to Slack alert"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "Alerting rules trigger notifications when error rates exceed thresholds, latency degrades, or cost budgets are exceeded, with severity levels (info, warning, critical)."
     },
     {
       "stage": "post",
@@ -60,7 +60,7 @@
         "OpenAI and Anthropic only"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "The capstone measures metric completeness (coverage of all important signals), visualization clarity (ease of understanding), and alert responsiveness (time from threshold breach to notification)."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "As eval spans written as children of the parent trace in ClickHouse"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "Performance impact is monitored by measuring the overhead of telemetry collection (typically <5% of request latency) and the impact on model throughput."
     }
   ]
 }
