@@ -137,7 +137,7 @@ Exactly 6 questions: 1 pre + 3 check + 2 post. `correct` is zero-indexed. The si
 
 - **Tier A (schema + stages)**: Required by `scripts/audit_lessons.py` default mode. Enforces correct JSON structure, 6 questions with valid stage sequence, and option count bounds.
 - **Tier B (no placeholders, non-empty explanations)**: Optional quality gate via `--strict-quiz` flag. Checks for placeholder text in options and ensures all explanations contain substantive content.
-- **Missing quiz.json**: Not a failure — lessons without quizzes are tracked separately. Do not bulk-generate quizzes; quality over volume.
+- **Missing quiz.json**: Not a failure — lessons without quizzes are tracked separately. Do not bulk-generate quizzes ad hoc; use **`quiz-factory/`** (batch workspace, one commit per lesson, see `quiz-factory/README.md`). **Gate:** `.cursor/rules/lesson-planning-gate.mdc` requires **`.cursor/skills/lesson-planning/SKILL.md`** (`/lesson-planning`) before any `quiz.json` edit or quality sign-off.
 
 ### code/
 

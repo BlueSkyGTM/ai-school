@@ -123,7 +123,10 @@ python phases/01-math-foundations/01-linear-algebra-intuition/code/vectors.py
 **Option C — find your level *(recommended)*.** Skip ahead intelligently. Inside Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed:
 
 ```bash
-/find-your-level
+/student-handbook          # map of skills, rules, progress files
+/find-your-level           # placement
+/learning-style-setup      # how you learn (optional, once)
+/guidance-counselor        # doubts & preferences (meta)
 ```
 
 Ten questions. Maps your knowledge to a starting phase, builds a personalized path with hour
@@ -147,6 +150,10 @@ ls phases/03-deep-learning-core/05-loss-functions/outputs/
 |---|---|
 | [`/find-your-level`](.cursor/skills/find-your-level/SKILL.md) | Ten-question placement quiz. Maps your knowledge to a starting phase and produces a personalized path with hour estimates. |
 | [`/check-understanding <phase>`](.cursor/skills/check-understanding/SKILL.md) | Per-phase quiz, eight questions, with feedback and specific lessons to review. |
+| [`/lesson-planning`](.cursor/skills/lesson-planning/SKILL.md) | Plan or review lesson quizzes against doc/code; seven flagship insights for quality comparison. |
+| [`/student-handbook`](.cursor/skills/student-handbook/SKILL.md) | Index of skills, rules, progress files, and modes — iterate your setup here. |
+| [`/learning-style-setup`](.cursor/skills/learning-style-setup/SKILL.md) | Intake for how you learn; save to `progress/learning-profile.json`. |
+| [`/guidance-counselor`](.cursor/skills/guidance-counselor/SKILL.md) | Meta: doubts, pace, preferences — not lesson drills. |
 
 ### Progress tracking (local-first, optional repo sync)
 

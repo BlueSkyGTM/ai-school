@@ -34,6 +34,21 @@
 
 - `focus` is optional. Agents read it per `.cursor/rules/curriculum-chat.mdc`. The site does not write `focus` yet; you can edit it by hand or ask the agent to remember the current lesson in chat.
 
+## Learning profile (`learning-profile.json`)
+
+Optional. Created via **`/learning-style-setup`** in Cursor. Agents read it for **guidance counselor** mode; they do not write it.
+
+Fields: `preferences` (pace, depth, feedback, session length), `strengths`, `weaknesses`, `doubts`, `avoid`, `notes`, `setupComplete`.
+
+Set `focus.mode` to `guidance` when you want curriculum-chat to treat the thread as meta (optional):
+
+```json
+"focus": {
+  "mode": "guidance",
+  "note": "doubting phase 7 pace"
+}
+```
+
 ## Privacy
 
-Quiz and completion data only — no API keys. Public commit = public learning log (FCC-style); use a private fork if you prefer.
+Quiz and completion data only — no API keys. Public commit = public learning log (FCC-style); use a private fork if you prefer. `learning-profile.json` may include personal doubts — keep repo private if that matters.
