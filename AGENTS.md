@@ -17,6 +17,8 @@ The repo is a curriculum, not a SaaS app. The lessons are the product. Every rul
 Both agents follow `.cursor/rules/consultant-charter.mdc` (Reasoning +
 Discipline on any topic — not engineering-only).
 
+`.cursor/rules/` is the canonical agent config directory for this repo.
+
 | Role | Who | Permissions |
 |------|-----|-------------|
 | **Consultant / Navigator / Otto** | Cursor chat (Auto) | Read-only. May read files and run non-mutating commands (grep, `graphify query`). Approve/reject plans. No file edits, commit, push, install, or `graphify update`. |
@@ -36,6 +38,7 @@ Handoff: Otto advises → user approves → Cline implements.
 - `GRAPH_REPORT.md`: optional skim of God Nodes / Surprising / Suggested Questions only; skip Community Hubs and Communities.
 - Full-repo graph is too large for `graph.html`. Do not run `graphify site` unless intentionally replacing the full graph.
 - No Obsidian/wiki workflow for this repo unless user revisits later.
+- **Always use `py -3.12 -m graphify query` or `graphify path` / `graphify explain` instead of reading `graph.json` directly.**
 
 ## Handoffs between agents
 
