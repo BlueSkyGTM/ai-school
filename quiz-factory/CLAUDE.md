@@ -19,6 +19,8 @@ Process `manifest.json` rows with `status: pending` in phase order. For each row
 - **Read first:** [lesson-planning SKILL](../.cursor/skills/lesson-planning/SKILL.md) → [CONTEXT.md](CONTEXT.md) → [REFERENCES.md](REFERENCES.md) → [ARCHITECTURE.md](ARCHITECTURE.md).
 - **Before each new phase:** read `phases/NN-*/BATCH.md`; use lesson-planning **seven insights** to compare output.
 - **Do not** copy flagship `quiz.json` text — extract claims from **that** lesson’s doc/code (see skill).
+- **Variance rule (mold):** the six `correct` values must not be a constant column; vary the correct slot (REFERENCES.md "Variance rule"). Leave position-dependent options ("all of the above", "both B and C") in place.
+- **`redo_quiz` rows:** rebuild questions from the doc/code — the existing text is an anti-pattern (all answer `A`), do not trust it.
 - **Edit only** `phases/.../MM-lesson/quiz.json` unless `job_type` says otherwise.
 - **Never** edit `docs/en.md`, `code/`, `README.md`, or `site/data.js`.
 - **Never** batch multiple lessons in one commit.

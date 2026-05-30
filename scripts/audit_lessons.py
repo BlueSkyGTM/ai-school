@@ -150,6 +150,7 @@ def check_quiz(audit: Audit, lesson: Path, strict_quiz: bool = False) -> None:
             "quiz.json must be a non-empty array or a dict with non-empty questions[]",
         )
         return
+    correct_indices: list[int] = []
     for idx, q in enumerate(questions):
         if not isinstance(q, dict):
             audit.add("L006", lesson, quiz, f"question[{idx}] is not an object")
@@ -192,6 +193,7 @@ def check_quiz(audit: Audit, lesson: Path, strict_quiz: bool = False) -> None:
                 f"question[{idx}] correct={correct!r} not a valid index in options[0..{len(options) - 1}]",
             )
             continue
+        correct_indices.append(correct)
         # L011: placeholder text in options (strict mode only)
         if strict_quiz and isinstance(options, list):
             for opt_idx, opt in enumerate(options):
@@ -212,6 +214,15 @@ def check_quiz(audit: Audit, lesson: Path, strict_quiz: bool = False) -> None:
                     quiz,
                     f"question[{idx}] explanation is empty or whitespace-only",
                 )
+
+    # L013: constant answer key — every correct index identical (strict mode only)
+    if strict_quiz and len(correct_indices) >= 2 and len(set(correct_indices)) == 1:
+        audit.add(
+            "L013",
+            lesson,
+            quiz,
+            f"answer key is constant (all correct={correct_indices[0]}); vary the correct slot",
+        )
 
 
 def check_internal_links(audit: Audit, lesson: Path, text: str) -> None:
@@ -274,7 +285,7 @@ def main(argv: list[str]) -> int:
     parser.add_argument(
         "--strict-quiz",
         action="store_true",
-        help="enable L011 (no placeholders) and L012 (non-empty explanations) checks",
+        help="enable L011 (no placeholders), L012 (non-empty explanations), L013 (no constant answer key)",
     )
     args = parser.parse_args(argv)
 

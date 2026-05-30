@@ -14,11 +14,61 @@
     "18"
   ],
   "summary": {
-    "pending_rows": 219,
+    "pending_rows": 226,
+    "redo_quiz": 7,
     "create_quiz": 157,
     "fill_explanations": 62
   },
   "rows": [
+    {
+      "path": "phases/07-transformers-deep-dive/15-attention-variants",
+      "phase": "07",
+      "job_type": "redo_quiz",
+      "status": "pending",
+      "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
+    },
+    {
+      "path": "phases/07-transformers-deep-dive/16-speculative-decoding",
+      "phase": "07",
+      "job_type": "redo_quiz",
+      "status": "pending",
+      "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
+    },
+    {
+      "path": "phases/08-generative-ai/19-visual-autoregressive-var",
+      "phase": "08",
+      "job_type": "redo_quiz",
+      "status": "pending",
+      "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
+    },
+    {
+      "path": "phases/10-llms-from-scratch/15-speculative-decoding-eagle3",
+      "phase": "10",
+      "job_type": "redo_quiz",
+      "status": "pending",
+      "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
+    },
+    {
+      "path": "phases/10-llms-from-scratch/16-differential-attention-v2",
+      "phase": "10",
+      "job_type": "redo_quiz",
+      "status": "pending",
+      "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
+    },
+    {
+      "path": "phases/10-llms-from-scratch/17-native-sparse-attention",
+      "phase": "10",
+      "job_type": "redo_quiz",
+      "status": "pending",
+      "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
+    },
+    {
+      "path": "phases/10-llms-from-scratch/34-gradient-checkpointing",
+      "phase": "10",
+      "job_type": "redo_quiz",
+      "status": "pending",
+      "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
+    },
     {
       "path": "phases/07-transformers-deep-dive/01-why-transformers",
       "phase": "07",

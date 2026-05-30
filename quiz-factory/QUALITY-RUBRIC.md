@@ -30,6 +30,7 @@ Use when reviewing one quiz per phase after factory runs. Score **Pass / Revise*
 | C3 | All explanations non-empty (Tier B) | `--strict-quiz` pass for this file |
 | C4 | No `placeholder` in option strings | L011 pass |
 | C5 | No legacy keys | L007 pass |
+| C6 | Answer key not constant; correct slot varies | not all six `correct` equal — L013 pass (`--strict-quiz`) |
 
 ## D. Tone
 

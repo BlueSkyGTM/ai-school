@@ -79,7 +79,7 @@ For claim `c`:
 - **Question:** ask for the claim’s mechanism, comparison, or invariant (not “define X” only unless pre).
 - **Correct option:** paraphrase `c` faithfully.
 - **Distractors (3):** pick claims the doc **refutes** or common confusions from the same section/table.
-- **correct:** zero-based index.
+- **correct:** zero-based index — **vary the slot** (see REFERENCES.md "Variance rule"). Across the six questions the key must not be constant; place the correct option in different positions, not always first.
 
 Difficulty knob: check-stage distractors must be **same topic** (e.g. all about attention masks), not absurd unrelated domains.
 
