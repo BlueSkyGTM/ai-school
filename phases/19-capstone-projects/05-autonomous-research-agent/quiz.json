@@ -1,6 +1,6 @@
 {
   "lesson": "05-autonomous-research-agent",
-  "title": "Capstone 05 \u00e2\u20ac\u201d Autonomous Research Agent (AI-Scientist Class)",
+  "title": "Capstone 05 — Autonomous Research Agent (AI-Scientist Class)",
   "questions": [
     {
       "stage": "pre",
@@ -12,7 +12,7 @@
         "To prevent network egress and contain experiment side effects within a reproducible envelope"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "The hypothesis generator formulates testable research questions by identifying gaps in existing literature and proposing novel experimental approaches."
     },
     {
       "stage": "check",
@@ -24,7 +24,7 @@
         "Replaces matplotlib at render time"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "Literature retrieval uses semantic search over academic databases to find relevant papers, extract their contributions, and build a knowledge graph of the research space."
     },
     {
       "stage": "check",
@@ -36,7 +36,7 @@
         "Five judges score on NeurIPS-style rubrics and the weighted aggregate must clear a threshold, otherwise the draft loops back to the writer"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "The experiment runner executes computational experiments (code runs, data analysis, simulations) based on the generated hypothesis and retrieves structured results."
     },
     {
       "stage": "check",
@@ -48,7 +48,7 @@
         "GPU-hours tracked but never capped"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "The result evaluator compares experimental outcomes against the hypothesis, interprets statistical significance, and determines whether the hypothesis should be accepted or revised."
     },
     {
       "stage": "post",
@@ -60,7 +60,7 @@
         "Output length and token count"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "The capstone measures hypothesis novelty (originality of generated research questions), experimental validity (soundness of designed experiments), and iteration efficiency (number of cycles to reach a valid conclusion)."
     },
     {
       "stage": "post",
@@ -72,7 +72,7 @@
         "Sandbox-escape attempts such as fork bombs, network exfiltration, and filesystem escapes"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "Autonomy is evaluated by measuring the number of human interventions required, the diversity of explored hypotheses, and the ability to identify when to stop research."
     }
   ]
 }
