@@ -40,15 +40,15 @@
     },
     {
       "stage": "check",
-      "question": "Which of the following is a correct implementation detail?",
+      "question": "What happens when one of the writer's validation gates (duplicate figure id, missing citation, empty abstract/title) fails?",
       "options": [
-        "Option A (placeholder)",
-        "Option B (placeholder)",
-        "Option C (placeholder)",
-        "Option D (placeholder)"
+        "A partially written paper.tex is emitted with missing sections marked TODO",
+        "PaperValidationError is raised and no output files are written",
+        "The invalid element is silently skipped and the rest is rendered",
+        "A warning is logged and the paper is written without the offending figure or citation"
       ],
-      "correct": 0,
-      "explanation": ""
+      "correct": 1,
+      "explanation": "The writer's contract is atomic: either all three files (tex, bib, manifest) are emitted, or none. A failed validation gate raises PaperValidationError with a precise reason."
     },
     {
       "stage": "post",
