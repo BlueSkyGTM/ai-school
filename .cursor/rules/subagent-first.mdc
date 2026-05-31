@@ -13,4 +13,6 @@ Before file edits, search, or verification in main context, ask: **can a subagen
 
 **Do not use subagents for:** git operations, one-line table rows, compiling cross-agent summaries.
 
-See `.cursor/_archive/CURRICULUM_QA_FINDINGS_2026-05-30.md` for a worked example (2026-05-30 sprint metrics).
+**For batch quiz work specifically:** use the `/batch-orchestration` skill (`.cursor/skills/batch-orchestration/SKILL.md`). It defines the manifest-queue pattern, BATCH.md knowledge injection, and round protocol for all `create_quiz` / `schema_repair` / `fill_explanations` / `redo_quiz` jobs.
+
+See `CURRICULUM_QA_FINDINGS_2026-05-30.md` for a worked example (2026-05-30 sprint).

@@ -14,9 +14,10 @@
     "18"
   ],
   "summary": {
-    "pending_rows": 226,
+    "pending_rows": 322,
     "redo_quiz": 7,
-    "create_quiz": 157,
+    "schema_repair": 99,
+    "create_quiz": 154,
     "fill_explanations": 62
   },
   "rows": [
@@ -70,21 +71,700 @@
       "note": "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
     },
     {
-      "path": "phases/07-transformers-deep-dive/01-why-transformers",
-      "phase": "07",
-      "job_type": "create_quiz",
+      "path": "phases/04-computer-vision/01-image-fundamentals",
+      "phase": "04",
+      "job_type": "schema_repair",
       "status": "pending",
-      "note": ""
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/02-convolutions-from-scratch",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/03-cnns-lenet-to-resnet",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/04-image-classification",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/05-transfer-learning",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/06-object-detection-yolo",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/07-semantic-segmentation-unet",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/08-instance-segmentation-mask-rcnn",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/09-image-generation-gans",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/10-image-generation-diffusion",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/11-stable-diffusion",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/12-video-understanding",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/13-3d-vision-nerf",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/14-vision-transformers",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/15-real-time-edge",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/16-vision-pipeline-capstone",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/17-self-supervised-vision",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/18-open-vocab-clip",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/19-ocr-document-understanding",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/20-image-retrieval-metric",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/21-keypoint-pose",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/22-3d-gaussian-splatting",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/23-diffusion-transformers-rectified-flow",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/24-sam3-open-vocab-segmentation",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/25-vision-language-models",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/26-monocular-depth",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/27-multi-object-tracking",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/04-computer-vision/28-world-models-video-diffusion",
+      "phase": "04",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "5q (pre\u00d72, post\u00d73) \u2192 rebuild to (pre\u00d71, check\u00d73, post\u00d72): keep best pre; write 3 new check questions from distinct doc sections; keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/01-text-processing",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/02-bag-of-words-tfidf",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/03-word-embeddings-word2vec",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/04-glove-fasttext-subword",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/05-sentiment-analysis",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/06-named-entity-recognition",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/07-pos-tagging-parsing",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/08-cnns-rnns-for-text",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/09-sequence-to-sequence",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/10-attention-mechanism",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/11-machine-translation",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/12-text-summarization",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/13-question-answering",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/14-information-retrieval-search",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/15-topic-modeling",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/16-text-generation-pre-transformer",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/17-chatbots-rule-to-neural",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/18-multilingual-nlp",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/19-subword-tokenization",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/20-structured-outputs-constrained-decoding",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/21-nli-textual-entailment",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/22-embedding-models-deep-dive",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/23-chunking-strategies-rag",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/24-coreference-resolution",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/25-entity-linking",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/26-relation-extraction-kg",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/27-llm-evaluation-frameworks",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/28-long-context-evaluation",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/05-nlp-foundations-to-advanced/29-dialogue-state-tracking",
+      "phase": "05",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "8q (pre\u00d72, check\u00d73, post\u00d73) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; drop the weakest post OR merge two posts into one integration question that requires two doc ideas; keep all three checks unchanged"
+    },
+    {
+      "path": "phases/14-agent-engineering/01-the-agent-loop",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/02-rewoo-plan-and-execute",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/03-reflexion-verbal-rl",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/04-tree-of-thoughts-lats",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/05-self-refine-and-critic",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/06-tool-use-and-function-calling",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/07-memory-virtual-context-memgpt",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/08-memory-blocks-sleep-time-compute",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/09-hybrid-memory-mem0",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/10-skill-libraries-voyager",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/11-planning-htn-and-evolutionary",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/12-anthropic-workflow-patterns",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/13-langgraph-stateful-graphs",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/14-autogen-actor-model",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/15-crewai-role-based-crews",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/16-openai-agents-sdk",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/17-claude-agent-sdk",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/18-agno-and-mastra-runtimes",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/19-benchmarks-swebench-gaia",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/20-benchmarks-webarena-osworld",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/21-computer-use-agents",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/22-voice-agents-pipecat-livekit",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/23-otel-genai-conventions",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/24-agent-observability-platforms",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/25-multi-agent-debate",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/26-failure-modes-agentic",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/27-prompt-injection-defense",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/28-orchestration-patterns",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/29-production-runtimes",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/30-eval-driven-agent-development",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/31-agent-workbench-why-models-fail",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/32-minimal-agent-workbench",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/33-instructions-as-executable-constraints",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/34-repo-memory-and-state",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/35-initialization-scripts",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/36-scope-contracts",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/37-runtime-feedback-loops",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/38-verification-gates",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/39-reviewer-agent",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/40-multi-session-handoff",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/41-workbench-for-real-repos",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
+    },
+    {
+      "path": "phases/14-agent-engineering/42-agent-workbench-capstone",
+      "phase": "14",
+      "job_type": "schema_repair",
+      "status": "pending",
+      "note": "7q (pre\u00d72, check\u00d73, post\u00d72) \u2192 trim to (pre\u00d71, check\u00d73, post\u00d72): drop the weaker pre; add a code-symbol reference (exact function name from code/main.*) to at least one check or post"
     },
     {
       "path": "phases/07-transformers-deep-dive/03-multi-head-attention",
-      "phase": "07",
-      "job_type": "create_quiz",
-      "status": "pending",
-      "note": ""
-    },
-    {
-      "path": "phases/07-transformers-deep-dive/04-positional-encoding",
       "phase": "07",
       "job_type": "create_quiz",
       "status": "pending",
@@ -134,13 +814,6 @@
     },
     {
       "path": "phases/07-transformers-deep-dive/11-mixture-of-experts",
-      "phase": "07",
-      "job_type": "create_quiz",
-      "status": "pending",
-      "note": ""
-    },
-    {
-      "path": "phases/07-transformers-deep-dive/12-kv-cache-flash-attention",
       "phase": "07",
       "job_type": "create_quiz",
       "status": "pending",

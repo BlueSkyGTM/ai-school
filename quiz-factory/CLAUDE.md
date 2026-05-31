@@ -21,6 +21,7 @@ Process `manifest.json` rows with `status: pending` in phase order. For each row
 - **Do not** copy flagship `quiz.json` text — extract claims from **that** lesson’s doc/code (see skill).
 - **Variance rule (mold):** the six `correct` values must not be a constant column; vary the correct slot (REFERENCES.md "Variance rule"). Leave position-dependent options ("all of the above", "both B and C") in place.
 - **`redo_quiz` rows:** rebuild questions from the doc/code — the existing text is an anti-pattern (all answer `A`), do not trust it.
+- **`schema_repair` rows:** follow the repair pattern in the row's `note` field (see `## schema_repair job type` below). Preserve every question that already meets quality standards; only add, drop, or strengthen as the note specifies.
 - **Edit only** `phases/.../MM-lesson/quiz.json` unless `job_type` says otherwise.
 - **Never** edit `docs/en.md`, `code/`, `README.md`, or `site/data.js`.
 - **Never** batch multiple lessons in one commit.
@@ -51,6 +52,41 @@ fix(phase-NN/MM): fill quiz explanations
 - All rows for the assigned phase slice are `done` or `blocked`.
 - User message says stop.
 - Do not stop early because a row is tedious.
+
+## schema_repair job type
+
+The `note` field of each `schema_repair` row contains the exact repair pattern. Three patterns exist in this repo:
+
+**Phase 04 — add checks (5q → 6q)**
+Current stages: `pre, pre, post, post, post`
+Target stages:  `pre, check, check, check, post, post`
+Steps:
+1. Keep the stronger of the two `pre` questions; drop the other.
+2. Write **3 new `check` questions** from three distinct sections of `docs/en.md` — one per concept cluster. At least one check must require applying a formula or algorithm step, not just naming a term.
+3. Keep the two strongest `post` questions; drop the third. If neither post integrates two doc ideas, rewrite one to do so.
+4. For Build lessons: at least one check or post must name a specific function from `code/main.*`.
+
+**Phase 05 — trim (8q → 6q)**
+Current stages: `pre, pre, check, check, check, post, post, post`
+Target stages:  `pre, check, check, check, post, post`
+Steps:
+1. Keep the stronger of the two `pre` questions; drop the other.
+2. Keep all three `check` questions unchanged.
+3. Keep the two strongest `post` questions; drop the third OR merge the weakest two into a single integration question requiring two doc ideas.
+4. For Build lessons: verify at least one check or post names a function from `code/main.*`; add if missing.
+
+**Phase 14 — trim + code-ref (7q → 6q)**
+Current stages: `pre, pre, check, check, check, post, post`
+Target stages:  `pre, check, check, check, post, post`
+Steps:
+1. Keep the stronger of the two `pre` questions; drop the other.
+2. Keep all three `check` questions and both `post` questions unless they fail quality criteria.
+3. Verify at least one check or post names a specific function from `code/main.*`; rewrite one question to add this if missing.
+
+**Commit format for schema_repair:**
+```text
+fix(phase-NN/MM): repair quiz schema
+```
 
 ## When blocked
 

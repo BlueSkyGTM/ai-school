@@ -35,22 +35,67 @@ REDO_QUIZ = {
 }
 REDO_NOTE = "all-A anti-pattern; rebuild questions + variance from docs/en.md and code/"
 
+# Schema-repair phases — discovered by 2026-05-30 QA audit.
+# Every quiz in these phases has the wrong stage count/sequence.
+# key = two-digit phase number
+# value = (wrong_stage_tuple, repair_note)
+SCHEMA_REPAIR_PHASES: dict[str, tuple[tuple[str, ...], str]] = {
+    "04": (
+        ("pre", "pre", "post", "post", "post"),
+        "5q (pre×2, post×3) → rebuild to (pre×1, check×3, post×2): "
+        "keep best pre; write 3 new check questions from distinct doc sections; "
+        "keep 2 posts; for Build lessons tie at least one check to a named function in code/main.*",
+    ),
+    "05": (
+        ("pre", "pre", "check", "check", "check", "post", "post", "post"),
+        "8q (pre×2, check×3, post×3) → trim to (pre×1, check×3, post×2): "
+        "drop the weaker pre; drop the weakest post OR merge two posts into one "
+        "integration question that requires two doc ideas; keep all three checks unchanged",
+    ),
+    "14": (
+        ("pre", "pre", "check", "check", "check", "post", "post"),
+        "7q (pre×2, check×3, post×2) → trim to (pre×1, check×3, post×2): "
+        "drop the weaker pre; add a code-symbol reference (exact function name from "
+        "code/main.*) to at least one check or post",
+    ),
+}
+
 
 def lesson_path(phase: Path, lesson: Path) -> str:
     return f"phases/{phase.name}/{lesson.name}"
+
+
+def _read_questions(lesson: Path) -> list[dict]:
+    quiz = lesson / "quiz.json"
+    if not quiz.is_file():
+        return []
+    data = json.loads(quiz.read_text(encoding="utf-8"))
+    if isinstance(data, list):
+        return data
+    if isinstance(data, dict):
+        return data.get("questions", [])
+    return []
+
+
+def schema_repair_note(phase_num: str, lesson: Path) -> str | None:
+    """Return the repair note if this lesson needs schema_repair, else None."""
+    if phase_num not in SCHEMA_REPAIR_PHASES:
+        return None
+    expected_pattern, note = SCHEMA_REPAIR_PHASES[phase_num]
+    questions = _read_questions(lesson)
+    if not questions:
+        return None
+    actual = tuple(q.get("stage", "") for q in questions)
+    if actual == expected_pattern:
+        return note
+    return None
 
 
 def job_for_lesson(lesson: Path) -> str | None:
     quiz = lesson / "quiz.json"
     if not quiz.is_file():
         return "create_quiz"
-    data = json.loads(quiz.read_text(encoding="utf-8"))
-    if isinstance(data, list):
-        questions = data
-    elif isinstance(data, dict):
-        questions = data.get("questions", [])
-    else:
-        questions = []
+    questions = _read_questions(lesson)
     for q in questions:
         if not str(q.get("explanation", "")).strip():
             return "fill_explanations"
@@ -77,7 +122,11 @@ def build_manifest() -> dict:
         if path in REDO_QUIZ:
             job, note = "redo_quiz", REDO_NOTE
         else:
-            job, note = job_for_lesson(lesson), ""
+            repair_note = schema_repair_note(phase_num, lesson)
+            if repair_note is not None:
+                job, note = "schema_repair", repair_note
+            else:
+                job, note = job_for_lesson(lesson), ""
         if job is None:
             continue
         rows.append(
@@ -90,26 +139,36 @@ def build_manifest() -> dict:
             }
         )
 
-    # redo_quiz first (broken in production), then phase order, then path.
-    job_rank = {"redo_quiz": 0}
+    # Priority order: redo_quiz (0) → schema_repair (1) → everything else (2)
+    # Within each priority: phase order, then path.
+    job_rank = {"redo_quiz": 0, "schema_repair": 1}
+    schema_repair_phase_order = sorted(SCHEMA_REPAIR_PHASES.keys())
 
     def sort_key(row: dict) -> tuple:
-        try:
-            order = PHASE_ORDER.index(row["phase"])
-        except ValueError:
-            order = 99
-        return (job_rank.get(row["job_type"], 1), order, row["path"])
+        if row["job_type"] == "schema_repair":
+            try:
+                order = schema_repair_phase_order.index(row["phase"])
+            except ValueError:
+                order = 99
+        else:
+            try:
+                order = PHASE_ORDER.index(row["phase"])
+            except ValueError:
+                order = 99
+        return (job_rank.get(row["job_type"], 2), order, row["path"])
 
     rows.sort(key=sort_key)
     create = sum(1 for r in rows if r["job_type"] == "create_quiz")
     fill = sum(1 for r in rows if r["job_type"] == "fill_explanations")
     redo = sum(1 for r in rows if r["job_type"] == "redo_quiz")
+    repair = sum(1 for r in rows if r["job_type"] == "schema_repair")
     return {
         "version": 1,
         "phase_order": PHASE_ORDER,
         "summary": {
             "pending_rows": len(rows),
             "redo_quiz": redo,
+            "schema_repair": repair,
             "create_quiz": create,
             "fill_explanations": fill,
         },
@@ -135,7 +194,8 @@ def main() -> int:
     s = manifest["summary"]
     print(
         f"# pending={s['pending_rows']} redo_quiz={s['redo_quiz']} "
-        f"create_quiz={s['create_quiz']} fill_explanations={s['fill_explanations']}",
+        f"schema_repair={s['schema_repair']} create_quiz={s['create_quiz']} "
+        f"fill_explanations={s['fill_explanations']}",
         file=__import__("sys").stderr,
     )
     return 0
