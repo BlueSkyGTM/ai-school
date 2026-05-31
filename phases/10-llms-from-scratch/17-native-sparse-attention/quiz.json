@@ -4,75 +4,75 @@
   "questions": [
     {
       "stage": "pre",
-      "question": "At 64K-token context, what fraction of total decode latency does the NSA paper attribute to attention, and why does this make sparse attention an infrastructure-level priority rather than a research curiosity?",
+      "question": "Prior sparse attention methods such as H2O and StreamingLLM apply KV cache pruning to models that were pre-trained with full dense attention. The doc says these methods 'recover only a fraction of the potential speedup because the model was never asked to route information through the sparse pattern.' What makes NSA fundamentally different from these inference-time-only approaches?",
       "options": [
-        "About 10–15% — notable but not the dominant bottleneck; compute-bound FFN layers still dominate",
-        "About 30–40% — significant enough to warrant optimisation after other bottlenecks are addressed",
-        "About 50% — at the halfway point where sparse attention breaks even with optimised dense attention",
-        "About 70–80% — attention dominates, so every downstream metric (TTFT, tokens/sec, cost per million tokens) is bounded by how fast you can serve attention at long context"
-      ],
-      "correct": 3,
-      "explanation": "The NSA paper (Yuan et al., ACL 2025 Best Paper) measured 70–80% of decode latency in attention at 64K context. When one operation consumes 4/5 of all compute, no amount of FFN or embedding optimisation can move the needle — you must fix attention. This is why NSA's 9× speedup over FlashAttention at 64K translates directly to ~7× overall decode speedup."
-    },
-    {
-      "stage": "check",
-      "question": "NSA runs three parallel attention branches for each query. Match each branch to its purpose and the type of context it captures.",
-      "options": [
-        "Compressed branch = coarse global context via block-averaged summary tokens; Selected branch = fine-grained attention on the top-k most relevant blocks; Sliding-window branch = local context for the most recent W tokens",
-        "Compressed branch = recent local tokens in sliding window; Selected branch = global coarse summary; Sliding-window branch = top-k relevant sparse blocks",
-        "All three branches capture identical context at different compression ratios; the gate learns which ratio is best per query",
-        "Compressed branch = top-k relevant blocks; Selected branch = recent local tokens; Sliding-window branch = full-sequence coarse summary"
-      ],
-      "correct": 0,
-      "explanation": "NSA's three branches cover different receptive fields: (1) Compressed — the entire sequence but averaged into N/l block summaries, giving cheap global awareness; (2) Selected — the full uncompressed tokens from the k blocks with the highest compressed-branch scores, giving precise fine-grained retrieval; (3) Sliding window — the last W tokens for local coherence. The gate weights their contributions per position."
-    },
-    {
-      "stage": "check",
-      "question": "Prior sparse-attention methods (H2O, StreamingLLM) pruned the KV cache at inference time but underperformed NSA. What makes NSA 'natively trainable' where inference-time pruning is not?",
-      "options": [
-        "NSA uses a fixed block-sparse pattern expressible as a standard causal mask, making gradient computation straightforward",
-        "The top-k block selection is replaced with a differentiable soft-selection during training and hardened to discrete top-k at inference",
-        "Gradients flow through the differentiable compressed-branch attention, which also determines the top-k selection — the model learns to route information through the sparse pattern from the start of pre-training, not as an overlay on dense-attention weights",
-        "NSA uses special scale-and-shift position embeddings that allow the model to learn which tokens to route without any discrete selection operation"
+        "NSA uses a fixed hand-designed sparse pattern determined before training, so the model can encode information at exactly the positions the sparse kernel will access",
+        "NSA runs three branches in parallel; the additional branches compensate for any tokens dropped by sparsity, recovering quality that single-branch methods lose",
+        "NSA's sparsity pattern is learned and active during pre-training — the model's internal representations are shaped by gradient flow through the three differentiable branches so that at inference the sparse pattern accesses exactly the information the model has learned to place there",
+        "NSA uses full dense attention during training and switches to sparse attention only at inference, avoiding gradient-flow problems while still achieving speedups because the attention maps are globally low-rank"
       ],
       "correct": 2,
-      "explanation": "H2O and StreamingLLM prune the KV cache of a model trained expecting to attend to all tokens — the weights have no incentive to route information to accommodate the pruning pattern. NSA's compressed branch is a differentiable attention over the entire sequence; its scores drive the top-k selection. Gradients flow through compressed-branch scores end-to-end, so the model learns during pre-training to put the information NSA needs into the selected blocks."
+      "explanation": "Inference-time sparse methods retrofit sparsity onto a model optimized for all-pairs access. That model learned to route important information to positions the sparse kernel may not read — so inference speedup is partial and recall degrades. NSA trains with its sparse kernel active: the compressed branch is differentiable (standard softmax attention), the gate is differentiable (sigmoid MLP), and the selected branch is differentiable over its loaded keys. Gradients propagate end-to-end and shape the model's representations to route information through blocks the three branches will actually read. The doc states this is 'a sparsity pattern the model learns during pre-training, implemented as a kernel-aligned algorithm that actually delivers the compute savings at inference.'"
     },
     {
       "stage": "check",
-      "question": "At N=64K context with l=64 (compression blocks), k=16 (top-k), b=64 (selected block size), w=512 (sliding window), NSA sees 1000+1024+512=2536 keys per query vs 64000 for full attention. The doc says the savings ratio grows with sequence length. Why?",
+      "question": "The doc gives NSA's per-query key count as N/l (compressed) + k*b (selected) + w (sliding window). Using the paper's example of N=64k, l=64, k=16, b=64, w=512, what is the total key count per query and the reduction factor versus full attention?",
       "options": [
-        "At longer sequences fewer blocks qualify for top-k selection, automatically reducing the selected-branch key count",
-        "The compressed-branch cost is O(N/l); the selected and sliding branches are O(k·b) and O(w), both constants — as N doubles the compressed branch doubles but the total grows more slowly than O(N), widening the ratio",
-        "The sliding window W is automatically expanded at longer contexts, but its cost grows sub-linearly because tokens repeat",
-        "At longer sequences the gate MLP learns to down-weight the selected branch, reducing the k·b key loads proportionally"
+        "Compressed: N/l = 64,000/64 = 1,000 keys. Selected: k*b = 16×64 = 1,024 keys. Sliding window: w = 512 keys. Total = 2,536 keys. Full attention = 64,000 keys. Reduction: 64,000 / 2,536 ≈ 25x — the figure the doc explicitly reports",
+        "Compressed: N/l = 1,024 keys. Selected: k*b = 512 keys. Sliding window: w = 512 keys. Total = 2,048 keys — 31x reduction. The selected branch dominates at this block size",
+        "Compressed: N/l = 1,000 keys. Selected: k*b = 1,024 keys. Sliding window: w = 512 keys. Total = 2,536 keys — 25x reduction. The sliding-window branch dominates because it is contiguous memory and accessed most frequently",
+        "Compressed: N/l = 64 keys (one per 1,024-token macro-block). Selected: k*b = 1,024 keys. Sliding window: w = 512 keys. Total = 1,600 keys — 40x reduction. The compressed branch is negligible at l=64"
+      ],
+      "correct": 0,
+      "explanation": "N/l = 64,000 / 64 = 1,000 compressed keys. k*b = 16 × 64 = 1,024 selected keys. w = 512 sliding-window keys. Total = 1,000 + 1,024 + 512 = 2,536 per-query keys versus 64,000 for full attention — exactly the 25x reduction the doc reports. The `count_nsa(65_536, 64, 16, 512)` call in code/main.py Step 2 computes this formula directly. At N=128k the doc shows the reduction grows to 36x because N/l doubles (more compressed keys) while k*b and w remain fixed, confirming that the savings scale with sequence length."
+    },
+    {
+      "stage": "check",
+      "question": "NSA's top-k block selection step is discrete — it picks the k highest-scoring compressed blocks via `top_k_blocks()`. Discrete operations normally break backpropagation. The doc says NSA avoids continuous relaxations entirely. What is the actual gradient path that makes end-to-end pre-training work?",
+      "options": [
+        "NSA uses straight-through estimators (STE): the forward pass applies top-k discretely but the backward pass treats it as an identity function, passing gradients through unchanged",
+        "NSA applies Gumbel-softmax to the top-k scores to produce a differentiable soft selection during training that sharpens to discrete at inference via temperature annealing",
+        "NSA uses a continuous relaxation where the block selection weights are a softmax over all block scores, and at inference the softmax is replaced by argmax for real sparsity",
+        "Gradients flow through the compressed-branch softmax attention scores, which are fully differentiable; the top-k operation only controls which blocks get loaded from memory and does not appear in the computational graph — no gradient through the discrete step is needed because the routing signal itself is continuously differentiable"
+      ],
+      "correct": 3,
+      "explanation": "The doc states: 'The non-differentiable top_k operation is a no-op on the forward computational graph — it only controls which blocks get loaded from memory.' The compressed-branch attention runs as standard softmax over N/l compressed keys — a fully differentiable operation. Its output scores drive top-k block selection (memory routing only), and the selected blocks' tokens are then attended over by the selected branch (also differentiable). Gradients from the loss flow backward through the compressed-branch Q/K/V projections and through the selected-branch attention. The discrete argmax that routes memory reads sits off the differentiable path entirely."
+    },
+    {
+      "stage": "check",
+      "question": "NSA's `gate()` function in code/main.py applies sigmoid to each of 3 logits independently, producing branch weights g_cmp, g_sel, g_win. The doc notes these 'do not have to sum to 1 — they can weight branches independently.' What would be lost by replacing sigmoid with a 3-way softmax?",
+      "options": [
+        "Softmax would force the gate weights to sum to 1, making the combined output a convex combination of branch outputs and preventing the model from amplifying the total attention magnitude above 1",
+        "Softmax creates a zero-sum competition between branches — increasing g_sel necessarily decreases g_cmp and g_win — while sigmoid lets each branch's weight be set independently, allowing a query to activate all three strongly, suppress all three, or any asymmetric combination without forcing tradeoffs among branches",
+        "Sigmoid ensures gate weights are always positive, while softmax can produce near-zero values for branches the model has not learned to use, causing vanishing gradients in the gate MLP during early training",
+        "Softmax produces sharper gates than sigmoid because its exponential normalization is steeper in the relevant operating range, which would cause the selected branch to dominate too aggressively at inference"
       ],
       "correct": 1,
-      "explanation": "Full attention cost is O(N). NSA cost = O(N/l) + O(k·b) + O(w). At 64K: 1000 + 1024 + 512 = 2536 (25× reduction). At 128K: 2000 + 1024 + 512 = 3536 (36× reduction). The selected and sliding terms are constant in N; only the compressed branch grows — but it grows as N/l not N. So the ratio NSA/full shrinks as N grows, and the savings ratio (full/NSA) grows. The paper shows this benefit scaling linearly with sequence length."
+      "explanation": "Softmax over 3 outputs sums to 1: Σg_i = 1, so raising g_sel forces g_cmp + g_win down. This creates a competition where branches fight for weight budget. Sigmoid maps each logit to (0,1) independently — g_cmp, g_sel, and g_win are uncoupled. The doc justifies this with 'they can weight branches independently': a query that retrieves relevant information from both a far-back high-relevance block (selected branch) AND the recent tokens (sliding window) should be able to heavily weight both. With softmax, increasing one branch's weight would suppress the other. The independent sigmoid formulation is what allows the gate to learn non-zero-sum routing behavior."
     },
     {
       "stage": "post",
-      "question": "The Build code Step 6 on a 1024-token synthetic with l=32, k=4, w=128 prints NSA sees 288 keys vs 1024 for full attention. Account for where the 288 comes from.",
+      "question": "In `nsa_step()` in code/main.py, `top_k_blocks()` receives `cmp_w` (compressed-branch attention weights) and returns block indices. `fine_grained_keys()` then loads the raw K and V tokens from those blocks. When `attention(q, K_sel, V_sel)` runs on the loaded tokens, what is it computing, and how does it differ from a second pass of the compressed branch over just the selected blocks?",
       "options": [
-        "Compressed branch: 1024/32 = 32 block summaries; Selected branch: k×b = 4×32 = 128 fine-grained tokens; Sliding window: w = 128 recent tokens. Total: 32+128+128 = 288",
-        "Compressed branch: k×b = 4×32 = 128; Selected branch: 1024/32 = 32; Sliding window: 128. Total: 128+32+128 = 288",
-        "Compressed branch: w = 128; Selected branch: 1024/32 = 32; Sliding window: k×b = 128. Total: 128+32+128 = 288",
-        "All 288 come from the compressed branch at three different compression ratios: 32+128+128 = 288"
+        "It averages the fine-grained keys within each selected block and runs attention over those per-block averages — producing a higher-resolution version of the compressed branch over only the top-k blocks",
+        "It re-runs the compressed-branch attention scores on the selected blocks and directly reuses those scores to weight the corresponding V averages, avoiding a second softmax computation",
+        "It runs full softmax attention between the query and all individual uncompressed tokens from the selected blocks — accessing each token in full resolution, not block averages — to extract fine-grained information from the blocks the compressed branch identified as most relevant",
+        "It applies the compressed-branch weights (cmp_w) directly to the uncompressed V tokens in the selected blocks without recomputing attention scores, treating compressed scores as a proxy for fine-grained relevance"
       ],
-      "correct": 0,
-      "explanation": "N/l = 1024/32 = 32 compressed block summaries for the compressed branch. k×b = 4 selected blocks × 32 tokens each = 128 fine-grained tokens for the selected branch. w = 128 most recent tokens for the sliding window. 32+128+128 = 288 total keys per query, versus 1024 for full attention — a 3.5× reduction even at short context. At 64K this ratio grows to 25× and at 128K to 36×."
+      "correct": 2,
+      "explanation": "`fine_grained_keys()` returns the raw (uncompressed) K and V tokens from the top-k selected blocks. For k=4 blocks of l=32 tokens each, `K_sel` has 128 individual key vectors. `attention(q, K_sel, V_sel)` then runs standard softmax attention — computing dot products between q and all 128 raw keys, applying softmax, and taking the weighted sum of 128 raw V rows. This is full-resolution attention over just those blocks. The compressed branch served as a cheap routing signal to identify which blocks are worth reading at full resolution. The two-level structure — coarse scores route, fine-grained attention extracts — is the core 'coarse-to-fine' design of NSA."
     },
     {
       "stage": "post",
-      "question": "The doc distinguishes NSA from MoBA (Moonshot, arXiv:2502.13189) as 'the two architectures to know for 2026 long-context pre-training.' Both use three branches or block-level routing. What is the conceptual lineage each draws from, and when does the doc say you should NOT reach for NSA?",
+      "question": "The doc explains NSA's kernel amortizes KV loads across GQA groups: 'selection is per-query-group, not per-query-head, [so] KV loads are amortized across the group.' For a model with 8 KV heads and 32 Q heads (4 Q heads per KV group), what is the KV load reduction from per-group selection versus per-head selection, and what happens to the arithmetic intensity?",
       "options": [
-        "NSA draws from sparse attention research (Longformer, BigBird); MoBA draws from Mixture-of-Experts. Avoid NSA when context is always under 16K or when serving existing dense-attention weights that were not pre-trained with NSA",
-        "NSA draws from diffusion models; MoBA draws from FlashAttention. Avoid NSA for batch-1 CPU deployments",
-        "NSA draws from KV cache pruning; MoBA draws from residual VQ tokenisation. Avoid NSA when using speculative decoding",
-        "NSA and MoBA share identical conceptual lineage from routing transformers; avoid NSA when using GQA because the two are incompatible"
+        "Per-head selection needs 32 independent top-k calls each loading k*l tokens — up to 32×k×l KV token reads per layer. Per-group selection needs only 8 top-k calls; all 4 Q heads in a group share the same k blocks, cutting KV reads by 4× and keeping arithmetic intensity high because more compute (4 Q heads' attention) runs against the same loaded KV data",
+        "Per-group selection forces all 4 Q heads in a group to attend to identical blocks, so effective recall drops; the hardware benefit is purely a latency optimization with no effect on total bytes read from HBM",
+        "The 8 KV groups each load 2k blocks instead of k to compensate for forced sharing among Q heads, keeping total KV reads constant while reducing kernel-launch overhead",
+        "Per-group selection applies only to the sliding-window branch; compressed and selected branches always run per-head to maximize each head's recall of relevant blocks"
       ],
       "correct": 0,
-      "explanation": "NSA is the sparse-attention line (Longformer → BigBird → NSA with learned sparsity); MoBA applies the MoE principle (mixture of experts) to attention blocks. The doc's 'When not to' section: NSA requires continued training to retrofit on an existing model (cannot bolt on at inference like KV pruning), doesn't help below 16K (three-branch overhead dominates savings), and is not justified for batch-1 interactive short-context chat."
+      "explanation": "In per-head selection, each of the 32 Q heads picks its own top-k blocks: 32 × k × l tokens loaded from HBM for the selected branch. With 8 KV groups (4 Q heads each sharing KV heads), per-group selection means 8 top-k calls and 8 × k × l tokens loaded — a 4× reduction in KV reads for the selected branch. The 4 Q heads in a group run their attention computations against the same loaded KV tile in SRAM: more FLOPs per byte of HBM traffic, which is the definition of higher arithmetic intensity. The doc states this as 'arithmetic intensity stays high' — exactly this amortization across the GQA group is what makes the hardware-aligned kernel perform near the theoretical compute limit."
     }
   ]
 }
