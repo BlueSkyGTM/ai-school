@@ -1,4 +1,6 @@
 {
+  "lesson": "28-world-models-video-diffusion",
+  "title": "World Models & Video Diffusion",
   "questions": [
     {
       "stage": "pre",
@@ -13,16 +15,40 @@
       "explanation": "Sora 2 is autoregressive on spacetime tokens; its prompt sets the scene but you cannot change direction mid-rollout. Genie 3 infers or takes a latent action at each step and conditions the next-frame prediction on it, letting the user interact with the simulated world. This interactivity is what makes a model a 'world simulator' rather than a video generator."
     },
     {
-      "stage": "pre",
-      "question": "Divided attention in a video transformer means what?",
+      "stage": "check",
+      "question": "Divided attention runs temporal attention O(H·W · T²) then spatial attention O(T · (H·W)²) per block. For T=8 and H·W=256 (a 16×16 spatial grid), which option best describes the compute savings over full joint attention O((T·H·W)²)?",
       "options": [
-        "Half the tokens are masked",
-        "Each block does a temporal attention (same spatial position, across frames) followed by a spatial attention (same frame, across positions); this factorises cost from O((T*H*W)^2) into O((H*W)*T^2) + O(T*(H*W)^2) — dramatically cheaper than the joint product",
-        "Only half the layers run attention",
-        "Attention is split across GPUs"
+        "About 2× fewer operations — the savings are modest at small video sizes",
+        "Exactly 4× fewer — divided attention always halves the operation count twice",
+        "About 8× fewer — full joint costs ~4.2M pairwise ops; divided temporal + spatial costs ~540K",
+        "About 100× fewer — video models are completely intractable with full joint attention at any resolution"
+      ],
+      "correct": 2,
+      "explanation": "Full joint: (T·H·W)² = (8·256)² ≈ 4.2M. Divided: H·W·T² + T·(H·W)² = 256·64 + 8·65536 ≈ 540K. Ratio ≈ 7.75×. For production video (T=150, H·W=2700), the doc shows the gap reaches multiple orders of magnitude. This cost difference is why TimeSformer and every 2026 video DiT — Sora, Wan, HunyuanVideo — use divided or window attention rather than full joint attention."
+    },
+    {
+      "stage": "check",
+      "question": "DreamerV3 operates entirely in a learned latent space during policy rollouts rather than in pixel space. What is the primary benefit for RL?",
+      "options": [
+        "Pixel-space models cannot learn reward signals",
+        "Latent-space rollouts are orders of magnitude cheaper, enabling thousands of imagined policy steps without rendering frames — this is what makes DreamerV3 sample-efficient across 150+ tasks without domain-specific tuning",
+        "Latent models always outperform pixel models on video quality metrics like FVD",
+        "It avoids the need for an explicit action-conditioning interface"
       ],
       "correct": 1,
-      "explanation": "Full joint attention over spacetime tokens is prohibitive: for T=150 temporal tokens and a 60x45 spatial grid (2700 spatial tokens), the joint (T*H*W)^2 ≈ 1.6e11 pairs. Divided attention runs temporal attention at each spatial position (H*W * T^2 ≈ 6.1e7) and spatial attention at each timestep (T * (H*W)^2 ≈ 1.1e9) — multiple orders of magnitude less. TimeSformer introduced this pattern; almost every 2026 video DiT (Sora, Wan, HunyuanVideo) uses a divided or window variant."
+      "explanation": "In DreamerV3 the encoder compresses observations to compact latent states, and the world model transitions (state, action) → next state in that latent space. The agent rolls out thousands of imagined trajectories without decoding pixels. Decoding only happens for visualisation. This compressed simulation is what achieves sample efficiency across 150+ tasks from Atari to proprioceptive control with a single set of hyperparameters."
+    },
+    {
+      "stage": "check",
+      "question": "In `VideoPatch3D.forward`, a `nn.Conv3d` with kernel and stride equal to `(patch_t, patch_h, patch_w)` is applied to input `(N, C, T, H, W)`. After reshaping and transposing, what shape is the returned token sequence?",
+      "options": [
+        "(N, T·H·W, C) — raw frame pixels rearranged into a flat sequence",
+        "(N, T/patch_t, H/patch_h · W/patch_w, dim) — temporal and spatial kept in separate axes",
+        "(N, dim, T/patch_t, H/patch_h, W/patch_w) — still a 5D feature map",
+        "(N, (T/patch_t)·(H/patch_h)·(W/patch_w), dim) — all spatio-temporal patches flattened into one token sequence"
+      ],
+      "correct": 3,
+      "explanation": "`VideoPatch3D` uses a stride-equal-to-kernel 3D conv to produce a `(N, dim, t, h, w)` feature map, then reshapes and transposes to `(N, t·h·w, dim)`. The method returns `(tokens, (t, h, w))` so that `DividedAttentionBlock.forward` knows the grid shape when separating temporal and spatial attention passes. This is the 3D generalisation of ViT's 2D patch embedding."
     },
     {
       "stage": "post",
@@ -47,18 +73,6 @@
       ],
       "correct": 3,
       "explanation": "The VLM plans, the video model imagines, and the inverse dynamics model turns imagination into motor commands. Given two consecutive observations, inverse dynamics asks: what action produced this transition? This three-component stack lets a robot train largely in a learned simulator, using the video model to generate data and the inverse dynamics model to execute."
-    },
-    {
-      "stage": "post",
-      "question": "Autonomous-driving teams use world models (Cosmos-Drive, Gaia-2, DrivingWorld) to replace what cost?",
-      "options": [
-        "Expensive real-world data collection for rare or dangerous corner cases (pedestrian jaywalks, icy roads, unusual vehicles); synthesised driving video provides on-demand training and evaluation data for those scenarios",
-        "Actual fleet insurance",
-        "Road tolls",
-        "Vehicle depreciation"
-      ],
-      "correct": 0,
-      "explanation": "Collecting corner-case driving data takes millions of real-world miles. Cosmos-Drive, Gaia-2, and DrivingWorld generate it conditioned on trajectories and maps. Teams use this data to expand training sets, evaluate planners in reproducible conditions, and de-risk scenarios they cannot ethically drive in reality. Replacing a fraction of real-world collection with synthesis is one of the clearest production wins for video world models in 2026."
     }
   ]
 }
