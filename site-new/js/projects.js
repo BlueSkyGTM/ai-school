@@ -40,7 +40,7 @@
         ? el('a',    { class: 'proj__link', href: l.url, target: '_blank', rel: 'noopener' }, 'View ↗')
         : done
           ? el('span', { class: 'proj__st is-shipped' }, 'Shipped')
-          : el('a',    { class: 'proj__link proj__link--locked', href: 'course.html' }, '🔒 Complete in Course')
+          : el('a',    { class: 'proj__link proj__link--locked', href: 'course.html' }, '[ locked ] — Go to Course')
     ]);
 
     return el('div', { class: 'proj ' + (done ? 'is-shipped' : 'is-locked') }, [
