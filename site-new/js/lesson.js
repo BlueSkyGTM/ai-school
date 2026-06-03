@@ -11,7 +11,6 @@
   const { store } = window.AIS;
   const $ = (s) => document.querySelector(s);
 
-  if (typeof PHASES !== 'undefined') store.seedIfEmpty(PHASES);
 
   /* ---------- flatten lessons + derive paths ---------- */
   const flat = [];

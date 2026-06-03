@@ -9,7 +9,6 @@
   const { el } = ui;
   const $ = (s) => document.querySelector(s);
 
-  store.seedIfEmpty(PHASES);
 
   /* ---------- player card ---------- */
   function renderCard() {

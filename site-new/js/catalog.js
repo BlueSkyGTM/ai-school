@@ -11,7 +11,6 @@
   const { el } = ui;
   const $ = (s) => document.querySelector(s);
 
-  store.seedIfEmpty(PHASES);
 
   // GitHub lesson URL → in-site reader link (lesson.html?path=…), or null
   function readerHref(url) {

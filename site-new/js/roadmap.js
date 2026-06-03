@@ -10,7 +10,6 @@
   const { el } = ui;
   const $ = (s) => document.querySelector(s);
 
-  store.seedIfEmpty(PHASES);
   const stats  = game.derive(PHASES, store.load());
   const byId   = (id) => stats.phaseStats.find((p) => p.id === id);
   const phById = (id) => PHASES.find((p) => p.id === id);

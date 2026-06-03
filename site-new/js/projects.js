@@ -10,7 +10,6 @@
   const { el } = ui;
   const $ = (s) => document.querySelector(s);
 
-  store.seedIfEmpty(PHASES);
 
   /* collect capstones from all chapters */
   const allCapstones = [];
