@@ -21,8 +21,8 @@
 
   const RANKS = [
     { min: 1,  title: 'Initiate' },
-    { min: 4,  title: 'Apprentice Engineer' },
-    { min: 7,  title: 'Practitioner' },
+    { min: 4,  title: 'Practitioner' },
+    { min: 7,  title: 'Apprentice Engineer' },
     { min: 10, title: 'AI Engineer' },
     { min: 13, title: 'Senior Engineer' },
     { min: 16, title: 'Staff Engineer' },
