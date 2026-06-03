@@ -65,7 +65,9 @@
       return (va < vb ? -1 : va > vb ? 1 : 0) * sortDir;
     });
 
-    $('#count').textContent = `${out.length} of ${rows.length} lessons`;
+    $('#count').textContent = out.length === rows.length
+      ? `${rows.length} lessons`
+      : `${out.length} of ${rows.length} lessons`;
     const body = $('#body');
     if (!out.length) { body.replaceChildren(el('tr', null, el('td', { colspan: '5', class: 'cat-empty' }, 'No lessons match — try clearing a filter.'))); return; }
     body.replaceChildren(...out.map((r) => {

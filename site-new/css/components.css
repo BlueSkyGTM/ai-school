@@ -235,7 +235,8 @@
 .proj.is-locked { border-color: var(--line); border-style: dashed; }
 .proj.is-shipped { border-color: var(--gold); }
 .proj__art { aspect-ratio: 16 / 9; }
-.proj.is-locked .proj__art { filter: grayscale(1) brightness(0.55); opacity: 0.5; }
+.proj.is-locked .proj__art { filter: grayscale(1) brightness(0.4); opacity: 0.7; }
+.proj.is-locked .proj__name { color: var(--cream-dim); }
 .proj__body { padding: var(--s4); flex: 1; display: flex; flex-direction: column; gap: var(--s2); }
 .proj__name { font-family: var(--pix); font-size: 1.5rem; text-transform: uppercase; color: var(--cream); line-height: 0.95; }
 .proj.is-locked .proj__name { color: var(--cream-mute); }
