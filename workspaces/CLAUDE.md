@@ -126,6 +126,7 @@ python3 scripts/audit_lessons.py --strict-quiz phases/<slug>/
 ## Hard rules
 
 - **Never brief Cline to create quiz.json files** — they already exist
+- **Never brief Cline on 5q files without explicit approval** — phases 00, 01, 04, 07, 11, 16 have `pre, pre, post, post, post` with no check questions at all. Fixing requires writing 3 new check questions per lesson — content creation, not repair.
 - Never commit multiple lessons in one commit
 - Never edit `site/data.js` (old site) — unused
 - Always verify stage sequence: `pre, check, check, check, post, post`

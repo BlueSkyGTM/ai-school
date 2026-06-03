@@ -56,12 +56,38 @@ Files: `ai-school-curriculum/site-new/wordpress/`
 - `aischool-progress.php` — REST plugin (`/wp-json/aischool/v1/progress`)
 - `page-aischool.php` — page template for Course/Catalog/Library/Projects/Glossary
 
-### P2 — Quiz UI (future)
+### P2 — 5q quiz files (content creation required — NOT simple repair)
+
+69 files across phases 00, 01, 04, 07, 11, 16 have pattern `pre, pre, post, post, post`.
+Target is `pre, check, check, check, post, post`. These need 3 check questions WRITTEN
+per lesson — that is quiz creation, not trimming. 69 × 3 = 207 new questions.
+Decision pending: write them, or leave as non-standard until later.
+
+### P3 — lesson.html (skeleton, not functional)
+
+The catalog links to `lesson.html?path=phases/...` for lessons that have GitHub URLs.
+Currently clicking a catalog row opens a non-rendering skeleton page.
+Two options:
+- A) Redirect to GitHub URL (10 lines JS, simple)
+- B) Fetch and render lesson markdown (full lesson reader build, larger)
+
+### P4 — Homepage copy
+
+`index.html` signpost cards still say "470+" lessons. Should be "498".
+
+### P5 — Close upstream PRs
+
+Two open PRs from BlueSkyGTM on `rohitg00/ai-engineering-from-scratch`:
+- #236 "feat: add quiz.json for seven orphan lessons" — superseded by upstream pull
+- #237 "docs: wire orphan lessons into README and ROADMAP" — check if still relevant
+Close or update them.
+
+### P6 — Quiz UI (future)
 
 1,109 questions exist as JSON. Nothing renders them yet. Build a quiz interface
 into the lesson reader when WordPress is deployed.
 
-### P3 — Graphify (future)
+### P7 — Graphify (future)
 
 Interactive prerequisite DAG for the site. Shows chapter dependencies visually.
 
@@ -69,8 +95,12 @@ Interactive prerequisite DAG for the site. Shows chapter dependencies visually.
 
 ## Known gaps (do not skip)
 
-1. **data.js lesson count** — says "470+" in some copy but site now has 498 lessons.
-   Update signpost text on index.html when convenient.
+1. **data.js lesson count** — index.html signpost cards say "470+" but site has 498 lessons.
+   Fix: update copy in `site-new/index.html` signpost descriptions. (P4 above)
+
+2. **5q quiz files** — 69 files have no check questions at all. Pattern: `pre, pre, post, post, post`.
+   These cannot be fixed by trimming — they need 3 check questions written per lesson.
+   Do NOT brief Cline on these without explicit approval and content direction.
 
 2. **Stage sequence not enforced by CI** — manually verify `pre, check, check, check, post, post`
    before every schema repair commit until the audit script is updated.
