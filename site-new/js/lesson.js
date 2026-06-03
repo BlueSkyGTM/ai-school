@@ -190,7 +190,11 @@
         const lang = fence[1] || ''; const buf = []; i++;
         while (i < lines.length && !/^```/.test(lines[i])) { buf.push(lines[i]); i++; }
         i++;
-        out.push('<pre>' + (lang ? '<span class="lz-code-lang">' + esc(lang) + '</span>' : '') + '<code>' + esc(buf.join('\n')) + '</code></pre>');
+        if (lang === 'mermaid') {
+          out.push('<div class="lz-diagram"><span class="lz-code-lang">diagram</span><span class="lz-diagram-note">View on GitHub ↗</span></div>');
+        } else {
+          out.push('<pre>' + (lang ? '<span class="lz-code-lang">' + esc(lang) + '</span>' : '') + '<code>' + esc(buf.join('\n')) + '</code></pre>');
+        }
         continue;
       }
       if (/^\s*$/.test(line)) { i++; continue; }
