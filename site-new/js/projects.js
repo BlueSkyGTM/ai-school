@@ -13,12 +13,14 @@
   /* collect capstones from all chapters */
   const allCapstones = [];
   PHASES.forEach((ph) => {
+    const last = ph.lessons.length - 1;
     ph.lessons.forEach((l, i) => {
-      if (
-        l.type === 'Capstone' ||
+      const isTypeCap = l.type === 'Capstone';
+      const isFinalCap = i === last && (
         (l.url  && l.url.toLowerCase().includes('capstone')) ||
         (l.name && l.name.toLowerCase().includes('apstone'))
-      ) {
+      );
+      if (isTypeCap || isFinalCap) {
         allCapstones.push({ ph, l, i, done: store.isDone(ph.id, i) });
       }
     });
