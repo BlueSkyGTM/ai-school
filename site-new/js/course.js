@@ -104,10 +104,12 @@
   function render() {
     const list = PHASES.filter((ph) => passes(phaseStat(ph)));
     const host = $('#toc');
+    const scrollY = window.scrollY;
     host.replaceChildren();
     list.forEach((ph) => phaseBlock(ph).forEach((n) => host.append(n)));
     const s = game.derive(PHASES, store.load());
     $('#count').textContent = `${list.length} of ${PHASES.length} chapters · ${s.lessonsDone}/${s.lessonsTotal} lessons cleared`;
+    window.scrollTo({ top: scrollY, behavior: 'instant' });
   }
 
   $('#filter').addEventListener('change', (e) => { filter = e.target.value; render(); });
