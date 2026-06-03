@@ -78,9 +78,8 @@
 
 /* ---------- catalog · search hero (its own swagger) ---------- */
 .cat-hero { border: 2px solid var(--terra-deep); background: linear-gradient(160deg, var(--panel-2), var(--panel)); box-shadow: var(--shadow-pix); padding: var(--s5) var(--s5) var(--s4); margin-top: var(--s2); }
-.cat-hero__head { display: flex; align-items: baseline; gap: var(--s4); flex-wrap: wrap; margin-bottom: var(--s4); }
-.cat-hero__t { font-family: var(--pix); font-size: clamp(2.6rem, 7vw, 4rem); line-height: 0.8; text-transform: uppercase; color: var(--cream); }
-.cat-hero__sub { font-size: 0.74rem; color: var(--cream-dim); }
+.cat-hero__head { display: block; margin-bottom: var(--s4); }
+.cat-hero__t { font-family: var(--pix); font-size: clamp(2.6rem, 7vw, 4rem); line-height: 0.8; text-transform: uppercase; color: var(--terra); }
 
 .cat-search { display: flex; align-items: center; gap: var(--s3); background: var(--bg); border: 2px solid var(--line); padding: 0 var(--s4); transition: border-color 0.12s; }
 .cat-search:focus-within { border-color: var(--terra); }
