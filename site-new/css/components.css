@@ -239,15 +239,11 @@
 
 /* ---------- projects (trophy case of builds) ---------- */
 .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s4); }
-.proj { display: flex; flex-direction: column; border: 1.5px solid var(--terra-deep); background: var(--panel); }
-.proj.is-locked { border-color: var(--line); border-style: dashed; }
+.proj { display: flex; flex-direction: column; border: 1.5px solid var(--terra-deep); background: var(--panel); min-height: 120px; }
+.proj.is-locked { border-color: var(--line); border-style: dashed; opacity: 0.65; }
 .proj.is-shipped { border-color: var(--gold); }
-.proj__art { aspect-ratio: 16 / 9; }
-.proj.is-locked .proj__art { filter: grayscale(1) brightness(0.4); opacity: 0.7; }
-.proj.is-locked .proj__name { color: var(--cream-dim); }
 .proj__body { padding: var(--s4); flex: 1; display: flex; flex-direction: column; gap: var(--s2); }
-.proj__name { font-family: var(--pix); font-size: 1.5rem; text-transform: uppercase; color: var(--cream); line-height: 0.95; }
-.proj.is-locked .proj__name { color: var(--cream-mute); }
+.proj__name { font-family: var(--pix); font-size: 1.3rem; text-transform: uppercase; color: var(--cream); line-height: 1; }
 .proj__desc { font-size: 0.72rem; color: var(--cream-dim); line-height: 1.45; flex: 1; }
 .proj__foot { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); margin-top: var(--s3); }
 .proj__tag { font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-mute); }
@@ -256,10 +252,7 @@
 .proj.is-open .proj__st { color: var(--terra); border-color: var(--terra-deep); }
 .proj__link { font-size: 0.54rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-dim); border: 1px solid var(--line); padding: 4px 8px; }
 .proj__link:hover { color: var(--terra); border-color: var(--terra); }
-/* locked-summary tile: one card that replaces N grey boxes */
-.proj--locked-summary { border-style: dashed; border-color: var(--line); min-height: 160px; }
-.proj__body--center { justify-content: center; align-items: center; text-align: center; min-height: 160px; }
-.proj__locked-num { font-family: var(--pix); font-size: 3.4rem; color: var(--cream-mute); line-height: 1; margin-bottom: var(--s2); }
+.proj__link--locked { color: var(--cream-mute); font-size: 0.52rem; }
 
 .proj--more { color: inherit; transition: border-color 0.12s; }
 .proj--more:hover { border-color: var(--terra); border-style: solid; }

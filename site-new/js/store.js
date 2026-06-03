@@ -1,23 +1,48 @@
 /* ============================================================
    AI SCHOOL · ProgressStore
    The ONLY thing that touches persistence. Everything else reads
-   derived stats from game.js. Swap `adapter` to move from
-   localStorage → WordPress REST with zero screen changes.
+   derived stats from game.js.
+
+   Adapters:
+   - localAdapter  → localStorage (default, always available)
+   - restAdapter   → WordPress REST /wp-json/aischool/v1/progress
+                     Active when window.WP_REST_NONCE is set.
    ============================================================ */
 (function (global) {
   'use strict';
 
   const KEY = 'aischool.progress.v1';
 
-  /* --- adapters: same 3 methods, different backend --- */
+  /* --- local adapter (sync) --- */
   const localAdapter = {
     read()  { try { return JSON.parse(localStorage.getItem(KEY)); } catch { return null; } },
     write(p) { localStorage.setItem(KEY, JSON.stringify(p)); },
     clear() { localStorage.removeItem(KEY); }
   };
 
-  // Later: const restAdapter = { read: () => fetch('/wp-json/aischool/v1/progress')…, … }
-  // Store.adapter = restAdapter;  ← only line that changes.
+  /* --- WordPress REST adapter (async) --- */
+  const restAdapter = {
+    async read() {
+      const r = await fetch('/wp-json/aischool/v1/progress', {
+        credentials: 'same-origin',
+        headers: { 'X-WP-Nonce': window.WP_REST_NONCE || '' }
+      });
+      if (!r.ok) return null;
+      return r.json();
+    },
+    async write(p) {
+      await fetch('/wp-json/aischool/v1/progress', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-WP-Nonce': window.WP_REST_NONCE || ''
+        },
+        body: JSON.stringify(p)
+      });
+    },
+    clear() { return this.write(blank()); }
+  };
 
   function blank() {
     return { v: 1, done: {}, days: [], updatedAt: 0 };
@@ -29,23 +54,50 @@
   const Store = {
     adapter: localAdapter,
     _cache: null,
+    _ready: null,
+
+    /* Call once per page before rendering. Returns a Promise.
+       Fetches from WP if nonce present, falls back to localStorage. */
+    init() {
+      if (this._ready) return this._ready;
+
+      if (window.WP_REST_NONCE) {
+        this.adapter = restAdapter;
+        this._ready = restAdapter.read()
+          .then((data) => {
+            this._cache = data && data.v ? data : (localAdapter.read() || blank());
+            /* keep local copy in sync for offline fallback */
+            localAdapter.write(this._cache);
+          })
+          .catch(() => {
+            this._cache = localAdapter.read() || blank();
+          });
+      } else {
+        this._cache = localAdapter.read() || blank();
+        this._ready = Promise.resolve();
+      }
+
+      return this._ready;
+    },
 
     load() {
-      if (!this._cache) this._cache = this.adapter.read() || blank();
+      if (!this._cache) this._cache = localAdapter.read() || blank();
       return this._cache;
     },
 
     _commit() {
       const p = this._cache;
       p.updatedAt = Date.now();
-      this.adapter.write(p);
+      /* always write locally for instant feedback + offline */
+      localAdapter.write(p);
+      /* background sync to WP when active */
+      if (window.WP_REST_NONCE) restAdapter.write(p);
     },
 
     isDone(phaseId, idx) {
       return !!this.load().done[key(phaseId, idx)];
     },
 
-    /** Toggle a lesson. Returns the new done state. Records today for streaks. */
     toggle(phaseId, idx) {
       const p = this.load();
       const k = key(phaseId, idx);
@@ -62,12 +114,11 @@
 
     reset() {
       this._cache = blank();
-      this.adapter.clear();
+      localAdapter.clear();
+      if (window.WP_REST_NONCE) restAdapter.write(blank());
     },
 
-    exportJSON() {
-      return JSON.stringify(this.load(), null, 2);
-    },
+    exportJSON() { return JSON.stringify(this.load(), null, 2); },
 
     importJSON(raw) {
       const parsed = typeof raw === 'string' ? JSON.parse(raw) : raw;
@@ -75,18 +126,16 @@
       this._commit();
     },
 
-    /** One-time demo state so the design reads as "in progress" on first open. */
     seedIfEmpty(phases) {
       const p = this.load();
       if (Object.keys(p.done).length) return;
       phases.forEach((ph) => {
         const total = ph.lessons.length;
         let upto = 0;
-        if (ph.id === 0 || ph.id === 1) upto = total;          // cleared
-        else if (ph.id === 2) upto = Math.round(total * 0.45); // in progress
+        if (ph.id === 0 || ph.id === 1) upto = total;
+        else if (ph.id === 2) upto = Math.round(total * 0.45);
         for (let i = 0; i < upto; i++) p.done[key(ph.id, i)] = Date.now();
       });
-      // 12-day streak
       for (let d = 11; d >= 0; d--) {
         const dt = new Date(); dt.setDate(dt.getDate() - d);
         p.days.push(dt.toISOString().slice(0, 10));

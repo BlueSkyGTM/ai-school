@@ -5,11 +5,12 @@
    chips + a sortable manifest. Status reflects YOUR progress.
    (The visual dependency view is the Roadmap page.)
    ============================================================ */
-(function () {
+(async function () {
   'use strict';
   const { store, game, ui } = window.AIS;
   const { el } = ui;
   const $ = (s) => document.querySelector(s);
+  await store.init();
 
 
   // GitHub lesson URL → in-site reader link (lesson.html?path=…), or null

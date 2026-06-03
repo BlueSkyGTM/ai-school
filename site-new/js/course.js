@@ -3,9 +3,10 @@
    Player card: level, rank, XP bar, career stats.
    No avatar, no streak, no reset button.
    ============================================================ */
-(function () {
+(async function () {
   'use strict';
   const { store, game, ui } = window.AIS;
+  await store.init();
   const { el } = ui;
   const $ = (s) => document.querySelector(s);
 
