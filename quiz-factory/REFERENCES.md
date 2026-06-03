@@ -46,7 +46,7 @@ A repo-wide one-time fix already ran (`quiz-factory/scripts/balance_answers.py`)
 
 | Doc | Content |
 |-----|---------|
-| [lesson-planning SKILL](../.cursor/skills/lesson-planning/SKILL.md) | Seven insights, planning, review, triage |
+| [lesson-planning SKILL](../.claude/skills/lesson-planning/SKILL.md) | Seven insights, planning, review, triage |
 | [QUALITY-RUBRIC.md](QUALITY-RUBRIC.md) | PM spot-check after each phase |
 
 ## Gold JSON (read live — insights in skill)

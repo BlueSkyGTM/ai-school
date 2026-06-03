@@ -74,7 +74,7 @@ Cap: <word or item limit>
 
 Sub-agents return findings, not decisions. Claude Code:
 - **Synthesizes** the report into a clear decision
-- **Writes a Cline brief** if file changes are needed (drops to `work/batches/pending/`)
+- **Writes a Cline brief** if file changes are needed (drops to `cline-backlog/batches/pending/`)
 - **Launches batch-orchestration** if it's a parallel execution task across many files
 - **Acts directly** if only horizon-level reasoning was needed
 
@@ -99,5 +99,5 @@ When a job needs both: dispatch first to assess scope, then use batch-orchestrat
 ## Related
 
 - Execution of non-horizon batch work: `.claude/skills/batch-orchestration/SKILL.md`
-- Cline inline briefs: `work/batches/pending/`
+- Cline inline briefs: `cline-backlog/batches/pending/`
 - Repo search tools: `scripts/query_graph.py`, `scripts/audit_lessons.py`
