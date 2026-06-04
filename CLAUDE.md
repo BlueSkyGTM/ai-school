@@ -82,16 +82,15 @@ Fail on check = missed concept cluster. Send them back to that section.
 
 ---
 
-## Executing batch briefs (quiz factory)
+## Open Site Integration Tasks
 
-When Claude Code sets `cline-backlog/batches/ACTIVE.md`:
+These are the two remaining site integration items (all schema repair is complete as of 2026-06-04):
 
-1. Read the brief at the path listed in `ACTIVE.md`
-2. Follow the per-lesson procedure exactly
-3. Run audit gate after each lesson
-4. Verify stage sequence manually: `pre, check, check, check, post, post`
-5. One commit per lesson: `fix(phase-NN/MM): <description>`
-6. Append result to `cline-backlog/run.log`
+**1. Quiz UI in lesson reader**
+`site-new/lesson.html` needs a quiz section that loads `quiz.json` for the current lesson and renders it after the lesson content. Questions exist as data — nothing displays them yet.
+
+**2. data.js sync — Phase 19 lessons 58–87**
+30 capstone lessons exist in `phases/19-capstone-projects/` (58–87) but are not yet indexed in `site-new/js/data.js`. Re-run the curriculum build or manually add the 30 entries.
 
 ---
 
