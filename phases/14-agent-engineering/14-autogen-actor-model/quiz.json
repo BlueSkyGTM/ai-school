@@ -15,18 +15,6 @@
       "explanation": "Actors have private state and an inbox; messages are the only interaction."
     },
     {
-      "stage": "pre",
-      "question": "What are the three API layers of AutoGen v0.4?",
-      "options": [
-        "Core, AgentChat, Extensions",
-        "Frontend, Backend, Database",
-        "Tools, Models, Memory",
-        "Plan, Act, Reflect"
-      ],
-      "correct": 0,
-      "explanation": "Core is the low-level actor framework, AgentChat is the task-driven high-level API, Extensions are integrations."
-    },
-    {
       "stage": "check",
       "question": "Why does decoupling delivery from handling give fault isolation?",
       "options": [
