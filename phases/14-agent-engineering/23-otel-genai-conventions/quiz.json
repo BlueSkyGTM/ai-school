@@ -15,18 +15,6 @@
       "explanation": "invoke_agent is the canonical name; the agent's name attribute appears in the span name when set."
     },
     {
-      "stage": "pre",
-      "question": "Which three span categories does the GenAI SIG define?",
-      "options": [
-        "Model/client, agent, tool",
-        "Frontend, backend, db",
-        "Read, write, exec",
-        "Latency, error, throughput"
-      ],
-      "correct": 0,
-      "explanation": "Model/client (LLM calls), agent (create/invoke), tool (per invocation) are the categories."
-    },
-    {
       "stage": "check",
       "question": "When does an invoke_agent span use kind CLIENT vs INTERNAL?",
       "options": [
