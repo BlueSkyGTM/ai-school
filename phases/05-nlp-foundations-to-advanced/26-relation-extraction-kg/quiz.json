@@ -15,18 +15,6 @@
       "explanation": "KGs store information as (s, r, o) triples; aggregated triples form the graph."
     },
     {
-      "stage": "pre",
-      "question": "What does AEVS stand for in 2026 relation extraction?",
-      "options": [
-        "Anchor-Extraction-Verification-Supplement: anchor spans, extract triples, verify against source, supplement coverage",
-        "Auto-Encoder Vector Search",
-        "Async Entity Validation Service",
-        "Aggregated Entity-Value Schema"
-      ],
-      "correct": 0,
-      "explanation": "AEVS is the 2026 hallucination-mitigation framework for grounded RE."
-    },
-    {
       "stage": "check",
       "question": "Why must each triple carry source provenance (doc id + span)?",
       "options": [
@@ -85,18 +73,6 @@
       ],
       "correct": 2,
       "explanation": "Time-bounded relations need qualifiers (e.g. Wikidata P580/P582) or facts go silently stale."
-    },
-    {
-      "stage": "post",
-      "question": "What is REBEL?",
-      "options": [
-        "A vector database",
-        "A seq2seq relation extractor that outputs triples already in Wikidata property ids",
-        "A tokenizer",
-        "A coreference model"
-      ],
-      "correct": 1,
-      "explanation": "REBEL (Babelscape) is a seq2seq RE model trained on distantly supervised Wikidata triples."
     }
   ]
 }
