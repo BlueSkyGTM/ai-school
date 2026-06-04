@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "Which three vector types does each scene get in the multi-vector index?",
-      "options": [
-        "Caption embedding, keyframe embedding, and transcript embedding",
-        "Audio waveform, mel-spectrogram, and MFCCs",
-        "Hash, gzip, and CRC",
-        "Pose, depth, and optical flow"
-      ],
-      "correct": 0,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "How are results from the three retrieval streams merged at query time?",
       "options": [
