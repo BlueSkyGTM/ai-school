@@ -33,6 +33,9 @@ Cargo.lock
 .env.*.local
 *.pem
 *.key
+.gbrain-source
+gbrain.key
+gbrain-config.json
 
 .DS_Store
 Thumbs.db
