@@ -15,18 +15,6 @@
       "explanation": "Exact-match/F1 cannot recognize paraphrases or formatting differences that humans would mark correct."
     },
     {
-      "stage": "pre",
-      "question": "What does the RAGAS faithfulness metric measure?",
-      "options": [
-        "Retrieval recall",
-        "Whether each claim in the answer is entailed by the retrieved context, via NLI",
-        "Latency",
-        "Tokens per second"
-      ],
-      "correct": 1,
-      "explanation": "Faithfulness checks each answer claim against retrieved context using NLI entailment."
-    },
-    {
       "stage": "check",
       "question": "Why is judge-model calibration against human labels required before trusting scores?",
       "options": [
@@ -85,18 +73,6 @@
       ],
       "correct": 3,
       "explanation": "A judge upgrade silently shifts the metric baseline; pinning preserves cross-run comparability."
-    },
-    {
-      "stage": "post",
-      "question": "Where does DeepEval fit relative to RAGAS?",
-      "options": [
-        "DeepEval is pytest-for-LLMs (CI gates, G-Eval, hallucination metrics); RAGAS specializes in reference-free RAG monitoring",
-        "DeepEval is hosted only",
-        "DeepEval is a tokenizer",
-        "Replaces RAGAS entirely"
-      ],
-      "correct": 0,
-      "explanation": "DeepEval anchors CI/CD regression testing; RAGAS handles reference-free RAG monitoring."
     }
   ]
 }
