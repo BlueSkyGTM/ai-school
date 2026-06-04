@@ -15,18 +15,6 @@
       "explanation": "HTN's symbolic operators with preconditions and effects guarantee soundness by construction."
     },
     {
-      "stage": "pre",
-      "question": "Which problem class is AlphaEvolve built for?",
-      "options": [
-        "Free-form prose generation",
-        "Optimizations with a machine-checkable, deterministic fitness function",
-        "Multi-turn chat memory",
-        "Vector search ranking"
-      ],
-      "correct": 1,
-      "explanation": "Evolutionary search needs a deterministic evaluator; AlphaEvolve targets domains where one exists."
-    },
-    {
       "stage": "check",
       "question": "How does ChatHTN preserve plan soundness while using an LLM?",
       "options": [
