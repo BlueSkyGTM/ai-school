@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "What signal does the pipeline use as ground truth for a successful migration?",
-      "options": [
-        "Agent self-grading on a rubric",
-        "Reviewer approval on the PR",
-        "Diff size below a hard limit",
-        "Green CI in the sandbox without a coverage regression beyond a small threshold"
-      ],
-      "correct": 3,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "Which budget caps does the agent loop enforce per repo?",
       "options": [
