@@ -15,18 +15,6 @@
       "explanation": "Perplexity equals exp(avg negative log-likelihood). When every token gets probability 1, the NLL is zero, and exp(0) is 1."
     },
     {
-      "stage": "pre",
-      "question": "Why does the harness require non-negative log-probabilities from the adapter?",
-      "options": [
-        "Perplexity is undefined for negative values",
-        "Negative log-probabilities are non-negative by definition; receiving a negative value means the adapter sent log p, not -log p",
-        "Numpy crashes on negatives",
-        "The bin edges in ECE assume positivity"
-      ],
-      "correct": 1,
-      "explanation": "-log p of a probability is non-negative. A negative value is a contract violation that would silently give perplexity < 1, which is impossible."
-    },
-    {
       "stage": "check",
       "question": "What does expected calibration error measure?",
       "options": [
@@ -73,6 +61,18 @@
       ],
       "correct": 1,
       "explanation": "Per-task calibration is dominated by noise. The runner pools confidence/correctness pairs across all tasks before computing ECE, Brier, and the reliability diagram."
+    },
+    {
+      "stage": "post",
+      "question": "Why does the harness require non-negative log-probabilities from the adapter?",
+      "options": [
+        "Perplexity is undefined for negative values",
+        "Negative log-probabilities are non-negative by definition; receiving a negative value means the adapter sent log p, not -log p",
+        "Numpy crashes on negatives",
+        "The bin edges in ECE assume positivity"
+      ],
+      "correct": 1,
+      "explanation": "-log p of a probability is non-negative. A negative value is a contract violation that would silently give perplexity < 1, which is impossible."
     }
   ]
 }
