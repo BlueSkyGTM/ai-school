@@ -15,18 +15,6 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "What goes into the cache header versus the uncached suffix of each request?",
-      "options": [
-        "Random text padding to hit cache size",
-        "Only the retrieved documents",
-        "User question first, system prompt last",
-        "System prompt and static policies in the cache header, reranked context as cache extension, user question as the uncached suffix"
-      ],
-      "correct": 3,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "How does the retrieval layer respect jurisdiction tags like GDPR or HIPAA?",
       "options": [
