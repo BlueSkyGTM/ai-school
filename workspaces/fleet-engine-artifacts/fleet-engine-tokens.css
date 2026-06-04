@@ -1,0 +1,18 @@
+/*
+ * Fleet Engine — shared design tokens
+ * Defines the accent palette for each agent version.
+ * Base body styles live in each page's inline <style> block (DM Sans, #0A0A0A, grain).
+ *
+ * Version accents:
+ *   Index:  --action: #4d89f5  (Fleet Engine base blue)
+ *   Fathom: --accent: #4a9456  (signal green)
+ *   Cortex: --action: #4a7b94  (orchestration teal)
+ *   Helix:  --action: #9B6DFF  (RAG violet — locked)
+ */
+
+:root {
+  --fe-blue:   #4d89f5;
+  --fe-green:  #4a9456;
+  --fe-teal:   #4a7b94;
+  --fe-violet: #9B6DFF;
+}
