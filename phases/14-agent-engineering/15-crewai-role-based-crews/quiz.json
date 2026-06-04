@@ -15,18 +15,6 @@
       "explanation": "Agent, Task, Crew, and Process are the four primitives."
     },
     {
-      "stage": "pre",
-      "question": "What is the recommended production starting point per the CrewAI docs?",
-      "options": [
-        "Crew",
-        "Flow",
-        "Sequential process",
-        "Hierarchical process"
-      ],
-      "correct": 1,
-      "explanation": "The docs say start production apps with Flows; fold Crews in as sub-steps when autonomy earns its cost."
-    },
-    {
       "stage": "check",
       "question": "What is the difference between a Crew and a Flow?",
       "options": [
