@@ -438,7 +438,6 @@ nav {
 .forensic-lab {
   display: grid;
   grid-template-columns: minmax(270px, 0.86fr) minmax(310px, 0.94fr) minmax(440px, 1.24fr);
-  min-height: 600px;
   gap: 18px;
   padding: 18px;
   border: 2px solid rgba(74,148,86,0.50);
@@ -470,6 +469,7 @@ nav {
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.025);
   border-radius: 8px;
   margin-top: 18px;
+  padding: 0 14px 14px;
 }
 .forensic-panel:first-child .raw-card:hover { border-color: rgba(74,148,86,0.46); }
 
@@ -565,7 +565,7 @@ nav {
 .workflow-map.has-panel {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 28px 22px 20px;
   background:
     radial-gradient(circle at 10px 10px, rgba(255,255,255,0.105) 1px, transparent 1px) 0 0 / 28px 28px,
@@ -578,6 +578,7 @@ nav {
   min-width: 1040px;
   width: min(1040px, 100%);
   flex: 0 0 auto;
+  margin: 0 auto;
   grid-template-columns: 82px repeat(7, minmax(96px, 1fr));
   grid-template-rows: 96px 32px auto;
   gap: 0 22px;
@@ -614,6 +615,7 @@ nav {
 /* Visible icon box (the n8n square) */
 .wf-node::after {
   content: '◆';
+  color: #E6E6E6;
   position: absolute;
   left: 50%;
   top: 0;
@@ -681,10 +683,11 @@ nav {
 .wf-node.seed::before { display: block; }
 
 /* Per-node emoji icons */
-.wf-node[data-flow="config"]::after  { content: '✎';  color: #8B8CFF; }
-.wf-node[data-flow="ahab"]::after    { content: '🐋'; color: #4a9456; }
-.wf-node[data-flow="parser"]::after  { content: '{}'; color: #FFAA45; font-size: 20px; font-weight: 900; }
-.wf-node[data-flow="router"]::after  { content: '⊢';  color: #4CE68A; font-size: 34px; }
+.wf-node[data-flow="ignition"]::after { content: '⚡'; font-size: 26px; }
+.wf-node[data-flow="config"]::after   { content: '⚙';  color: #8B8CFF; }
+.wf-node[data-flow="ahab"]::after     { content: '🐋'; color: #4a9456; }
+.wf-node[data-flow="parser"]::after   { content: '{}'; color: #FFAA45; font-size: 20px; font-weight: 900; }
+.wf-node[data-flow="router"]::after   { content: '→';  color: #4CE68A; font-size: 28px; font-weight: 700; }
 .wf-node[data-flow="nemo"]::after    { content: '🐟'; color: #76A1FF; }
 .wf-node[data-flow="neptune"]::after { content: '🔱'; color: #D7B7FF; }
 .wf-node[data-flow="payload"]::after { content: '🐘'; color: #8FB7FF; font-size: 30px; }
