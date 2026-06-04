@@ -10,11 +10,11 @@
  *    require get_template_directory() . '/aischool-progress.php';
  *
  * 3. In WordPress admin, create these pages with slugs matching exactly:
- *    - "course"   → Assign template: Epoch Academy Page
- *    - "catalog"  → Assign template: Epoch Academy Page
- *    - "library"  → Assign template: Epoch Academy Page
- *    - "projects" → Assign template: Epoch Academy Page
- *    - "glossary" → Assign template: Epoch Academy Page
+ *    - "course"   → Assign template: AI Engineering From Scratch
+ *    - "catalog"  → Assign template: AI Engineering From Scratch
+ *    - "library"  → Assign template: AI Engineering From Scratch
+ *    - "projects" → Assign template: AI Engineering From Scratch
+ *    - "glossary" → Assign template: AI Engineering From Scratch
  *
  * 4. The plugin handles auth via nonce. You must be logged in for
  *    progress to persist. For a personal site you're always logged in.
