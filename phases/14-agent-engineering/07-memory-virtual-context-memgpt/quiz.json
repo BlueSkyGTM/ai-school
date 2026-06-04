@@ -15,18 +15,6 @@
       "explanation": "MemGPT maps prompt to RAM, external store to disk, and memory tools to page-fault-style transfers."
     },
     {
-      "stage": "pre",
-      "question": "Why do bigger context windows not fully solve memory?",
-      "options": [
-        "Providers cap them at 4k tokens",
-        "Overflow, dilution of attention, and lack of cross-session persistence still bite even with 128k windows",
-        "Long context costs nothing",
-        "The model refuses long input"
-      ],
-      "correct": 1,
-      "explanation": "Mem0 measured 128k-window baselines still missing facts a 4k agent with external memory catches; overflow, dilution, and persistence remain."
-    },
-    {
       "stage": "check",
       "question": "Which of these is NOT one of MemGPT's canonical memory tools?",
       "options": [
