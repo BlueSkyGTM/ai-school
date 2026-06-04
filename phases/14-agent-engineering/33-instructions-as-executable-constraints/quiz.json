@@ -15,18 +15,6 @@
       "explanation": "Operational rules are testable; aspirational rules are wishes."
     },
     {
-      "stage": "pre",
-      "question": "What five categories does the lesson cover most rules with?",
-      "options": [
-        "Startup, forbidden, definition of done, uncertainty, approval",
-        "Read, write, exec, fork, exit",
-        "Plan, act, reflect, refine, ship",
-        "Low, medium, high, critical, fatal"
-      ],
-      "correct": 0,
-      "explanation": "Startup, forbidden, definition of done, uncertainty handling, approval boundaries are the five."
-    },
-    {
       "stage": "check",
       "question": "Which severity tag stops execution and requires an operator override?",
       "options": [
