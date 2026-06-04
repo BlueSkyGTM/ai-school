@@ -15,18 +15,6 @@
       "explanation": "Broadcast at init keeps ranks in sync at step zero. All-reduce after backward keeps them in sync at every step that follows."
     },
     {
-      "stage": "pre",
-      "question": "Why does this lesson work on CPU without CUDA?",
-      "options": [
-        "It is a stub",
-        "torch.distributed ships a gloo backend that runs collectives over plain sockets, so torch.multiprocessing workers on CPU form a real process group; only the device tag changes on a GPU box",
-        "It uses simulated tensors",
-        "It does not use torch.distributed at all"
-      ],
-      "correct": 1,
-      "explanation": "Gloo is the CPU collective backend. The same call sites work on nccl on GPU; the API surface is identical."
-    },
-    {
       "stage": "check",
       "question": "What does the manual_all_reduce_matches_single_process test prove?",
       "options": [
@@ -73,6 +61,18 @@
       ],
       "correct": 1,
       "explanation": "DDP's invariant is parameter parity across ranks. The spread is the audit; the demo asserts it stays under 1e-3."
+    },
+    {
+      "stage": "post",
+      "question": "Why does this lesson work on CPU without CUDA?",
+      "options": [
+        "It is a stub",
+        "torch.distributed ships a gloo backend that runs collectives over plain sockets, so torch.multiprocessing workers on CPU form a real process group; only the device tag changes on a GPU box",
+        "It uses simulated tensors",
+        "It does not use torch.distributed at all"
+      ],
+      "correct": 1,
+      "explanation": "Gloo is the CPU collective backend. The same call sites work on nccl on GPU; the API surface is identical."
     }
   ]
 }
