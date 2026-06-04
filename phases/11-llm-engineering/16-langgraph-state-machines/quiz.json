@@ -2,7 +2,7 @@
   "lesson": "phase-11/16-langgraph-state-machines",
   "questions": [
     {
-      "stage": "post",
+      "stage": "pre",
       "question": "Why does the `messages` field in a LangGraph State TypedDict need `Annotated[list, add_messages]`?",
       "options": [
         "It enables streaming of token deltas from the model.",
@@ -14,7 +14,7 @@
       "explanation": ""
     },
     {
-      "stage": "post",
+      "stage": "check",
       "question": "What is the difference between `interrupt_before=['tools']` and `interrupt_after=['tools']`?",
       "options": [
         "No difference; they are aliases.",
@@ -26,7 +26,7 @@
       "explanation": ""
     },
     {
-      "stage": "post",
+      "stage": "check",
       "question": "Given a thread's checkpoint history, how do you time-travel to a prior state and explore a different branch?",
       "options": [
         "Call `graph.reset(thread_id)` then `graph.invoke(new_input, config)`.",
@@ -36,6 +36,18 @@
       ],
       "correct": 2,
       "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Which of the following best describes: A ReAct loop written by hand is a `while True`. A ReAct loop...?",
+      "options": [
+        "Skip validation and trust the input data",
+        "A ReAct loop written by hand is a `while True`. A ReAct loop written in LangGrap",
+        "Use the default settings without customization",
+        "Delegate this step to a downstream process"
+      ],
+      "correct": 1,
+      "explanation": "A ReAct loop written by hand is a `while True`. A ReAct loop written in LangGrap"
     },
     {
       "stage": "post",
