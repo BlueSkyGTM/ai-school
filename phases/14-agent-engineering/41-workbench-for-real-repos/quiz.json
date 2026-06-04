@@ -15,39 +15,27 @@
       "explanation": "The numbers do the arguing; the case is made on a real-feeling task, not a toy."
     },
     {
-      "stage": "pre",
-      "question": "Which is NOT one of the five outcomes measured?",
-      "options": [
-        "tests_actually_run",
-        "acceptance_met",
-        "files_outside_scope",
-        "model_perplexity"
-      ],
-      "correct": 3,
-      "explanation": "The five are tests_actually_run, acceptance_met, files_outside_scope, handoff_quality, reviewer_total."
-    },
-    {
       "stage": "check",
       "question": "What did LangChain's Anatomy of an Agent Harness measure on Terminal Bench 2.0?",
       "options": [
         "Models all converged at top-3",
-        "Same model moved from outside top 30 to rank five by changing only the harness",
         "Top model lost 25 places",
+        "Same model moved from outside top 30 to rank five by changing only the harness",
         "Harness changes did not move the rank"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "Twenty-five-rank delta on the same model is the headline harness-vs-model receipt."
     },
     {
       "stage": "check",
       "question": "What does the preprints.org paper cite as the failure rate for enterprise agent projects?",
       "options": [
-        "8%",
         "About 88% fail to reach production, with failures clustering around runtime, not reasoning",
+        "8%",
         "About 50%",
         "None fail"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": "The Harness Engineering for Language Agents preprint traces failures to runtime issues (stale state, brittle retries, overgrown context)."
     },
     {
@@ -55,11 +43,11 @@
       "question": "What does WebAgent baseline accuracy do in long-context conditions?",
       "options": [
         "Stays flat",
-        "Drops from 40-50% to under 10% mostly from infinite loops and goal loss",
         "Goes up by 30%",
-        "Halves but stays above 30%"
+        "Halves but stays above 30%",
+        "Drops from 40-50% to under 10% mostly from infinite loops and goal loss"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": "Long-context collapse is what the Ralph Loop and handoff packet exist to absorb."
     },
     {
@@ -79,11 +67,11 @@
       "question": "Where do you cite the report from this lesson?",
       "options": [
         "Internal HR review",
-        "When someone wants to drop the verification gate 'just for this sprint', or when a new agent product launches and needs a portable time-savings benchmark",
         "Only in marketing decks",
+        "When someone wants to drop the verification gate 'just for this sprint', or when a new agent product launches and needs a portable time-savings benchmark",
         "Only at hackathons"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": "The numbers travel further than the explanation; cite the report when pressure tries to short-circuit surfaces."
     }
   ]
