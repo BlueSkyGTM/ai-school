@@ -15,18 +15,6 @@
       "explanation": "Self-Refine uses one model in three roles: generate, feedback, refine."
     },
     {
-      "stage": "pre",
-      "question": "Why does Self-Refine require history on the refine step?",
-      "options": [
-        "Providers cache only on history",
-        "Without prior outputs and critiques the refine step repeats earlier mistakes; the ablation shows quality drops sharply",
-        "History is needed for billing",
-        "It speeds up token generation"
-      ],
-      "correct": 1,
-      "explanation": "The refine prompt conditions on the full history so the model does not repeat its earlier errors."
-    },
-    {
       "stage": "check",
       "question": "What does CRITIC change relative to Self-Refine?",
       "options": [
