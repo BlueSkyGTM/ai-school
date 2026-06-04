@@ -15,18 +15,6 @@
       "explanation": "Extractive lifts sentences verbatim; abstractive rewrites and risks hallucination."
     },
     {
-      "stage": "pre",
-      "question": "What does ROUGE measure?",
-      "options": [
-        "Embedding similarity",
-        "N-gram and longest-common-subsequence overlap between system and reference summaries",
-        "Reading time",
-        "Token-level perplexity"
-      ],
-      "correct": 1,
-      "explanation": "ROUGE-1/2/L measure unigram, bigram, and LCS overlap with references."
-    },
-    {
       "stage": "check",
       "question": "How does TextRank score sentences in extractive summarization?",
       "options": [
@@ -85,18 +73,6 @@
       ],
       "correct": 3,
       "explanation": "Entity swaps, numeric drift, polarity flips, and invented facts are the canonical abstractive failure modes."
-    },
-    {
-      "stage": "post",
-      "question": "When would you reach for a Pegasus checkpoint over BART-large-CNN?",
-      "options": [
-        "When evaluating BLEU",
-        "When the input is short",
-        "When you need extractive output",
-        "For domains like scientific abstracts where Pegasus's gap-sentence pretraining objective is a closer fit"
-      ],
-      "correct": 3,
-      "explanation": "Pegasus's gap-sentence objective excels at long-form domain summarization (e.g. pubmed)."
     }
   ]
 }
