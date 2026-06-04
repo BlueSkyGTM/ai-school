@@ -14,7 +14,7 @@
   },
   {
     "id": "pipeline-pre-2",
-    "stage": "pre",
+    "stage": "check",
     "question": "Why is fitting a scaler on the full dataset before splitting into train/test considered leaky?",
     "options": [
       "Scaling changes the data distribution",
@@ -27,7 +27,7 @@
   },
   {
     "id": "pipeline-post-1",
-    "stage": "post",
+    "stage": "check",
     "question": "In sklearn, what is the difference between calling fit_transform and transform on a pipeline step?",
     "options": [
       "They are identical -- both fit and transform",
@@ -37,6 +37,18 @@
     ],
     "correct": 1,
     "explanation": "fit_transform computes statistics (e.g., mean, std) from the data AND transforms it. transform applies the already-learned statistics without recomputing. On test data, you must use transform to avoid leakage."
+  },
+  {
+    "stage": "check",
+    "question": "Which of the following best describes: an ML pipeline from scratch that chains imputation, scaling,...?",
+    "options": [
+      "data leakage scenarios and explain how pipelines prevent them by fitting transfo",
+      "Build an ML pipeline from scratch that chains imputation, scaling, encoding, and model...",
+      "Construct a ColumnTransformer that applies different preprocessing to numeric an",
+      "pipeline serialization and demonstrate that the same fitted pipeline produces id"
+    ],
+    "correct": 1,
+    "explanation": "Build an ML pipeline from scratch that chains imputation, scaling, encoding, and model training into a single reproducible object"
   },
   {
     "id": "pipeline-post-2",
