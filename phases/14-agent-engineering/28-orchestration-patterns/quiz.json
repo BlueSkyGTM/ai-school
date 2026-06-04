@@ -15,18 +15,6 @@
       "explanation": "Supervisor-worker, swarm, hierarchical, and debate recur across 2026 frameworks."
     },
     {
-      "stage": "pre",
-      "question": "What is the 2026 LangChain recommendation regarding supervision?",
-      "options": [
-        "Always use create_supervisor",
-        "Prefer direct tool calls over create_supervisor for finer context-engineering control",
-        "Avoid supervision entirely",
-        "Run supervisors on GPUs"
-      ],
-      "correct": 1,
-      "explanation": "Tool-call-based supervision gives you precise control over what each specialist sees."
-    },
-    {
       "stage": "check",
       "question": "What distinguishes a swarm from a supervisor-worker topology?",
       "options": [
