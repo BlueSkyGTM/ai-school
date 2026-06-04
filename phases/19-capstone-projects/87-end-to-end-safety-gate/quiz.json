@@ -15,39 +15,27 @@
       "explanation": ""
     },
     {
-      "stage": "pre",
-      "question": "What is the goal of during-gen filtering?",
-      "options": [
-        "To translate the output to another language",
-        "To buffer chunks and terminate the stream early when a known harmful continuation appears, before the user sees it",
-        "To increase token throughput",
-        "To replace the prompt with a refusal"
-      ],
-      "correct": 1,
-      "explanation": ""
-    },
-    {
       "stage": "check",
       "question": "How does the aggregator decide the final action?",
       "options": [
         "By averaging the confidences of every signal",
-        "By taking the maximum severity across detector, token-filter, classifier, and rules signals and mapping it to block, redact, warn, or allow",
         "By calling the model a second time",
+        "By taking the maximum severity across detector, token-filter, classifier, and rules signals and mapping it to block, redact, warn, or allow",
         "By looking only at the rules engine"
       ],
-      "correct": 1,
+      "correct": 2,
       "explanation": ""
     },
     {
       "stage": "check",
       "question": "Why does the gate emit a structured RequestTrace per request?",
       "options": [
-        "To slow the system down",
         "To give a reviewer a per-checkpoint audit trail so a regression in any layer can be traced to the right module",
+        "To slow the system down",
         "To replace logging",
         "To replicate the trace into the prompt"
       ],
-      "correct": 1,
+      "correct": 0,
       "explanation": ""
     },
     {
@@ -55,11 +43,11 @@
       "question": "What happens when pre-gen confidence exceeds the block threshold?",
       "options": [
         "The model is still called for completeness",
-        "The gate returns the policy refusal and skips during-gen and post-gen entirely",
         "The gate raises an exception",
-        "The gate lowers the threshold and retries"
+        "The gate lowers the threshold and retries",
+        "The gate returns the policy refusal and skips during-gen and post-gen entirely"
       ],
-      "correct": 1,
+      "correct": 3,
       "explanation": ""
     },
     {
@@ -72,6 +60,18 @@
         "Because the rules engine handles encoding"
       ],
       "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "What is the goal of during-gen filtering?",
+      "options": [
+        "To translate the output to another language",
+        "To increase token throughput",
+        "To buffer chunks and terminate the stream early when a known harmful continuation appears, before the user sees it",
+        "To replace the prompt with a refusal"
+      ],
+      "correct": 2,
       "explanation": ""
     }
   ]
