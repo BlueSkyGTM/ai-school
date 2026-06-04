@@ -14,7 +14,7 @@
   },
   {
     "id": "eval-pre-2",
-    "stage": "pre",
+    "stage": "check",
     "question": "A dataset has 95% negative and 5% positive samples. A model predicts 'negative' for every sample. What is its accuracy?",
     "options": [
       "50%",
@@ -27,7 +27,7 @@
   },
   {
     "id": "eval-post-1",
-    "stage": "post",
+    "stage": "check",
     "question": "In K-fold cross-validation with K=5, how many times is each data point used for validation?",
     "options": [
       "5 times",
@@ -37,6 +37,18 @@
     ],
     "correct": 1,
     "explanation": "In K-fold CV, data is split into K equal folds. Each fold is used as the validation set exactly once while the remaining K-1 folds are used for training."
+  },
+  {
+    "stage": "check",
+    "question": "Which of the following best describes: K-fold and stratified K-fold cross-validation from scratch and...?",
+    "options": [
+      "Compute precision, recall, F1, AUC-ROC, and regression metrics (MSE, RMSE, MAE, ",
+      "Implement K-fold and stratified K-fold cross-validation from scratch and explain why...",
+      "Interpret learning curves to diagnose whether a model suffers from high bias or ",
+      "common evaluation mistakes including data leakage, wrong metric selection, and t"
+    ],
+    "correct": 1,
+    "explanation": "Implement K-fold and stratified K-fold cross-validation from scratch and explain why stratification matters for imbalanced data"
   },
   {
     "id": "eval-post-2",
