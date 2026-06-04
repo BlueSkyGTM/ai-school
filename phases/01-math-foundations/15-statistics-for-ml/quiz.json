@@ -13,7 +13,7 @@
       "explanation": "The p-value is the probability of observing data as extreme as what you got, assuming the null hypothesis is true. It is NOT the probability that H0 is true — this is the single most common misunderstanding in statistics."
     },
     {
-      "stage": "pre",
+      "stage": "check",
       "question": "Why do you divide by (n-1) instead of n when computing sample variance?",
       "options": [
         "It makes the computation faster",
@@ -25,7 +25,7 @@
       "explanation": "Bessel's correction (dividing by n-1) compensates for the bias introduced by using the sample mean instead of the true population mean. Without it, sample variance systematically underestimates the true population variance."
     },
     {
-      "stage": "post",
+      "stage": "check",
       "question": "You test 20 different model configurations at alpha = 0.05. What is the approximate probability of at least one false positive?",
       "options": [
         "5%",
@@ -35,6 +35,18 @@
       ],
       "correct": 2,
       "explanation": "P(at least one false positive) = 1 - (1 - 0.05)^20 = 1 - 0.95^20 ≈ 0.64 (64%). This is the multiple comparison problem. Bonferroni correction addresses it by testing each at alpha/20 = 0.0025."
+    },
+    {
+      "stage": "check",
+      "question": "Which of the following best describes: Compute descriptive statistics, Pearson/Spearman correlation, and...?",
+      "options": [
+        "Perform hypothesis tests (t-test, chi-squared) and interpret p-values and confid",
+        "Compute descriptive statistics, Pearson/Spearman correlation, and covariance matrices...",
+        "bootstrap resampling to construct confidence intervals for any metric without di",
+        "statistical significance from practical significance using effect size measures"
+      ],
+      "correct": 1,
+      "explanation": "Compute descriptive statistics, Pearson/Spearman correlation, and covariance matrices from scratch"
     },
     {
       "stage": "post",
