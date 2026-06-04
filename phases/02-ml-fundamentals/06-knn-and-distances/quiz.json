@@ -14,7 +14,7 @@
   },
   {
     "id": "knn-pre-2",
-    "stage": "pre",
+    "stage": "check",
     "question": "Why is feature scaling critical for KNN?",
     "options": [
       "KNN cannot handle negative numbers without scaling",
@@ -27,7 +27,7 @@
   },
   {
     "id": "knn-post-1",
-    "stage": "post",
+    "stage": "check",
     "question": "In 100 dimensions with uniform random points, what happens to the ratio of max distance to min distance?",
     "options": [
       "It increases dramatically, making neighbors more distinct",
@@ -37,6 +37,18 @@
     ],
     "correct": 1,
     "explanation": "This is the curse of dimensionality. In high dimensions, distances converge: max_dist / min_dist approaches 1. When all points are equidistant, 'nearest' becomes meaningless."
+  },
+  {
+    "stage": "check",
+    "question": "Which of the following best describes: KNN classification and regression from scratch with configurable K...?",
+    "options": [
+      "L1, L2, cosine, and Minkowski distance metrics and select the appropriate one fo",
+      "Implement KNN classification and regression from scratch with configurable K and...",
+      "the curse of dimensionality and demonstrate why KNN degrades in high-dimensional",
+      "a KD-tree for efficient nearest neighbor search and analyze when it outperforms "
+    ],
+    "correct": 1,
+    "explanation": "Implement KNN classification and regression from scratch with configurable K and distance-weighted voting"
   },
   {
     "id": "knn-post-2",
