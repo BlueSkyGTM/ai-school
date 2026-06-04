@@ -6,32 +6,36 @@
 /* ---------- site header ---------- */
 .top {
   position: sticky; top: 0; z-index: 40;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; gap: var(--s4);
   height: 56px; padding: 0 var(--s5);
   background: rgba(20,17,15,0.92); backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
+.top .brand { flex-shrink: 0; }
+.top nav { flex: 1; overflow: hidden; }
+.search-btn { flex-shrink: 0; margin-left: auto; }
 /* Auth button */
-#sa-auth-btn { margin-left: var(--s3); flex-shrink: 0; }
+#sa-auth-btn { flex-shrink: 0; }
 .auth-btn { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.1s; }
 .auth-btn--in { color: var(--cream-dim); border: 1px solid var(--line); padding: 4px 10px; }
 .auth-btn--in:hover { color: var(--terra); border-color: var(--terra); }
 .auth-btn--out { color: var(--terra); }
 .auth-btn--out:hover { color: var(--cream); }
 .auth-avatar { border-radius: 50%; flex-shrink: 0; }
-.top .brand { display: flex; align-items: center; gap: var(--s2); white-space: nowrap; }
+.top .brand { display: flex; align-items: center; gap: var(--s2); white-space: nowrap; text-decoration: none; }
 .top .brand .mark { width: 14px; height: 14px; background: var(--terra); flex-shrink: 0; }
 .top .brand b { font-family: var(--pix); font-size: 1.5rem; color: var(--cream); text-transform: uppercase; white-space: nowrap; }
 .top nav { display: flex; gap: var(--s5); }
 .top nav a { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-dim); }
 .top nav a:hover, .top nav a[aria-current="page"] { color: var(--terra); }
 @media (max-width: 720px) {
-  .top { overflow: hidden; }
+  .top { overflow: hidden; gap: var(--s2); }
   .top nav { overflow-x: auto; flex-shrink: 1; gap: var(--s3); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .top nav::-webkit-scrollbar { display: none; }
   .top nav a { font-size: 0.6rem; letter-spacing: 0.06em; white-space: nowrap; }
   .search-btn span, .search-btn kbd { display: none; }
   .search-btn { padding: 0 var(--s2); min-width: 32px; }
+  #sa-auth-btn { display: none; }
 }
 
 /* ---------- HUD ---------- */

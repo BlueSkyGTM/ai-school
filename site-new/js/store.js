@@ -66,12 +66,17 @@
         this._ready = restAdapter.read()
           .then((data) => {
             this._cache = data && data.v ? data : (localAdapter.read() || blank());
-            /* keep local copy in sync for offline fallback */
             localAdapter.write(this._cache);
           })
-          .catch(() => {
-            this._cache = localAdapter.read() || blank();
-          });
+          .catch(() => { this._cache = localAdapter.read() || blank(); });
+      } else if (this.adapter !== localAdapter) {
+        /* External adapter swapped in (e.g. Vercel/Upstash via auth.js) */
+        this._ready = this.adapter.read()
+          .then((data) => {
+            this._cache = data && data.v ? data : (localAdapter.read() || blank());
+            localAdapter.write(this._cache);
+          })
+          .catch(() => { this._cache = localAdapter.read() || blank(); });
       } else {
         this._cache = localAdapter.read() || blank();
         this._ready = Promise.resolve();
@@ -88,10 +93,9 @@
     _commit() {
       const p = this._cache;
       p.updatedAt = Date.now();
-      /* always write locally for instant feedback + offline */
       localAdapter.write(p);
-      /* background sync to WP when active */
       if (window.WP_REST_NONCE) restAdapter.write(p);
+      else if (this.adapter !== localAdapter) this.adapter.write(p);
     },
 
     isDone(phaseId, idx) {
