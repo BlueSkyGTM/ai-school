@@ -15,18 +15,6 @@
       "explanation": "If the chunk that holds the answer span is incoherent the embedding moves to the wrong cluster and downstream components cannot repair the damage."
     },
     {
-      "stage": "pre",
-      "question": "Which strategy is the strongest single-strategy default when you have no prior knowledge of the corpus?",
-      "options": [
-        "Fixed-window",
-        "Sentence packer",
-        "Recursive split",
-        "Structural markdown"
-      ],
-      "correct": 2,
-      "explanation": "Recursive split adapts per region by trying the strongest separator first and falling back, so it survives inconsistent structure."
-    },
-    {
       "stage": "check",
       "question": "What does recall@k measure in this lesson?",
       "options": [
@@ -73,6 +61,18 @@
       ],
       "correct": 1,
       "explanation": "Semantic clustering depends on an embedding model; swapping the model changes the boundaries, so the chunk-model must be pinned separately or rebuilt together with the retrieval model."
+    },
+    {
+      "stage": "post",
+      "question": "Which strategy is the strongest single-strategy default when you have no prior knowledge of the corpus?",
+      "options": [
+        "Fixed-window",
+        "Sentence packer",
+        "Recursive split",
+        "Structural markdown"
+      ],
+      "correct": 2,
+      "explanation": "Recursive split adapts per region by trying the strongest separator first and falling back, so it survives inconsistent structure."
     }
   ]
 }
