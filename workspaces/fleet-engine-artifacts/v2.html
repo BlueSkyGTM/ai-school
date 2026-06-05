@@ -591,14 +591,25 @@ section#python {
   letter-spacing: 0.04em;
 }
 
-/* ── MMBN: HP bars in stat cells ─────────────────────────── */
+/* ── MMBN: HP bars in stat cells (animate on reveal) ─────── */
 .stat-hp { height: 4px; background: rgba(255,255,255,0.07); overflow: hidden; margin-top: 6px; margin-bottom: 4px; }
-.stat-hp-fill { height: 100%; }
-.stat-cell:nth-child(1) .stat-hp-fill { width: 100%; background: #B9E36A; box-shadow: 0 0 8px rgba(185,227,106,0.5); }
-.stat-cell:nth-child(2) .stat-hp-fill { width:  66%; background: #76A1FF; box-shadow: 0 0 8px rgba(118,161,255,0.5); }
-.stat-cell:nth-child(3) .stat-hp-fill { width:  33%; background: #f0a030; box-shadow: 0 0 8px rgba(240,160,48,0.5); }
-.stat-cell:nth-child(4) .stat-hp-fill { width:   0%; background: transparent; }
-.stat-cell:nth-child(4) .stat-hp { background: repeating-linear-gradient(90deg, rgba(255,85,85,0.25) 0px, rgba(255,85,85,0.25) 4px, transparent 4px, transparent 8px); }
+.stat-hp-fill { height: 100%; width: 0; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease; }
+.stat-hp.loaded .stat-hp-fill { box-shadow: 0 0 10px var(--hp-glow); }
+.stat-cell:nth-child(1) .stat-hp-fill { --hp-target: 100%; --hp-glow: rgba(185,227,106,0.6); background: #B9E36A; }
+.stat-cell:nth-child(2) .stat-hp-fill { --hp-target:  66%; --hp-glow: rgba(118,161,255,0.6); background: #76A1FF; }
+.stat-cell:nth-child(3) .stat-hp-fill { --hp-target:  33%; --hp-glow: rgba(240,160,48,0.6);  background: #f0a030; }
+.stat-cell:nth-child(4) .stat-hp-fill { --hp-target:   0%; background: transparent; }
+.stat-cell:nth-child(4) .stat-hp {
+  background: repeating-linear-gradient(90deg, rgba(255,85,85,0.25) 0px, rgba(255,85,85,0.25) 4px, transparent 4px, transparent 8px);
+}
+
+/* ── MMBN: Terminal header pulse animation ───────────────── */
+@keyframes terminal-pulse-green  { 0%,100%{background:rgba(185,227,106,0.04)} 50%{background:rgba(185,227,106,0.12)} }
+@keyframes terminal-pulse-blue   { 0%,100%{background:rgba(118,161,255,0.04)} 50%{background:rgba(118,161,255,0.12)} }
+@keyframes terminal-pulse-purple { 0%,100%{background:rgba(215,183,255,0.04)} 50%{background:rgba(215,183,255,0.12)} }
+.orch-term:nth-child(1).pulsed .orch-bar { animation: terminal-pulse-green  0.6s ease 0s 1; }
+.orch-term:nth-child(2).pulsed .orch-bar { animation: terminal-pulse-blue   0.6s ease 0.1s 1; }
+.orch-term:nth-child(3).pulsed .orch-bar { animation: terminal-pulse-purple 0.6s ease 0.2s 1; }
 
 /* ── MMBN: Battle chip tabs — §02 domain filter ──────────── */
 .domain-grid {
@@ -990,6 +1001,37 @@ const obs = new IntersectionObserver(
   { threshold: 0.08 }
 );
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── HP bar fill on scroll ─────────────────────────────────
+const hpObs = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) {
+      const bar = e.target;
+      const fill = bar.querySelector('.stat-hp-fill');
+      const target = getComputedStyle(fill).getPropertyValue('--hp-target').trim();
+      if (target) {
+        requestAnimationFrame(() => { fill.style.width = target; });
+        setTimeout(() => bar.classList.add('loaded'), 100);
+      }
+      hpObs.unobserve(bar);
+    }
+  }),
+  { threshold: 0.5 }
+);
+document.querySelectorAll('.stat-hp').forEach(el => hpObs.observe(el));
+
+// ── §03 terminal pulse on scroll enter ───────────────────
+const orchObs = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.orch-term').forEach(t => t.classList.add('pulsed'));
+      orchObs.disconnect();
+    }
+  }),
+  { threshold: 0.3 }
+);
+const orchGrid = document.querySelector('.orch-grid');
+if (orchGrid) orchObs.observe(orchGrid);
 
 // ── §01 Trilingual code explorer ──────────────────────────
 const langContent = {
