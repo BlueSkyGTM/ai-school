@@ -17,7 +17,8 @@
   --text: #E6E6E6; --muted: #6A6A6A; --dim: #333;
   --accent: #B9E36A;   /* V1 green */
   --action: #76A1FF;   /* V2 blue */
-  --locked: #3A3A3A;   /* V3 locked */
+  --locked: #3A3A3A;
+  --purple: #9B6DFF;   /* V3 */
   --orange: #FF6B35;
   --white: #FFF;
 }
@@ -113,7 +114,7 @@ h1 em { font-style: normal; color: var(--orange); }
 
 .panel-v1 { --c: var(--accent); --c-border: rgba(185,227,106,0.35); }
 .panel-v2 { --c: var(--action); --c-border: rgba(118,161,255,0.35); }
-.panel-v3 { --c: var(--locked); --c-border: var(--border2); cursor: default; }
+.panel-v3 { --c: var(--purple); --c-border: rgba(155,109,255,0.35); cursor: default; }
 
 /* ── panel inner ── */
 .panel-inner { padding: 28px 28px 20px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
@@ -124,18 +125,18 @@ h1 em { font-style: normal; color: var(--orange); }
   color: var(--c); border-color: color-mix(in srgb, var(--c) 35%, transparent);
   background: color-mix(in srgb, var(--c) 8%, transparent);
 }
-.panel-v3 .panel-tag { color: var(--muted); border-color: var(--border2); background: transparent; }
+.panel-v3 .panel-tag { color: var(--purple); border-color: rgba(155,109,255,0.35); background: rgba(155,109,255,0.06); }
 
 .panel-title {
   font-size: 22px; font-weight: 500; color: var(--white); line-height: 1.1;
 }
-.panel-v3 .panel-title { color: var(--muted); }
+.panel-v3 .panel-title { color: rgba(155,109,255,0.6); }
 
 .panel-desc {
   font-size: 13px; font-weight: 300; color: var(--text);
   line-height: 1.65; flex: 1;
 }
-.panel-v3 .panel-desc { color: var(--dim); }
+.panel-v3 .panel-desc { color: rgba(155,109,255,0.35); }
 
 /* ── pills ── */
 .pills { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -145,7 +146,7 @@ h1 em { font-style: normal; color: var(--orange); }
   border-color: color-mix(in srgb, var(--c) 22%, transparent);
   background: transparent;
 }
-.panel-v3 .pill { color: var(--dim); border-color: var(--border); }
+.panel-v3 .pill { color: rgba(155,109,255,0.4); border-color: rgba(155,109,255,0.18); }
 
 /* ── node preview ── */
 .node-preview {
@@ -190,20 +191,20 @@ h1 em { font-style: normal; color: var(--orange); }
   position: absolute; inset: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 12px; pointer-events: none;
-  background: linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.7) 100%);
+  background: linear-gradient(180deg, transparent 20%, rgba(10,10,10,0.82) 100%);
 }
 .lock-icon {
-  width: 44px; height: 44px; border: 2px solid var(--border2);
-  background: var(--surface2); border-radius: 0;
+  width: 48px; height: 48px; border: 2px solid rgba(155,109,255,0.5);
+  background: rgba(155,109,255,0.08); border-radius: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 20px; opacity: 0.7;
+  font-size: 20px; box-shadow: 0 0 24px rgba(155,109,255,0.2);
 }
 .lock-text {
-  font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--muted);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--purple);
 }
 .lock-sub {
-  font-size: 11px; color: var(--dim); font-weight: 300; text-align: center;
+  font-size: 11px; color: rgba(155,109,255,0.5); font-weight: 300; text-align: center;
   max-width: 180px; line-height: 1.5;
 }
 
@@ -260,7 +261,7 @@ footer a:hover { color: var(--orange); }
   <header>
     <div class="eyebrow">AI GTM Enrichment Pipeline · Raymond Fenton</div>
     <h1>Three versions.<br>One problem.<br><em>Not finished.</em></h1>
-    <p class="deck">A three-agent pipeline that reads job listings and funding signals, classifies the operational pressure behind them, and writes outreach grounded in each prospect's specific situation.</p>
+    <p class="deck">Fleet Engine is an AI pipeline that turns job listings and funding signals into warm, grounded outreach. Three agents work as one crew: Ahab hunts the open water for companies showing the right signals, Nemo dives deep into each one and surfaces the friction behind why they're hiring, and Neptune — commanding the whole sea — synthesizes an outreach bite that speaks to that exact pressure. This is three versions of building them until they ran clean.</p>
     <div class="select-hint">Select a version to enter</div>
   </header>
 
@@ -279,18 +280,6 @@ footer a:hover { color: var(--orange); }
           <span class="pill">1,500 cycles</span>
         </div>
       </div>
-      <div class="node-preview">
-        <div class="preview-label">Interactive inside</div>
-        <div class="node"><span class="node-emoji">🪝</span><span class="node-name">Ahab</span><span class="node-role">Find</span></div>
-        <div class="node-arrow">→</div>
-        <div class="node"><span class="node-emoji">🔬</span><span class="node-name">Nemo</span><span class="node-role">Enrich</span></div>
-        <div class="node-arrow">→</div>
-        <div class="node"><span class="node-emoji">🔱</span><span class="node-name">Neptune</span><span class="node-role">Transform</span></div>
-      </div>
-      <div class="panel-footer">
-        <span class="footer-hint">Payload table · forensic dictionary · prompts</span>
-        <span class="footer-btn">Enter <span class="footer-arrow">→</span></span>
-      </div>
     </a>
 
     <!-- ── V2 ── -->
@@ -307,28 +296,14 @@ footer a:hover { color: var(--orange); }
           <span class="pill">0 self-hosted</span>
         </div>
       </div>
-      <div class="node-preview">
-        <div class="preview-label">Interactive inside</div>
-        <div class="node"><span class="node-emoji">🪝</span><span class="node-name">Ahab</span><span class="node-role">Discover</span></div>
-        <div class="node-arrow">→<span class="arrow-label">GCS</span></div>
-        <div class="node"><span class="node-emoji">🔬</span><span class="node-name">Nemo</span><span class="node-role">Enrich</span></div>
-        <div class="node-arrow">→<span class="arrow-label">GCS</span></div>
-        <div class="node"><span class="node-emoji">🔱</span><span class="node-name">Neptune</span><span class="node-role">Synthesize</span></div>
-        <div class="node-arrow">→</div>
-        <div class="node"><span class="node-emoji">📡</span><span class="node-name">Deliver</span><span class="node-role">Clay</span></div>
-      </div>
-      <div class="panel-footer">
-        <span class="footer-hint">Architecture toggle · build phases · prompts</span>
-        <span class="footer-btn">Enter <span class="footer-arrow">→</span></span>
-      </div>
     </a>
 
     <!-- ── V3 ── -->
     <div class="panel panel-v3 locked">
       <div class="panel-inner">
-        <span class="panel-tag">V3 · In Development</span>
+        <span class="panel-tag">V3 · Locked</span>
         <div class="panel-title">Self-Improving Pipeline</div>
-        <p class="panel-desc">Reply outcomes from HubSpot flow back into the RAG store. A fourth agent uses that signal to improve outreach before delivery. The pipeline learns what converts.</p>
+        <p class="panel-desc">Reply outcomes flow back into the RAG store. A fourth agent uses that signal to improve outreach before delivery. The pipeline learns what converts.</p>
         <div class="pills">
           <span class="pill">Polish agent</span>
           <span class="pill">Outcome feedback loop</span>
@@ -336,27 +311,11 @@ footer a:hover { color: var(--orange); }
           <span class="pill">Reply signal</span>
         </div>
       </div>
-      <div class="node-preview">
-        <div class="preview-label">Unlocks after V2 Phase 2</div>
-        <div class="node"><span class="node-emoji">🔱</span><span class="node-name">Neptune</span><span class="node-role">Synthesize</span></div>
-        <div class="node-arrow">→</div>
-        <div class="node"><span class="node-emoji">✨</span><span class="node-name">Polish</span><span class="node-role">Refine</span></div>
-        <div class="node-arrow">→</div>
-        <div class="node"><span class="node-emoji">📡</span><span class="node-name">Deliver</span><span class="node-role">Clay</span></div>
-        <div class="node-arrow">→<span class="arrow-label">loop</span></div>
-        <div class="node"><span class="node-emoji">📊</span><span class="node-name">Outcomes</span><span class="node-role">RAG</span></div>
-      </div>
 
-      <!-- lock overlay -->
       <div class="lock-overlay">
         <div class="lock-icon">🔒</div>
         <div class="lock-text">Locked</div>
-        <div class="lock-sub">Phase 2 of V2 must complete before V3 begins.</div>
-      </div>
-
-      <div class="panel-footer">
-        <span class="footer-hint">Gate: 50 leads delivered to HubSpot</span>
-        <span class="footer-btn">Locked <span class="footer-arrow">🔒</span></span>
+        <div class="lock-sub">Unlocks after V2 Phase 2.</div>
       </div>
     </div>
 

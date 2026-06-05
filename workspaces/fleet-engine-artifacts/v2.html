@@ -409,20 +409,20 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 <!-- STAT BAR -->
 <div class="stat-bar reveal">
   <div class="stat-cell">
-    <div class="stat-n">0</div>
-    <div class="stat-d"><b>Self-Hosted Services</b>No Docker. No Postgres. No n8n. No VM. No SSH. The ops layer that kept failing is gone.</div>
-  </div>
-  <div class="stat-cell">
     <div class="stat-n">3</div>
-    <div class="stat-d"><b>RAG Corpora</b>Live in Vertex AI us-central1 Serverless. Ahab dedup vault, Nemo calibration store, Neptune bite variation store.</div>
+    <div class="stat-d"><b>RAG Corpora</b>Each agent has its own memory. Ahab deduplicates. Nemo calibrates. Neptune varies. All three compound across every run.</div>
   </div>
   <div class="stat-cell">
     <div class="stat-n">2</div>
-    <div class="stat-d"><b>Execution Paths</b>Node.js for local iteration. Python ADK for deployed Agent Engine runs. Both write neptune_output.json to the same GCS bucket.</div>
+    <div class="stat-d"><b>Execution Paths</b>Node.js for local iteration. Python ADK for hosted Agent Engine runs. Same agents, same output, different substrate.</div>
   </div>
   <div class="stat-cell">
     <div class="stat-n">1</div>
-    <div class="stat-d"><b>Orchestrator</b>Claude Code as Admiral. run.js for the Node.js path. agents.py + Pipeline_Orchestrator for the ADK path.</div>
+    <div class="stat-d"><b>Orchestrator</b>Claude Code as Admiral. No middleware. No polling. GCS is the handoff layer. The pipeline gates each stage before the next starts.</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">0</div>
+    <div class="stat-d"><b>Self-Hosted Services</b>No Docker. No Postgres. No n8n. No VM. Everything that failed in V1 has been removed from the architecture entirely.</div>
   </div>
 </div>
 
@@ -535,9 +535,8 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
       <div class="phase-num">Phase 1 <span class="phase-status done">LIVE</span></div>
       <div class="phase-q">GCS Pipeline + RAG</div>
       <div class="phase-desc">
-        Ahab (Flash + grounding) writes <code>ahab_output.json</code> to GCS. Nemo (Pro + grounding) enriches each lead, applies CATALYST_STALE, writes <code>nemo_output.json</code>. Neptune (Pro + responseSchema) writes <code>neptune_output.json</code> with the Outreach Bite.<br><br>
-        Three Vertex AI RAG corpora live in us-central1 Serverless — Ahab dedup vault, Nemo calibration, Neptune bite variation. All compounds across runs.<br><br>
-        ADK path deployed: <code>agents.py</code> + <code>Pipeline_Orchestrator</code> on Agent Engine global.
+        Ahab hunts, Nemo enriches, Neptune writes the bite. All three write to GCS at each stage — <strong>no lead advances until the previous stage completes</strong>. Leads that fail Nemo's CATALYST_STALE check route to shipwrecked.json and never reach Neptune.<br><br>
+        Three RAG corpora are live. Every run compounds the dedup vault, the friction calibration store, and the bite variation store. The pipeline gets smarter each time.
       </div>
       <div class="phase-gate"><b>Success gate:</b> 50 leads in neptune_output.json with Outreach_Bite populated.</div>
     </div>
@@ -576,30 +575,30 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
     <div class="rag-flow">
       <div class="rag-node ahab">🐋 Ahab<span class="node-model">Flash · grounding</span></div>
       <div class="rag-arrow">⇅</div>
-      <div class="rag-node rag" style="border-color:rgba(185,227,106,0.70);background:rgba(185,227,106,0.06)">Ahab Corpus<span class="node-model" style="color:var(--accent)">Dedup vault · 6536218…</span></div>
+      <div class="rag-node rag" style="border-color:rgba(185,227,106,0.70);background:rgba(185,227,106,0.06)">Dedup Vault<span class="node-model" style="color:var(--accent)">Every company ever found</span></div>
       <div class="rag-arrow" style="visibility:hidden">→</div>
       <div class="rag-node nemo">🐟 Nemo<span class="node-model">Pro · grounding</span></div>
     </div>
     <div class="rag-flow">
       <div class="rag-node neptune">🔱 Neptune<span class="node-model">Pro · schema</span></div>
       <div class="rag-arrow">⇅</div>
-      <div class="rag-node rag" style="border-color:rgba(215,183,255,0.70);background:rgba(215,183,255,0.06)">Neptune Corpus<span class="node-model" style="color:#D7B7FF">Bite store · 3877687…</span></div>
+      <div class="rag-node rag" style="border-color:rgba(215,183,255,0.70);background:rgba(215,183,255,0.06)">Bite Store<span class="node-model" style="color:#D7B7FF">Prior outreach, vary from these</span></div>
       <div class="rag-arrow">⇅</div>
-      <div class="rag-node rag">Nemo Corpus<span class="node-model">Calibration · 5352756…</span></div>
+      <div class="rag-node rag">Calibration<span class="node-model">Friction patterns, stay consistent</span></div>
     </div>
     <div style="margin-top:28px">
       <div class="rag-legend">
         <div class="rag-legend-item ahab-leg">
-          <b>Ahab Corpus — Dedup Vault</b>
-          <span>Queries top-10 prior discoveries before searching. Companies already in the vault are excluded. Deduplication across all campaigns is automatic — no manual tracking.</span>
+          <b>Dedup Vault</b>
+          <span>Every company Ahab has ever found lives here. Before each new run, Ahab pulls the full exclusion list from it. No company ever appears twice across campaigns — automatically.</span>
         </div>
         <div class="rag-legend-item nemo-leg">
-          <b>Nemo Corpus — Calibration Store</b>
-          <span>Queries top-3 similar enrichment profiles before each lead. Friction type classification stays consistent with prior runs. Only ACTIVE leads write back — SHIPWRECKED stays out.</span>
+          <b>Calibration Store</b>
+          <span>Prior enrichment profiles, grouped by friction type. Nemo reads the closest matches before classifying each new lead. Friction typing stays consistent across every run — no drift.</span>
         </div>
         <div class="rag-legend-item neptune-leg">
-          <b>Neptune Corpus — Bite Variation Store</b>
-          <span>Queries top-3 prior Bites filtered by friction type + intent — told explicitly to vary opening and villain from retrieved examples. Every finished Bite compounds the variation store.</span>
+          <b>Bite Store</b>
+          <span>Every Outreach Bite ever written. Neptune is told to vary opening lines, villain names, and CTAs from retrieved examples. Each run makes the next one harder to repeat.</span>
         </div>
       </div>
     </div>
