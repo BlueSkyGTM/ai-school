@@ -394,10 +394,8 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 .footer-left { font-size: 10px; color: var(--text); letter-spacing: 0.06em; }
 .footer-quote { font-size: 14px; font-style: italic; color: var(--text); font-weight: 300; }
 
-/* ── Reveal — content always visible, JS adds transition polish ── */
+/* ── Reveal — no hiding, no JS dependency ─────────────────── */
 .reveal { opacity: 1; transform: none; }
-.reveal.anim { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.anim.vis { opacity: 1; transform: none; }
 
 /* ── Trilingual three-column layout ──────────────────────── */
 .lang-grid {
@@ -978,18 +976,7 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 </footer>
 
 <script>
-// ── Scroll reveal (opt-in animation — content visible regardless) ──
-// Content is always visible via CSS. JS adds .anim to below-fold
-// elements, then removes it via IntersectionObserver for a scroll effect.
-document.querySelectorAll('.reveal').forEach(el => {
-  const r = el.getBoundingClientRect();
-  if (r.top > window.innerHeight) el.classList.add('anim');
-});
-const obs = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); }),
-  { threshold: 0.08 }
-);
-document.querySelectorAll('.reveal.anim').forEach(el => obs.observe(el));
+// reveal system removed — content visible without JS
 
 // ── HP bar fill on scroll ─────────────────────────────────
 const hpObs = new IntersectionObserver(
