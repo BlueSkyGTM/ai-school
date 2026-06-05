@@ -3,16 +3,17 @@
  * Defines the accent palette for each agent version.
  * Base body styles live in each page's inline <style> block (DM Sans, #0A0A0A, grain).
  *
+ * Vivid palette — required on #0A0A0A backgrounds.
+ * Muted alternatives (#4a9456, #4a7b94) were tried and rejected — low contrast on near-black.
+ *
  * Version accents:
- *   Index:  --action: #4d89f5  (Fleet Engine base blue)
- *   Fathom: --accent: #4a9456  (signal green)
- *   Cortex: --action: #4a7b94  (orchestration teal)
- *   Helix:  --action: #9B6DFF  (RAG violet — locked)
+ *   Fathom (V1): --accent: #B9E36A  (lime green)
+ *   Cortex (V2): --action: #76A1FF  (electric blue)
+ *   Helix  (V3): --action: #9B6DFF  (RAG violet — locked)
  */
 
 :root {
-  --fe-blue:   #4d89f5;
-  --fe-green:  #4a9456;
-  --fe-teal:   #4a7b94;
-  --fe-violet: #9B6DFF;
+  --fe-green:  #B9E36A;  /* Fathom / V1 */
+  --fe-blue:   #76A1FF;  /* Cortex / V2 */
+  --fe-violet: #9B6DFF;  /* Helix  / V3 */
 }
