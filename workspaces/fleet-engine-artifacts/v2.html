@@ -11,7 +11,8 @@
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&display=swap" rel="stylesheet">
 <style>
 
 /* ── Variables ──────────────────────────────────────────── */
@@ -108,7 +109,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--action); outlin
 .hero-pre { font-size: 12px; color: var(--action); letter-spacing: 0.04em; margin-bottom: 40px; display: flex; align-items: center; gap: 12px; font-weight: 500; }
 .hero-pre::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--action); box-shadow: 0 0 12px var(--action); }
 
-.hero-h1 { font-size: clamp(48px, 6.6vw, 92px); line-height: 1.04; font-weight: 500; margin-bottom: 40px; max-width: 16ch; font-optical-sizing: auto; }
+.hero-h1 { font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif; font-size: clamp(48px, 6.6vw, 92px); line-height: 1.04; font-weight: 800; margin-bottom: 40px; max-width: 16ch; font-optical-sizing: auto; }
 .hero-h1 em { font-style: normal; font-weight: 500; color: var(--action); }
 
 .hero-sub { font-size: 18px; color: var(--text); line-height: 1.6; max-width: 620px; margin-bottom: 44px; font-weight: 300; }
@@ -131,7 +132,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--action); outlin
 /* ── Shared section primitives ───────────────────────────── */
 /* .section-label moved to MMBN block below */
 
-.process-h2 { font-weight: 500; font-size: clamp(38px, 4.4vw, 64px); line-height: 1.0; margin-bottom: 32px; max-width: 18ch; font-optical-sizing: auto; }
+.process-h2 { font-family: 'Cabinet Grotesk', 'DM Sans', sans-serif; font-weight: 800; font-size: clamp(38px, 4.4vw, 64px); line-height: 1.0; margin-bottom: 32px; max-width: 18ch; font-optical-sizing: auto; }
 .process-h2 em { font-style: normal; font-weight: 500; color: var(--action); }
 
 .process { padding: 104px 36px 88px; border-bottom: 1px solid var(--border); background: var(--surface); }
@@ -186,7 +187,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--action); outlin
 .bridge-side.py   .bridge-headline { color: #f0a030; }
 .bridge-sub { font-size: 13px; color: var(--text); margin-bottom: 24px; font-weight: 300; }
 .bridge-code {
-  font-family: 'DM Mono', 'Courier New', monospace;
+  font-family: 'DM Mono', 'JetBrains Mono', monospace;
   font-size: 11px; line-height: 1.85; color: var(--text);
   padding-top: 22px; border-top: 1px solid var(--border2);
 }
@@ -413,7 +414,7 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 .lang-col.py   .lang-col-tag { color: #f0a030; border-color: rgba(240,160,48,0.35); background: rgba(240,160,48,0.06); }
 .lang-col.pmt  .lang-col-tag { color: var(--accent); border-color: rgba(185,227,106,0.35); background: rgba(185,227,106,0.06); }
 .lang-col-code {
-  font-family: 'Courier New', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px; line-height: 1.85; color: var(--text);
   padding: 18px 20px; overflow-x: auto;
   scrollbar-color: #365FA8 #0D1118; scrollbar-width: thin;
@@ -445,15 +446,26 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
   border: 2px solid rgba(118,161,255,0.50);
   box-shadow: 0 42px 120px rgba(0,0,0,0.48), 0 0 0 1px rgba(118,161,255,0.12);
 }
-.orch-term { background: #060810; display: flex; flex-direction: column; }
-.orch-bar { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(255,255,255,0.04); border-bottom: 1px solid var(--border); }
+.orch-term { background: #060810; display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,0.08); }
+.orch-term:last-child { border-right: none; }
+/* Agent color coding: Ahab=green, Nemo=blue, Neptune=purple */
+.orch-term:nth-child(1) { background: #060A05; border-right-color: rgba(185,227,106,0.15); }
+.orch-term:nth-child(2) { background: #050810; border-right-color: rgba(118,161,255,0.15); }
+.orch-term:nth-child(3) { background: #07050F; border-right: none; }
+.orch-bar { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: rgba(255,255,255,0.04); border-bottom: 1px solid; }
+.orch-term:nth-child(1) .orch-bar { border-bottom-color: rgba(185,227,106,0.25); background: rgba(185,227,106,0.04); }
+.orch-term:nth-child(2) .orch-bar { border-bottom-color: rgba(118,161,255,0.25); background: rgba(118,161,255,0.04); }
+.orch-term:nth-child(3) .orch-bar { border-bottom-color: rgba(215,183,255,0.25); background: rgba(215,183,255,0.04); }
 .orch-dot { width: 9px; height: 9px; border-radius: 50%; }
 .orch-dot.r { background: #FF5F57; }
 .orch-dot.y { background: #FFBD2E; }
 .orch-dot.g { background: #28C840; }
-.orch-title { font-size: 10px; color: var(--action); margin: 0 auto; letter-spacing: 0.04em; font-weight: 600; }
+.orch-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; margin: 0 auto; letter-spacing: 0.04em; font-weight: 700; }
+.orch-term:nth-child(1) .orch-title { color: #B9E36A; }
+.orch-term:nth-child(2) .orch-title { color: #76A1FF; }
+.orch-term:nth-child(3) .orch-title { color: #D7B7FF; }
 .orch-output {
-  font-family: 'Courier New', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 12px; line-height: 1.85;
   padding: 20px 22px;
   overflow-y: auto;
@@ -533,31 +545,31 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 .pat-card.code .pat-card-label { color: var(--action); padding: 12px 16px 0; }
 .pat-body { font-size: 13px; color: var(--text); line-height: 1.6; font-weight: 300; }
 .pat-code {
-  font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.8;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.8;
   padding: 12px 16px;
   background: repeating-linear-gradient(180deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 22px), rgba(0,0,0,0.2);
   color: #FFD580; white-space: pre; overflow-x: auto;
 }
 
-/* ── MMBN: Section area backgrounds ─────────────────────── */
+/* ── MMBN: Section area backgrounds (DESIGN.md §§01-04) ──── */
 section#languages {
-  background-color: #04080F;
-  background-image: radial-gradient(rgba(118,161,255,0.06) 1px, transparent 1px);
+  background-color: #030810;
+  background-image: radial-gradient(rgba(118,161,255,0.08) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 section#failures {
-  background-color: #0F0608;
-  background-image: repeating-linear-gradient(0deg, rgba(255,85,85,0.028) 0px, rgba(255,85,85,0.028) 1px, transparent 1px, transparent 32px);
+  background-color: #140306;
+  background-image: repeating-linear-gradient(0deg, rgba(255,85,85,0.05) 0px, rgba(255,85,85,0.05) 1px, transparent 1px, transparent 32px);
 }
 section#orchestration {
-  background-color: #060608;
-  background-image: repeating-linear-gradient(90deg, rgba(185,227,106,0.022) 0px, rgba(185,227,106,0.022) 1px, transparent 1px, transparent 28px);
+  background-color: #030B03;
+  background-image: repeating-linear-gradient(90deg, rgba(185,227,106,0.04) 0px, rgba(185,227,106,0.04) 1px, transparent 1px, transparent 28px);
 }
 section#python {
-  background-color: #0A0800;
+  background-color: #0D0800;
   background-image:
-    linear-gradient(rgba(240,160,48,0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(240,160,48,0.028) 1px, transparent 1px);
+    linear-gradient(rgba(240,160,48,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,160,48,0.05) 1px, transparent 1px);
   background-size: 30px 30px;
 }
 
@@ -571,7 +583,7 @@ section#python {
   content: attr(data-num);
   color: var(--accent);
   font-weight: 700;
-  font-family: 'Courier New', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   background: rgba(185,227,106,0.10);
   border: 1px solid rgba(185,227,106,0.32);
@@ -623,7 +635,7 @@ section#python {
 .domain-icon { font-size: 18px; margin-bottom: 10px; }
 .domain-name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: 0.02em; }
 .domain-count {
-  font-family: 'Courier New', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 30px; font-weight: 700;
   color: rgba(255,85,85,0.35); line-height: 1; margin-bottom: 8px;
   transition: color 0.2s;
@@ -666,7 +678,7 @@ section#python {
 .cat-icon { font-size: 18px; margin-bottom: 10px; }
 .cat-name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: 0.02em; }
 .cat-problem {
-  font-family: 'Courier New', monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 11px; color: var(--muted); line-height: 1.5; font-weight: 300;
 }
 
@@ -753,10 +765,10 @@ section#python {
 
 <!-- ══ SECTION 01: TRILINGUAL ══ -->
 <section class="process" id="languages">
-  <div class="section-label reveal" data-num="01">Three Languages. One Pipeline.</div>
-  <h2 class="process-h2 reveal">Node.js. Python. <em>Agent Prompts.</em></h2>
+  <div class="section-label reveal" data-num="Step 01">The Code</div>
+  <h2 class="process-h2 reveal">Three layers.<br><em>Read the pipeline here.</em></h2>
   <p class="process-lead reveal">
-    Cortex runs across three distinct code layers — each written in a different language, each with a different job. Node.js runs the agents through Vertex AI. Python ADK hosts the orchestrator on Agent Engine and validates every output contract with Pydantic. Agent prompts are the third language: version-controlled instruction sets that define how each agent thinks.
+    The pipeline runs across three code layers with three different jobs. Node.js calls Vertex AI and enforces output schemas. Python ADK deploys the same agents to hosted Agent Engine and validates every GCS output with Pydantic. The agent prompts in REFERENCES.md are the third layer — version-controlled instructions that survived 1,500 cycles unchanged. Read all three here.
   </p>
   <div class="lang-grid reveal" id="lang-grid">
 
@@ -796,10 +808,10 @@ section#python {
 <!-- ══ SECTION 02: FAILURE LOG ══ -->
 <!-- What V1 proved: every fix introduced a new failure surface. The infrastructure was the enemy. -->
 <section class="process" id="failures">
-  <div class="section-label reveal" data-num="02">18 Failure Modes — Why We Removed It Instead of Fixing It</div>
-  <h2 class="process-h2 reveal">Every Fix Introduced <em>A New Failure.</em></h2>
+  <div class="section-label reveal" data-num="Step 02">What Breaks</div>
+  <h2 class="process-h2 reveal">18 failure modes.<br><em>None were the agent prompts.</em></h2>
   <p class="process-lead reveal">
-    V1 ran 1,500 enrichment cycles across six campaigns. Every failure was documented. The pattern that emerged: fixing one layer broke another. The infrastructure was fighting itself. <span class="em">The decision wasn't to improve it. It was to remove it. Click a domain to filter the 18 failures by where they actually lived.</span>
+    V1 ran 1,500 cycles. Every failure was logged. Use this as a troubleshooting reference — if something breaks in a multi-agent pipeline, the cause is almost certainly in this list. The agents themselves never failed. Everything underneath them did. <span class="em">Filter by domain to find what broke where.</span>
   </p>
 
   <div class="domain-grid reveal" id="domain-grid">
@@ -850,10 +862,10 @@ section#python {
 <!-- ══ SECTION 03: ORCHESTRATION TERMINAL ══ -->
 <!-- Claude Code as Admiral — how the pipeline actually runs -->
 <section class="process" id="orchestration">
-  <div class="section-label reveal" data-num="03">Claude Code Orchestration — The Admiral in Action</div>
-  <h2 class="process-h2 reveal">One Command. <em>Three Agents. The Pipeline Runs.</em></h2>
+  <div class="section-label reveal" data-num="Step 03">Run It</div>
+  <h2 class="process-h2 reveal">One command.<br><em>Three agents gate by gate.</em></h2>
   <p class="process-lead reveal">
-    Claude Code is the Admiral — it invokes Ahab, gates the handoff to Nemo, gates the handoff to Neptune, and delivers. No middleware. No server. No polling. GCS files are the only shared state between stages.
+    Run <code style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent);background:rgba(255,255,255,0.06);padding:2px 6px;">node run.js "campaign"</code> and Claude Code takes it from there — invokes Ahab, confirms the GCS write, hands to Nemo, confirms again, hands to Neptune. No middleware, no polling, no server. Watch all three agents run simultaneously below.
   </p>
 
   <div class="orch-grid reveal">
@@ -888,10 +900,10 @@ section#python {
 <!-- ══ SECTION 04: PYTHON CONTROL LAYER ══ -->
 <!-- Python validates, enforces contracts, and bridges to downstream tools -->
 <section class="process" id="python">
-  <div class="section-label reveal" data-num="04">Python Control Layer — Schema Enforcement, State Machines, Output Contracts</div>
-  <h2 class="process-h2 reveal">Node.js Runs the Agents. <em>Python Makes Sure They Stayed in Contract.</em></h2>
+  <div class="section-label reveal" data-num="Step 04">Validate</div>
+  <h2 class="process-h2 reveal">Node.js runs the agents.<br><em>Python checks every output.</em></h2>
   <p class="process-lead reveal">
-    The Node.js pipeline writes four typed GCS files per run. Python reads them at the boundary, validates every field with Pydantic, enforces state transitions, strips Gemini citation artifacts, and validates the IPC handshake. These aren't utilities — they're the production control layer. <span class="em">Select a pattern to read the field notes.</span>
+    The pipeline writes four typed JSON files to GCS per run. Python reads them at the boundary, validates every field with Pydantic, enforces that leads can only move forward (no stage can skip), strips Gemini citation artifacts, and validates the Node-to-Python IPC handshake. If any field is wrong, it fails loud — before anything reaches a CRM. <span class="em">Select a pattern to read the field notes.</span>
   </p>
 
   <div class="cat-grid reveal" id="cat-grid">
