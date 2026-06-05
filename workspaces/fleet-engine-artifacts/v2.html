@@ -394,9 +394,10 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 .footer-left { font-size: 10px; color: var(--text); letter-spacing: 0.06em; }
 .footer-quote { font-size: 14px; font-style: italic; color: var(--text); font-weight: 300; }
 
-/* ── Reveal ──────────────────────────────────────────────── */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.vis { opacity: 1; transform: translateY(0); }
+/* ── Reveal — content always visible, JS adds transition polish ── */
+.reveal { opacity: 1; transform: none; }
+.reveal.anim { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.anim.vis { opacity: 1; transform: none; }
 
 /* ── Trilingual three-column layout ──────────────────────── */
 .lang-grid {
@@ -977,25 +978,18 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 </footer>
 
 <script>
-// ── Scroll reveal ─────────────────────────────────────────
+// ── Scroll reveal (opt-in animation — content visible regardless) ──
+// Content is always visible via CSS. JS adds .anim to below-fold
+// elements, then removes it via IntersectionObserver for a scroll effect.
+document.querySelectorAll('.reveal').forEach(el => {
+  const r = el.getBoundingClientRect();
+  if (r.top > window.innerHeight) el.classList.add('anim');
+});
 const obs = new IntersectionObserver(
   entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); }),
   { threshold: 0.08 }
 );
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// Fallback: force all in-viewport reveals visible after 400ms
-// (IntersectionObserver can silently not fire on some browser/CDN combos)
-setTimeout(() => {
-  document.querySelectorAll('.reveal').forEach(el => {
-    const r = el.getBoundingClientRect();
-    if (r.top < window.innerHeight + 200) el.classList.add('vis');
-  });
-}, 400);
-// Full fallback at 1s — nothing should stay invisible
-setTimeout(() => {
-  document.querySelectorAll('.reveal:not(.vis)').forEach(el => el.classList.add('vis'));
-}, 1000);
+document.querySelectorAll('.reveal.anim').forEach(el => obs.observe(el));
 
 // ── HP bar fill on scroll ─────────────────────────────────
 const hpObs = new IntersectionObserver(
