@@ -495,7 +495,7 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 .log-dot-y { background: #FFBD2E; }
 .log-dot-g { background: #28C840; }
 .log-title { font-size: 10px; color: var(--muted); margin: 0 auto; letter-spacing: 0.04em; }
-.log-body { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr); height: 560px; overflow: hidden; }
+.log-body { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.6fr); min-height: 480px; max-height: 680px; overflow: hidden; }
 .log-list { overflow-y: auto; border-left: 2px solid rgba(255,85,85,0.30); scrollbar-color: #365FA8 #0D1118; scrollbar-width: thin; }
 .log-group-header { padding: 8px 18px 6px; background: var(--surface2); border-bottom: 1px solid var(--border); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); position: sticky; top: 0; z-index: 2; }
 .log-row { padding: 12px 18px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s; display: flex; align-items: flex-start; gap: 10px; }
@@ -527,7 +527,7 @@ footer { padding: 36px 48px; display: flex; align-items: center; justify-content
 .exp-dot-y { background: #FFBD2E; }
 .exp-dot-g { background: #28C840; }
 .exp-title { font-size: 10px; color: var(--muted); margin: 0 auto; letter-spacing: 0.04em; }
-.explorer-body { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.55fr); height: 560px; overflow: hidden; }
+.explorer-body { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.55fr); min-height: 480px; max-height: 680px; overflow: hidden; }
 .pattern-list { overflow-y: auto; border-left: 2px solid rgba(240,160,48,0.30); scrollbar-color: #365FA8 #0D1118; scrollbar-width: thin; }
 .pattern-group-header { padding: 8px 18px 6px; background: var(--surface2); border-bottom: 1px solid var(--border); font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #f0a030; position: sticky; top: 0; z-index: 2; }
 .pattern-row { padding: 13px 18px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s; display: flex; align-items: flex-start; gap: 10px; }

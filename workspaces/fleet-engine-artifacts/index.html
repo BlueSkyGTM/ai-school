@@ -53,7 +53,12 @@ header {
   max-width: 1200px; margin: 0 auto; width: 100%;
 }
 .header-left { display: flex; flex-direction: column; gap: 18px; }
-.header-right { padding-top: 8px; }
+.header-right {
+  padding: 24px 28px;
+  background: rgba(7,8,12,0.72);
+  border: 1px solid rgba(255,107,53,0.14);
+  backdrop-filter: blur(8px);
+}
 .eyebrow {
   font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--orange);
@@ -83,7 +88,7 @@ h1 em { font-style: normal; color: var(--orange); }
 .crew-list { display: flex; flex-direction: column; gap: 0; }
 .crew-item {
   display: grid; grid-template-columns: 80px 1fr; gap: 16px;
-  padding: 16px 0; border-bottom: 1px solid var(--border);
+  padding: 16px 0; border-bottom: 1px solid rgba(255,107,53,0.18);
   align-items: start;
 }
 .crew-item:last-child { border-bottom: none; }
@@ -108,8 +113,8 @@ h1 em { font-style: normal; color: var(--orange); }
   flex: 1; padding: 48px;
   max-width: 1200px; margin: 0 auto; width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1.15fr 1fr;
-  gap: 2px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
   align-items: stretch;
 }
 
