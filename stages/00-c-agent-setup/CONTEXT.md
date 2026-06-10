@@ -1,7 +1,7 @@
 <!-- Agent: Claude Code -->
 # 00-c: Agent Setup
 
-Install operator-kit agents, write tailoring briefs, configure context loader.
+Write agent tailoring briefs (Echo, Newton, Lyra, Hypatia) and configure the context loader.
 
 ## Inputs
 

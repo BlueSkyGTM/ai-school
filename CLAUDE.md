@@ -74,3 +74,29 @@ full-stack-gtm/
 ## Stage Handoffs
 
 Each stage writes to its own `output/` folder. The next stage reads from there. Edit an output file and the next stage picks up your edits.
+
+## Skill Routing
+
+When the user's request matches an available skill, invoke it via the Skill tool. When in doubt, invoke the skill.
+
+Key routing rules:
+- Author a backlog-ready spec / surface gaps → invoke `/spec`
+- Generate missing technical or educational documentation → invoke `/document-generate`
+- Full plan review / pre-stage gate → invoke `/autoplan`
+- Code review / diff check → invoke `/review`
+- Ship / PR → invoke `/ship`
+- Bugs / errors → invoke `/investigate`
+- Visual site changes → invoke `/design-review`
+- Direction pivot or scope question → invoke `/office-hours`
+- Post-deploy monitoring → invoke `/canary`
+- Save progress → invoke `/context-save`
+- Resume context → invoke `/context-restore`
+
+### `/document-generate` — when to use in this project
+
+This skill fills two gaps the build pipeline doesn't cover automatically:
+
+1. **Missing exercise documentation** — when a stage produces exercises that lack a worked example, expected output, or failure-mode description, run `/document-generate` targeting that stage's `output/` folder. It will produce a how-to + reference doc pair per the Diataxis framework.
+2. **Missing technical reference for live site features** — auth flow, render pipeline, catalog schema, Helix integration — any undocumented surface area in `site-new/` or `phases/` that a build agent (Lyra-code, Stage 05-08) needs but can't infer from CONTEXT.md alone.
+
+Run it before Stage 01 if 00-a archaeology surfaces undocumented patterns. Run it after Stage 05 if Helix behavior needs a worked reference before Stage 08 wires it.

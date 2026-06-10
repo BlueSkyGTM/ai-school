@@ -7,12 +7,12 @@ Bootstrap the variable registry, course identity, and student archetype before a
 
 | Source | File/Location | Section/Scope | Why |
 |--------|--------------|---------------|-----|
-| Workflow map | `../../CLAUDE.md` | User-specific variables section | Variable values to resolve |
+| Variable source | `../../setup/questionnaire.md` | Full file | Variable values to resolve |
 | GTM topic map | `../00-b-gtm-content-mapping/output/gtm-topic-map.md` | Full file | Student archetype derivation |
 
 ## Process
 
-1. Resolve all `{{VARIABLE}}` placeholders from CLAUDE.md into a registry
+1. Resolve all `{{VARIABLE}}` placeholders from setup/questionnaire.md into a registry
 2. Draft the course identity doc: course name (Full-Stack GTM), positioning statement. Do not write the student promise — deferred to 00-e-full
 3. Draft the student archetype: who takes this course, prior knowledge, end goal
 4. Write all outputs to vault/

@@ -56,7 +56,7 @@ The context loader (operator-kit) auto-injects project files into context when a
 | `quality-pass` or `stage-09` | Stage 02 lessons, source citations, Helix voice |
 | `validation-run` or `stage-10` | Full curriculum, live site |
 
-Install: `context-loader/install.md` in operator-kit repo.
+Context loader config is written by 00-c to `00-c/output/project-keywords.json`. No external install required.
 
 ---
 

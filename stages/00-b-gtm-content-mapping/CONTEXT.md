@@ -8,7 +8,9 @@ Map GTM concepts to the existing 20-phase curriculum using a Perplexity-powered 
 | Source | File/Location | Section/Scope | Why |
 |--------|--------------|---------------|-----|
 | Lesson format spec | `../00-a-curriculum-archaeology/output/lesson-format-spec.md` | Full file | Know how many beats per lesson to map into |
-| 80/20 GTM Handbook | `../../shared/gtm-handbook-extract.md` | Full file | Primary GTM topic source |
+| 80/20 GTM Handbook | `../../shared/gtm-handbook-extract.md` | Full file | Primary GTM topic source — 10 cluster definitions |
+| GTM curriculum integration | `../../shared/gtm-curriculum-integration.md` | Full file | 20-phase redirect map — starting structure for phase mapping |
+| GTM integration citations | `../../shared/gtm-integration-citations.md` | Full file | 100+ phase-mapped URLs — source material for source-citations.md |
 | Runtime guide | `../../references/runtime-guide.md` | Research loop section | Newton invocation and stopping criteria |
 
 ## Process
@@ -16,9 +18,10 @@ Map GTM concepts to the existing 20-phase curriculum using a Perplexity-powered 
 1. Read lesson-format-spec to understand the lesson structure Newton must map into
 2. Identify GTM topic clusters from the 80/20 Handbook: TAM Mapping, TAM Refinement, Copywriting, AI Personalization, Deliverability, Cold Email, Cold Calls, Micro Lists, News-Led Outbound, Scraping
 3. For each cluster: run Perplexity research loop, extract concepts, cite sources. Stop when each cluster has 3+ concrete techniques and 2+ examples with citations
-4. Map each GTM concept to the existing 20-phase curriculum — which phase is the natural home
-5. Flag phases where no good GTM fit exists (exercise-only phases)
-6. Run audit checks
+4. Build the outcomes thesis: derive 5 practitioner outcomes (Signal machine, Write at scale, Score and qualify, Living GTM system, Agent stack) from the clusters. Each outcome is a capability a GTM engineer can demonstrate after the course — not an AI concept. Write this before the phase table.
+5. Map each GTM cluster to its primary outcome and home phase — the phase table implements the outcomes thesis, not the other way around
+6. Flag phases where no good GTM fit exists (exercise-only phases)
+7. Run audit checks
 
 ## Audit
 
@@ -32,5 +35,5 @@ Map GTM concepts to the existing 20-phase curriculum using a Perplexity-powered 
 
 | Artifact | Location | Format |
 |----------|----------|--------|
-| `gtm-topic-map.md` | `output/` | GTM concept to phase mapping table with exercise potential |
+| `gtm-topic-map.md` | `output/` | Outcomes thesis (5 practitioner outcomes) + phase table showing which phases implement which outcomes |
 | `source-citations.md` | `output/` | All sourced URLs with concept attribution |
