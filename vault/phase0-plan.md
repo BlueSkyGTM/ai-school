@@ -64,7 +64,7 @@ Outputs (to stages/00-c-agent-setup/output/):
 - model-config.md — GLM 5.1 for all agents
 
 ### 00-d — Helix Design
-Inputs: exercise/lesson format specs, lyra-code-brief, fsrs-algorithm reference, professor-synapse/
+Inputs: exercise/lesson format specs, lyra-code-brief, fsrs-algorithm reference, vault/helix-architecture.md
 Outputs (LOCKED — to stages/00-d-helix-design/output/):
 - fsrs-integration-spec.md — concrete parameter values, not ranges
 - copy-paste-flag-format.md — EXACT string, locked permanently

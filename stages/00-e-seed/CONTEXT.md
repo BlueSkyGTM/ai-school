@@ -14,7 +14,6 @@ Bootstrap the variable registry, course identity, and student archetype before a
 
 1. Resolve all `{{VARIABLE}}` placeholders from setup/questionnaire.md into a registry — include the following runtime URLs:
    - `REPO_URL` — GitHub URL or local path to the AI engineering lesson source (phases/)
-   - `SYNAPSE_REPO_URL` — Professor Synapse repository URL (fork base for Stage 05)
    - `SITE_URL` — Live site URL for Stage 10 validation (e.g. https://learn.blueskygtm.engineer)
 2. Draft the course identity doc: course name (Full-Stack GTM), positioning statement. Do not write the student promise — deferred to 00-e-full
 3. Draft the student archetype: who takes this course, prior knowledge, end goal

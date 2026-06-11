@@ -123,7 +123,7 @@ This coursemaker drew from seven external sources, each contributing a specific 
 |--------|-------------------|
 | **Made With ML** | The 498-lesson AI engineering curriculum — the spine of the Double Helix |
 | **80/20 GTM Engineering Playbook** | The application layer — toolstacks, KPIs, workflows, copy templates sourced from six-figure GTM practitioners |
-| **Professor Synapse / Open-Brain** | The reasoning chain architecture that Helix is built against (the pattern, not the fork) |
+| **Open-Brain / governed-maze pattern** | The reasoning chain architecture Helix is built against — structured decision flow with explicit nodes. Professor Synapse was evaluated and discarded (blackbox persona, general-purpose tutoring, hidden constraints). Helix is built from scratch against vault/helix-architecture.md. |
 | **learning-commons-org/evaluators** | LLM-as-judge architecture; CLEAR text complexity framework adapted into CLARITY_JUDGE |
 | **EducationQ** | Teacher→student→evaluator loop pattern adapted into the Helix test harness |
 | **axtonliu/smart-illustrator + coleam00/excalidraw-diagram-skill** | 3-tier illustration pipeline; render-and-inspect self-validation loop |

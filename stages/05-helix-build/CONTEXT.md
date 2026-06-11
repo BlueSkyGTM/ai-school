@@ -1,7 +1,7 @@
 <!-- Agent: Lyra-code -->
 # Stage 05: Helix Build
 
-Fork Professor Synapse, swap identity to Helix, implement FSRS and copy-paste flag parser.
+Build Helix from scratch against vault/helix-architecture.md. Implement FSRS and copy-paste flag parser.
 
 ## Inputs
 
@@ -17,7 +17,7 @@ Fork Professor Synapse, swap identity to Helix, implement FSRS and copy-paste fl
 
 ## Process
 
-1. Build Helix system prompt from `vault/helix-architecture.md` — four layers: identity, reasoning chain, modality rules, constraints
+1. Build Helix system prompt from scratch using `vault/helix-architecture.md` — four layers: identity, reasoning chain, modality rules, constraints
 2. Implement FSRS scheduling per fsrs-integration-spec (background layer, separate from conversation)
 3. Implement copy-paste flag parser per copy-paste-flag-format (locked format — do not deviate)
 4. Implement faculty persona system per faculty-persona-spec (voice register shift, not personality change)
@@ -29,7 +29,7 @@ Fork Professor Synapse, swap identity to Helix, implement FSRS and copy-paste fl
 
 | Check | Pass Condition |
 |-------|---------------|
-| Identity swap complete | No "Professor Synapse" references remain in user-facing output |
+| Identity clean | No "Professor Synapse" references remain in system prompt or user-facing output |
 | Flag parser exact | Parses the locked format string, fails gracefully on malformed input |
 | FSRS wired | Card scheduling uses fsrs-integration-spec parameters |
 
