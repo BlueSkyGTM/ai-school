@@ -18,7 +18,7 @@ Claude Code reads the `<!-- Agent: -->` declaration at the top of each stage CON
 | `<!-- Agent: Echo -->` | Echo | Sonnet 4.6 | Codebase archaeology, read-only file traversal | Stage 01+ |
 | `<!-- Agent: Hypatia -->` | Hypatia | Sonnet 4.6 | Curriculum audit, gap detection, quality challenge | Stage 09 |
 
-**Newton:** Newton's primary job is gap-fill research — when Hypatia or any stage detects curriculum gaps (missing source material, undercited concepts, or topics the existing handbook doesn't cover), Newton activates to find citations. He uses the link repo (gtm-integration-citations.md) and Perplexity as jumping-off points, then fills blanks without stopping the main build batch. His brief is written in 00-c for immediate deployment at Stage 01+.
+**Newton:** Newton's primary job is gap-fill research — when Hypatia or any stage detects curriculum gaps (missing source material, undercited concepts, or topics the existing handbook doesn't cover), Newton activates to find citations. He uses the link repo (gtm-integration-citations.md) and GLM air as his research tool (replaces Perplexity — faster, tooling-native, better fit for the maker/checker loop pattern). Fills blanks without stopping the main build batch. His brief is written in 00-c for immediate deployment at Stage 01+.
 
 Agent brief files (written by 00-c): `stages/00-c-agent-setup/output/agent-briefs/`
 Model config: `stages/00-c-agent-setup/output/model-config.md`

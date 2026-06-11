@@ -85,9 +85,39 @@ FSRS-5 spaced repetition handles recall scheduling in the background. Helix rece
 
 ---
 
+## The Third Structural Layer: Loop Engineering
+
+*Added 2026-06-11. This is a living document — shifts are recorded here as they happen.*
+
+Double Helix accounts for two layers: logic (the derivation constraint) and representation (dual-access indexing). What was missing — and was implicit in the build pipeline from the start — is the operational layer: how autonomous systems actually run, discover work, execute without constant human prompting, and maintain state across sessions.
+
+That layer is **loop engineering**.
+
+> "My job is to write loops." — Boris Cherny, Head of Claude Code, Anthropic
+
+Loop engineering is replacing yourself as the person who prompts the agent. You design the system that does it instead. The five primitives: scheduling (cadenced discovery), worktrees (parallel isolation), skills (persistent knowledge), connectors (MCP), and sub-agents (maker/checker split) — plus memory/state as the durable spine.
+
+**Why this changes the coursemaker:**
+
+The build pipeline was already a loop. batch-orchestration is the worktree primitive. CONTEXT.md files are skills. vault/ is state. autoplan is the maker/checker pattern. But without the explicit framework, the standards were informal. At 498-lesson scale, informal breaks. LOOP.md (at repo root) now codifies the operating model before any Stage runs.
+
+**Why this changes the curriculum:**
+
+The GTM operator kit — TAM segmentation, signal detection, Clay enrichment, HubSpot qualification — is a loop. Every GTM system a student will build after this course is a loop. Teaching GTM engineering without teaching loop design is training technicians, not engineers.
+
+The positioning is not "future-proofing." It is engineering from first principles. The Boris Cherny quote is the opening frame: the leverage point has moved from prompting to loop design. A GTM engineer who cannot design autonomous signal-to-outreach loops will be replaced by one who can. This course closes that gap.
+
+Loop engineering threads through the curriculum as the operating model — introduced early as a frame (the Boris Cherny quote, the five primitives, why the leverage point shifted), deepened in the GTM execution phases as the architecture underlying every system students build, and synthesized in the capstone as the student's own loop design. It does not compete with the AI engineering depth. It explains why the AI engineering depth exists: you need to understand what's under the loop to build one that doesn't break.
+
+**On GLM air replacing Perplexity:**
+
+Newton's gap-fill research role (activated when curriculum gaps are detected) runs on GLM air, not Perplexity. GLM air's speed and tooling affinity make it a better fit for the maker/checker loop pattern than a search-first API. This is a build pipeline decision that propagates into the curriculum: students learn GLM air as the research agent in their own loops, not a standalone search tool.
+
+---
+
 ## References
 
-This coursemaker drew from six external sources, each contributing a specific structural layer:
+This coursemaker drew from seven external sources, each contributing a specific structural layer:
 
 | Source | What It Contributed |
 |--------|-------------------|
@@ -97,6 +127,7 @@ This coursemaker drew from six external sources, each contributing a specific st
 | **learning-commons-org/evaluators** | LLM-as-judge architecture; CLEAR text complexity framework adapted into CLARITY_JUDGE |
 | **EducationQ** | Teacher→student→evaluator loop pattern adapted into the Helix test harness |
 | **axtonliu/smart-illustrator + coleam00/excalidraw-diagram-skill** | 3-tier illustration pipeline; render-and-inspect self-validation loop |
+| **cobusgreyling/loop-engineering** | The operational layer — five primitives, phased rollout (L1/L2/L3), maker/checker standard, STATE.md pattern, anti-patterns catalog. Integrated into LOOP.md and threaded through the curriculum as the GTM loop engineering arc. |
 
 None of these were taken wholesale. Each was a reference that became a component — adapted, constrained, and integrated into a pipeline that none of them individually describe.
 
@@ -108,6 +139,8 @@ The coursemaker is not a software project in the traditional sense. No productio
 
 What makes it possible is the same thing that makes the Double Helix work: structure enforced at write time. Every stage has a CONTEXT.md that tells the agent exactly what to read, what to produce, and what constitutes a passing audit. The human writes the spec. The agent executes it. The quality layer catches what the agent misses.
 
+The loop engineering layer adds the third rail: the agents aren't just executing specs, they're running loops — with state, with verification, with human gates at the right moments. The coursemaker is itself an example of what it teaches. Building it is the proof of concept for the operational model the students will learn.
+
 The skill being developed is not "how to code a course platform." It is how to design systems where AI agents can do reliable, auditable work at scale — and how to build the quality gates that make that reliability verifiable.
 
-That is AI engineering. The GTM course is just the proof of concept.
+That is AI engineering. That is loop engineering. The GTM course is just the first instantiation.

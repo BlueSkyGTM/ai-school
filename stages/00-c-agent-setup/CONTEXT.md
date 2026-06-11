@@ -17,7 +17,7 @@ Write agent tailoring briefs (Echo, Newton, Lyra, Hypatia) and configure the con
 ## Process
 
 1. Write Echo brief: read-only scout, BlueSkyGTM repo, 00-a archaeology scope
-2. Write Newton brief: Newton's role is gap-fill research — when curriculum gaps are detected (by Hypatia at Stage 09 or by any stage discovering missing source material), Newton activates to find citations using the link repo and Perplexity as jumping-off points. Brief must include: GTM topic clusters, Perplexity as source, cite every claim, stopping criteria, and the gap-fill trigger conditions (what signals Newton to activate)
+2. Write Newton brief: Newton's role is gap-fill research — when curriculum gaps are detected (by Hypatia at Stage 09 or by any stage discovering missing source material), Newton activates to find citations using the link repo and GLM air as the research tool. Brief must include: GTM topic clusters, GLM air as source (not Perplexity), cite every claim, stopping criteria, and the gap-fill trigger conditions (what signals Newton to activate)
 3. Write Lyra content brief: ground it in vault/student-archetype.md and vault/course-identity-doc.md — the brief must name who the student is and what the course promises before specifying format constraints
 4. Write Lyra code brief: site architecture constraints, render pipeline (ui.js, catalog.js), auth.js constraints, no breaking changes
 5. Write Hypatia brief: curriculum coherence focus, double-helix alignment, GTM accuracy against source-citations, gap detection

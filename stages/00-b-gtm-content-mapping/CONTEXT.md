@@ -1,7 +1,7 @@
 <!-- Agent: Claude Code -->
 # 00-b: GTM Content Mapping
 
-Map GTM concepts to the existing 20-phase curriculum using a Perplexity-powered research loop.
+Map GTM concepts to the existing 20-phase curriculum using a GLM air research loop.
 
 ## Inputs
 
@@ -17,7 +17,7 @@ Map GTM concepts to the existing 20-phase curriculum using a Perplexity-powered 
 
 1. Read lesson-format-spec to understand the lesson structure that will implement each GTM cluster
 2. Identify GTM topic clusters from the 80/20 Handbook: TAM Mapping, TAM Refinement, Copywriting, AI Personalization, Deliverability, Cold Email, Cold Calls, Micro Lists, News-Led Outbound, Scraping
-3. For each cluster: use Perplexity (Claude Code runs the research directly — Newton is not active in Phase 0) to extract concepts and cite sources. Stop when each cluster has 3+ concrete techniques and 2+ examples with citations
+3. For each cluster: use GLM air (Claude Code runs the research directly — Newton is not active in Phase 0; GLM air replaces Perplexity for speed and tooling affinity) to extract concepts and cite sources. Stop when each cluster has 3+ concrete techniques and 2+ examples with citations
 4. Build the outcomes thesis: derive 5 practitioner outcomes (Signal machine, Write at scale, Score and qualify, Living GTM system, Agent stack) from the clusters. Each outcome is a capability a GTM engineer can demonstrate after the course — not an AI concept. Write this before the phase table.
 5. Map each GTM cluster to its primary outcome and home phase — the phase table implements the outcomes thesis, not the other way around
 6. Flag phases where no good GTM fit exists (exercise-only phases)
