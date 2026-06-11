@@ -20,6 +20,8 @@ Generate FSRS-formatted active recall card banks per phase.
 2. Format each card per the FSRS card schema from fsrs-integration-spec
 3. Tag each card with the lesson it reviews and the strand (AI engineering vs GTM)
 
+Note: Stage 04 produces FSRS-formatted card files. SRS scheduling (when to surface each card) runs at Helix runtime — Stage 04 does not build or require a separate SRS backend.
+
 ## Audit
 
 | Check | Pass Condition |

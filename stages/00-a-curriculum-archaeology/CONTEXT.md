@@ -18,7 +18,7 @@ Map the existing site, codebase, and auth layer before anything is built.
 3. Document the exercise format: CLI-facing, expected output shape
 4. Document the quiz format: question types, scoring model
 5. Read auth.js: session handling, persistence mechanism, known failure modes
-6. Capture CSS/design system: class naming, component patterns, lesson layout markup
+6. Capture rendering stack: static site generator or build tool, Markdown-to-HTML pipeline, CSS/design system (class naming, component patterns, lesson layout markup). Stage 06 depends on this to define "modular components" concretely.
 7. Note placement test mechanism if present
 8. Run audit checks
 
@@ -38,4 +38,4 @@ Map the existing site, codebase, and auth layer before anything is built.
 | `exercise-format-spec.md` | `output/` | CLI exercise structure, expected output, copy-paste trigger pattern |
 | `quiz-format-spec.md` | `output/` | Question types, answer formats, scoring fields |
 | `auth-audit.md` | `output/` | auth.js behavior, session model, failure modes, Stage 07 implications |
-| `design-system-snapshot.md` | `output/` | CSS patterns, component list, lesson layout markup |
+| `design-system-snapshot.md` | `output/` | Rendering stack (SSG/build tool, Markdown pipeline), CSS patterns, component list, lesson layout markup |

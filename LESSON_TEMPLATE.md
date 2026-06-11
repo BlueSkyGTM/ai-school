@@ -45,6 +45,8 @@ Build mental models before implementation.]
 
 ## Build It
 
+> **Open your terminal — this section runs in Claude Code, not the browser.**
+
 [Step-by-step implementation from scratch.
 Start with the simplest version, then add complexity.
 Every code block should be runnable on its own.]

@@ -36,3 +36,4 @@ Fork Professor Synapse, swap identity to Helix, implement FSRS and copy-paste fl
 | Artifact | Location | Format |
 |----------|----------|--------|
 | `helix-agent/` | `output/` | Working Helix implementation |
+| `helix-invocation-guide.md` | `output/` | How students invoke Helix from the terminal: command syntax, flag options, when to use Helix vs reading the site. Included in Phase 01 lesson as the course's first Helix touchpoint. |

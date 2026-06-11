@@ -19,8 +19,9 @@ Audit double-helix alignment and GTM accuracy. Lyra fills identified gaps direct
 
 1. Audit double-helix alignment: GTM strand woven into AI lessons, not parallel
 2. Audit GTM accuracy: concepts match source citations
-3. Identify gaps: phases with thin or missing GTM content
-4. Lyra fills gaps per gtm-topic-map guidance — writes filled lessons back to `../02-lesson-injection/output/hybrid-lessons/`
+3. Audit voice consistency: compare lesson tone across all phases against helix-voice.md — flag any phase cluster where Lyra drifted from the established voice benchmark
+4. Identify gaps: phases with thin or missing GTM content
+5. Lyra fills gaps per gtm-topic-map guidance — writes filled lessons back to `../02-lesson-injection/output/hybrid-lessons/`
 
 ## Audit
 
@@ -28,6 +29,7 @@ Audit double-helix alignment and GTM accuracy. Lyra fills identified gaps direct
 |-------|---------------|
 | Alignment score | Every phase has at least one woven GTM-AI connection |
 | Accuracy verified | No GTM claim lacks a citation from source-citations.md |
+| Voice consistent | No phase cluster deviates from the Helix voice benchmark in helix-voice.md |
 | Gaps filled | All identified gaps have corresponding filled lesson files in Stage 02 output |
 
 ## Outputs
