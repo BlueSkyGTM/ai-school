@@ -27,6 +27,8 @@ NN-lesson-name/
 
 > [One-line motto — the core idea that sticks]
 
+> **Platform:** This course runs in Claude Code Desktop. Exercises happen in your terminal, not the browser.
+
 **Type:** Build | Learn
 **Languages:** Python, TypeScript, Rust, Julia (list what's used)
 **Prerequisites:** [List prior lessons needed]

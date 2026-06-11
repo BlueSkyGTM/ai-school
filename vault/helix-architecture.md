@@ -50,6 +50,8 @@ Student input received
   ├─ Completing an exercise → [FLAG CHECK]
   ├─ Requesting recall review → [QUIZ]
   ├─ Stuck / frustrated → [HINT]
+  ├─ Answered confidently but incorrectly → [CORRECT]
+  ├─ Lost / disoriented / asking where they are → [ORIENT]
   └─ Off-topic → [REDIRECT]
         │
         ▼
@@ -66,6 +68,10 @@ Student input received
   └─ No → surface the gap explicitly, do not loop silently
 ```
 
+**Modality notes:**
+- **CORRECT** — student was wrong-but-confident. Name the misconception first, then correct it with the specific mechanism (not a re-explanation of the whole concept). Differs from HINT which is for students who are stuck or uncertain.
+- **ORIENT** — student is disoriented. Helix surfaces: current lesson, current phase, lessons completed so far (from student state context). Then asks: "Do you want to continue here, or pick up from a specific lesson?" Never sends a student into REDIRECT when they're just lost.
+
 ---
 
 ## FSRS Integration Layer
@@ -75,7 +81,15 @@ Separate from the conversation layer. FSRS scheduling runs as a background proce
 - FSRS-5 calculates next review interval
 - Helix receives the next due card on the student's next review session
 
-Helix does not see the FSRS algorithm. It receives: `next_card: {{CARD_JSON}}`. The scheduling is invisible to Helix's conversation layer by design.
+Helix receives two context objects, not one:
+```
+next_card: {{CARD_JSON}}          — the card to present
+review_summary: {{SUMMARY_JSON}}  — {cards_due_today: N, topics_overdue: [...], streak: N}
+```
+
+The `review_summary` lets Helix answer "how many cards are due?" and "what topics am I behind on?" without needing access to the scheduling algorithm. The FSRS algorithm stays invisible; the summary is a computed view passed alongside the card.
+
+**Flag parser robustness:** The copy-paste flag parser must normalize input before matching — strip ANSI escape codes, collapse whitespace, normalize line endings (CRLF → LF). If the flag is not found after normalization, Helix falls through to ASSESS rather than failing silently. The student sees a normal ASSESS response; no error message, no broken state.
 
 ---
 

@@ -19,12 +19,12 @@ Audit double-helix alignment and GTM accuracy. Lyra fills identified gaps direct
 
 ## Process
 
-1. Run CLARITY_JUDGE on every lesson — flag lessons scoring < 3.0 overall
-2. Run WEAVE_JUDGE on every lesson — flag lessons where derivation < 3.0 or ## Sources missing
-3. Run ACCURACY_JUDGE on every lesson — flag lessons scoring < 3.5 overall
+1. Run CLARITY_JUDGE, WEAVE_JUDGE, and ACCURACY_JUDGE on every lesson — max 10 concurrent judge calls to avoid rate limits; retry once on transient API errors before flagging; do not mark a lesson blocked on a network error alone
+2. For each failed lesson: mark blocked in manifest.json with the specific judge + score that failed
+3. Lyra fills blocked lessons — max 2 revision passes per lesson. If a lesson still fails after 2 passes, escalate to human checkpoint rather than continuing to loop.
 4. Audit voice consistency: compare lesson tone across all phases against helix-voice.md — flag any phase cluster where Lyra drifted from the established voice benchmark
 5. Identify gaps: phases with thin or missing GTM content
-6. Lyra fills gaps per gtm-topic-map guidance — writes filled lessons back to `../02-lesson-injection/output/hybrid-lessons/`
+6. Write curriculum-audit-report.md with per-lesson judge scores, blocked count, revision count, and any lessons requiring human review
 
 ## Audit
 

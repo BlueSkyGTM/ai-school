@@ -24,7 +24,7 @@ Draft full hybrid lessons — GTM strand woven into AI engineering lessons as ap
    a. Derive the GTM application from the AI concept first — mechanically trace what the technical concept enables in a GTM context before writing any prose. If the derivation doesn't hold, flag the phase before drafting.
    b. Draft full GTM-strand content for all six beats per outline, grounded in the derivation from step (a)
    c. Weave GTM context into the corresponding AI engineering lesson — GTM as application layer
-   c. Write hybrid lesson to `output/hybrid-lessons/{{PHASE}}/{{LESSON}}/docs/en.md` — include a `## Sources` block at the end with citations for every GTM claim made in the lesson (url + what it supports)
+   c. Write hybrid lesson to `output/hybrid-lessons/{{PHASE}}/{{LESSON}}/docs/en.md` — include a `## Sources` block at the end with citations for every GTM claim made in the lesson (url + what it supports). Note: Tier 3 (Mermaid) diagrams written inline here will render as raw code blocks until Stage 06 confirms mermaid.js is wired on the site — this is expected and not a bug.
    d. Run all three audit checks (six-beat complete, weave-not-parallel, format match)
    e. If audit passes: mark lesson done in manifest.json and advance
    f. If audit fails: flag the lesson as blocked in manifest.json, report to human, do not advance

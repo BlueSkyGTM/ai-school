@@ -20,6 +20,31 @@ Content type check:
 
 One tier per lesson. No mixing.
 
+**Boundary case default:** when a concept could fit two tiers (e.g., a pipeline that is both a sequence AND has entities), default to Tier 2 (Excalidraw). It can show both structure and flow.
+
+### Labeled Examples — 5 per tier
+
+**Tier 3 (Mermaid):**
+1. `FSRS scheduling intervals` — flowchart: Again → short interval, Good → longer
+2. `Lead scoring decision tree` — branching: score > 80? → sequence A / B
+3. `API request lifecycle` — sequence diagram: client → enrichment API → CRM
+4. `Clay waterfall steps` — sequential flow: Find → Enrich → Transform → Export
+5. `Helix modality selection` — decision tree: concept question? → EXPLAIN / stuck? → HINT
+
+**Tier 2 (Excalidraw):**
+1. `Vector database architecture` — entities: query → embedding layer → vector store → result
+2. `Multi-agent GTM system` — components: signal agent, enrichment agent, copy agent, router
+3. `Double Helix course structure` — spatial: AI engineering spine + GTM application layer woven in
+4. `CRM as retrieval system` — data flow: account record → embedding → similarity search → context
+5. `Enrichment waterfall with retry logic` — distributed system: parallel providers, failure paths, idempotent retries
+
+**Tier 1 (GLM-image):**
+1. `Fine-tuning concept` — metaphor: a sculptor refining a rough shape to match a specific mold
+2. `Embeddings` — analogy: words as coordinates in a space where meaning = proximity
+3. `RLHF` — abstract: human preference arrows nudging a probability distribution
+4. `Chain-of-thought prompting` — visual: stepping stones across a river (each step visible)
+5. `Overfitting` — metaphor: a tailor making a suit that fits only one person's exact pose
+
 ---
 
 ## Tier 1: GLM-image (Conceptual)
@@ -36,6 +61,8 @@ One tier per lesson. No mixing.
 
 **Output location:** `output/illustrations/{{PHASE}}/{{LESSON}}/concept.png`
 
+**Alt-text:** Every generated illustration must include a corresponding `concept.alt.txt` file — one sentence describing what the image shows, written for a screen reader. Format: `[Tier 1 illustration: description of what the visual depicts]`. GLM-image batch spec generates alt-text alongside each image using the same content description that was passed to the API.
+
 ---
 
 ## Tier 2: Excalidraw (Architectural)
@@ -49,6 +76,8 @@ One tier per lesson. No mixing.
 **Quality gate:** render-and-inspect loop is the gate. Visual output is human-reviewed at phase checkpoints.
 
 **Output location:** `output/illustrations/{{PHASE}}/{{LESSON}}/diagram.svg`
+
+**Alt-text:** Every Excalidraw diagram must include a `diagram.alt.txt` — one sentence naming the components and relationships shown. The render-and-inspect loop generates alt-text as part of the self-correction pass.
 
 ---
 
