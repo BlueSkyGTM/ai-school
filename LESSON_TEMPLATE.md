@@ -40,8 +40,11 @@ Make it concrete — show a scenario where not knowing this hurts.]
 ## The Concept
 
 [Explain with diagrams and intuition. No code yet.
-Use ASCII diagrams, tables, or link to visuals in the web app.
-Build mental models before implementation.]
+Every Concept beat gets one illustration — tier selected by illustration-pipeline.md logic:
+- Sequence/flowchart/decision tree → Mermaid (write inline)
+- System diagram/entities/data flow → Excalidraw (generated at Stage 06)
+- Abstract concept/metaphor → GLM-image (generated at Stage 06)
+Build the mental model before implementation.]
 
 ## Build It
 

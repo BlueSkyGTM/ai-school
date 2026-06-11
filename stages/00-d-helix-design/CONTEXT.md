@@ -10,7 +10,7 @@ Design the FSRS integration, copy-paste flag format (LOCKED here), faculty perso
 | Curriculum archaeology | `../00-a-curriculum-archaeology/output/` | exercise-format-spec, lesson-format-spec | What Helix must parse |
 | Agent architecture | `../00-c-agent-setup/output/agent-briefs/lyra-code-brief.md` | Full file | How Helix fits in the agent pattern |
 | FSRS reference | `../../phases/19-capstone-projects/17-personal-ai-tutor/docs/en.md` | FSRS definition, BKT section | Algorithm spec — use FSRS-5 |
-| Professor Synapse | `../../professor-synapse/` | SKILL.md, teaching protocol | Vendored fork — base for Helix persona |
+| Helix architecture | `../../vault/helix-architecture.md` | Full file | Governed-maze design, system prompt layers, decision tree — Helix is built from this spec, not forked from any existing agent |
 
 ## Capstone Direction
 

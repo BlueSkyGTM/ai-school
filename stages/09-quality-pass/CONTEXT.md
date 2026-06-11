@@ -14,14 +14,17 @@ Audit double-helix alignment and GTM accuracy. Lyra fills identified gaps direct
 | MLOps appendage | `../../shared/mlops-appendage-concepts.md` | Full file | Verify appendage lessons are placed after Phase 17 and match Made With ML source content |
 | GTM Starter Kit | `../../shared/gtm-starter-kit-guide.md` | Skills table | Verify key phases (01, 02, 03, 05, 17) have GTM Starter Kit exercise hooks |
 | Helix voice | `../../vault/helix-voice.md` | Full file | Voice consistency check |
+| Quality standards | `../../shared/quality-standards.md` | Full file | Master quality reference for all four dimensions |
+| Lesson judge prompts | `../../shared/quality-evaluator/lesson-judge-prompts.md` | Full file | CLARITY_JUDGE, WEAVE_JUDGE, ACCURACY_JUDGE — run per lesson |
 
 ## Process
 
-1. Audit double-helix alignment: GTM strand woven into AI lessons, not parallel
-2. Audit GTM accuracy: concepts match source citations
-3. Audit voice consistency: compare lesson tone across all phases against helix-voice.md — flag any phase cluster where Lyra drifted from the established voice benchmark
-4. Identify gaps: phases with thin or missing GTM content
-5. Lyra fills gaps per gtm-topic-map guidance — writes filled lessons back to `../02-lesson-injection/output/hybrid-lessons/`
+1. Run CLARITY_JUDGE on every lesson — flag lessons scoring < 3.0 overall
+2. Run WEAVE_JUDGE on every lesson — flag lessons where derivation < 3.0 or ## Sources missing
+3. Run ACCURACY_JUDGE on every lesson — flag lessons scoring < 3.5 overall
+4. Audit voice consistency: compare lesson tone across all phases against helix-voice.md — flag any phase cluster where Lyra drifted from the established voice benchmark
+5. Identify gaps: phases with thin or missing GTM content
+6. Lyra fills gaps per gtm-topic-map guidance — writes filled lessons back to `../02-lesson-injection/output/hybrid-lessons/`
 
 ## Audit
 

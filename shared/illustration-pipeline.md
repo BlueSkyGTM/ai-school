@@ -1,0 +1,99 @@
+# Illustration Pipeline
+
+Three-tier logic for mass illustration generation across 502 lessons. Each lesson in The Concept beat gets exactly one illustration. Tier selection is automatic.
+
+---
+
+## Tier Selection Logic
+
+```
+Content type check:
+├─ Can be expressed as a sequence, flowchart, or decision tree?
+│   └─ YES → Tier 3: Mermaid (inline markdown, zero render dependency)
+│
+├─ Has spatial components, entities, or system relationships?
+│   └─ YES → Tier 2: Excalidraw (architecture diagrams, data flow maps)
+│
+└─ Abstract concept, metaphor, or analogy that needs visual grounding?
+    └─ YES → Tier 1: GLM-image (conceptual illustrations)
+```
+
+One tier per lesson. No mixing.
+
+---
+
+## Tier 1: GLM-image (Conceptual)
+
+**Tool:** smart-illustrator (axtonliu/smart-illustrator) with Gemini API swapped for GLM-image API.
+
+**Swap point:** `scripts/generate-image.ts` — replace the Gemini SDK call with GLM-image API endpoint. Input/output contract stays identical: content description in, PNG path out.
+
+**Variable:** `{{GLM_IMAGE_ENDPOINT}}` — set in variable-registry.md, injected at runtime.
+
+**Batch spec:** `references/slides-prompt-example.json` pattern — one entry per lesson needing a Tier 1 illustration. Batch runs with resume support (smart-illustrator has built-in checkpoint).
+
+**Quality gate:** GLM-image outputs are human-reviewed at phase checkpoints (same cadence as Stage 02 phase pauses). No automated render-and-inspect for generated images.
+
+**Output location:** `output/illustrations/{{PHASE}}/{{LESSON}}/concept.png`
+
+---
+
+## Tier 2: Excalidraw (Architectural)
+
+**Tool:** excalidraw-diagram-skill (coleam00/excalidraw-diagram-skill).
+
+**The differentiator:** render-and-inspect self-validation loop. The agent generates Excalidraw JSON, renders to PNG via Playwright, screenshots the result, and self-corrects layout before writing output. Catches visual layout bugs automatically.
+
+**Usage:** Claude Code skill loaded from `.claude/skills/excalidraw-diagram-skill/`. Run per lesson that needs a Tier 2 diagram.
+
+**Quality gate:** render-and-inspect loop is the gate. Visual output is human-reviewed at phase checkpoints.
+
+**Output location:** `output/illustrations/{{PHASE}}/{{LESSON}}/diagram.svg`
+
+---
+
+## Tier 3: Mermaid (Structural)
+
+**Tool:** Mermaid.js — rendered natively by the site's markdown pipeline.
+
+**Usage:** Mermaid code blocks written inline in `docs/en.md` during Stage 02 lesson injection. No separate generation step.
+
+**Quality gate:** Site render validation at Stage 10 (Mermaid syntax errors surface as broken renders).
+
+**Output location:** inline in lesson file — no separate illustration output.
+
+---
+
+## Integration with the Build Pipeline
+
+| Stage | Illustration action |
+|-------|-------------------|
+| Stage 02 (Lesson Injection) | Tier 3 (Mermaid) written inline during lesson drafting |
+| Stage 06 (Site Readability) | Tier 1 + Tier 2 generated per lesson needing visual grounding; illustration outputs dropped into lesson folders |
+| Stage 09 (Quality Pass) | Hypatia flags missing illustrations; Tier 1/2 re-runs for flagged lessons |
+| Stage 10 (Validation Run) | Confirm all illustrations render correctly on the live site |
+
+---
+
+## GLM-image API Swap — Implementation Notes
+
+The swap requires three changes to smart-illustrator:
+
+1. `scripts/generate-image.ts` — replace:
+   ```ts
+   // BEFORE (Gemini)
+   const model = genai.getGenerativeModel({ model: "gemini-pro-vision" });
+   
+   // AFTER (GLM-image)
+   const response = await fetch(`${process.env.GLM_IMAGE_ENDPOINT}/v1/images/generations`, {
+     method: "POST",
+     headers: { "Authorization": `Bearer ${process.env.GLM_API_KEY}`, "Content-Type": "application/json" },
+     body: JSON.stringify({ model: "cogview-3", prompt: imagePrompt, n: 1, size: "1024x1024" })
+   });
+   ```
+
+2. `.env` — add `GLM_IMAGE_ENDPOINT` and `GLM_API_KEY` (already in environment, not committed)
+
+3. `styles/` — adjust style presets if GLM-image produces different aspect ratios than Gemini
+
+Security: `GLM_API_KEY` is a runtime secret — set in environment, never committed. Same handling as `{{GLM_API_KEY}}` in variable-registry.

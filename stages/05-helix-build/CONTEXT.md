@@ -11,16 +11,18 @@ Fork Professor Synapse, swap identity to Helix, implement FSRS and copy-paste fl
 | Exercise specs | `../03-exercise-design/output/exercise-specs/` | Flag format reference | Verify flag parsing |
 | Quiz bank | `../04-quiz-recall/output/quiz-bank/` | Card format reference | Verify card input format |
 | Lyra code brief | `../00-c-agent-setup/output/agent-briefs/lyra-code-brief.md` | Full file | Standing orders |
-| Professor Synapse | `{{SYNAPSE_REPO_URL}}` | Full repo | Fork base |
+| Helix architecture | `../../vault/helix-architecture.md` | Full file | Governed-maze design — build from this spec |
+| Quality standards | `../../shared/quality-standards.md` | AI Interaction section | Pedagogical dimensions Helix must satisfy |
+| Helix test harness | `../../vault/helix-test-harness.md` | Full file | 3-scenario test loop — must pass before output ships |
 
 ## Process
 
-1. Fork Professor Synapse into `output/helix-agent/`
-2. Swap identity: Professor Synapse to Helix — naming, voice, persona system
-3. Implement FSRS scheduling per fsrs-integration-spec
-4. Implement copy-paste flag parser per copy-paste-flag-format (locked format — do not deviate)
-5. Implement faculty persona generation per faculty-persona-spec
-6. Wire to quiz bank input format
+1. Build Helix system prompt from `vault/helix-architecture.md` — four layers: identity, reasoning chain, modality rules, constraints
+2. Implement FSRS scheduling per fsrs-integration-spec (background layer, separate from conversation)
+3. Implement copy-paste flag parser per copy-paste-flag-format (locked format — do not deviate)
+4. Implement faculty persona system per faculty-persona-spec (voice register shift, not personality change)
+5. Wire to quiz bank input format
+6. Run the helix-test-harness.md loop — all 3 scenarios, must pass ≥ 4/5 dimensions each
 7. Run /review gate before output is written
 
 ## Audit

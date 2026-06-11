@@ -26,4 +26,6 @@
 
 **What this is not:** Workplace superiority. Credential stacking. Putting eggs in two sexy baskets. It is a compound discipline built to be durable.
 
+**This repo is two things:** A course and a coursemaker. The course is Full-Stack GTM Engineering — the content, the 502 lessons, the GTM handbook integration. The coursemaker is everything else: the ICM build pipeline (Stages 01-10), the quality evaluation layer (CLARITY/WEAVE/ACCURACY judges), the illustration pipeline (GLM-image/Excalidraw/Mermaid), and the Helix governed-maze architecture. The coursemaker is designed to be domain-agnostic. The GTM content is one instantiation. For others building technical courses with a hybrid AI/application structure, the coursemaker may be the more valuable artifact.
+
 **Why the GTM content is accurate by construction:** The AI engineering curriculum is the reasoning chain. Every GTM lesson has to answer "what does this specific technical concept let you do in GTM?" — it cannot drift into vague best practices because the AI concept anchors it. GTM-first curricula are opinions all the way down. This curriculum has a validated technical spine across 502 lessons that forces every GTM claim to be grounded in a specific mechanism. The Double Helix doesn't just organize the content — it enforces accuracy as a structural property.
