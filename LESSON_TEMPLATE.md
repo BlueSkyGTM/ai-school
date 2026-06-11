@@ -91,6 +91,11 @@ Include it here and save it in the outputs/ folder.]
 
 - [Resource 1](url) — [why it's worth reading]
 - [Resource 2](url) — [why it's worth reading]
+
+## Sources
+
+<!-- GTM strand citations — written by Stage 02 during lesson injection -->
+<!-- Format: [Source name](url) — [what it supports in this lesson] -->
 ```
 
 ## Code File Guidelines
