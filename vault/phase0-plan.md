@@ -90,7 +90,7 @@ Both contracts already patched — 00-a and 00-b CONTEXT.md files already declar
 ## Success Criteria
 Phase 0 is done when:
 1. All 5 output folders have files (not just .gitkeep)
-2. vault/ and all stage CONTEXT.md files have no unfilled {{VARIABLE}} placeholders — includes {{REPO_URL}}, {{SYNAPSE_REPO_URL}}, {{SITE_URL}}
+2. vault/ and all stage CONTEXT.md files have no unfilled {{VARIABLE}} placeholders — includes {{REPO_URL}}, {{SITE_URL}}
 3. copy-paste-flag-format.md exists and contains the exact flag string
 4. project-keywords.json covers all 10 build pipeline stages
 5. Stage 01 dry-run passes: run 00-c's lyra-content-brief through Stage 01 CONTEXT.md against a single Phase 01 lesson slot. If Lyra produces a structurally valid outline, Phase 0 is done. If it fails (missing context, unfilled variables, structural error), Phase 0 is not done.
