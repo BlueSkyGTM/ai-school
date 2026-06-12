@@ -1,58 +1,149 @@
 <!-- /autoplan restore point: /c/Users/raymo/.gstack/projects/BlueSkyGTM-blueskygtm-engineering/master-autoplan-restore-20260612-033405.md -->
-# Operator-Kit Architecture Plan: GLM Agent Integration
+# Operator-Kit Architecture Plan: GLM Proxy Skills
 
 ## Problem Statement
 
-The 5 operator-kit agents (Lyra content, Lyra code, Echo, Hypatia, Newton) are intended to run on Z.ai GLM models. Claude Code only speaks the Anthropic Messages API format. Two viable approaches exist:
+The 5 operator-kit skills run on Z.ai GLM models. The Z.ai API key must not live
+in Claude Code's environment or the git repo. The call format (OpenAI-compatible)
+is the same across all skills — only the model and system prompt change per skill.
 
-**Option A — Anthropic-to-GLM Proxy:**
-Build a lightweight proxy server (FastAPI or Node/Express) that:
-- Accepts requests in Anthropic Messages API format (`POST /v1/messages`)
-- Translates and forwards to Z.ai GLM endpoint (`open.bigmodel.cn/api/paas/v4/`)
-- Returns responses in Anthropic format (both streaming and non-streaming)
-- Handles tool use translation (Anthropic `tool_use` blocks ↔ OpenAI `tool_calls`)
-- Claude Code pointed at proxy via `ANTHROPIC_BASE_URL=http://localhost:3000`
+## Approved Architecture: Proxy + Function-Named Skills
 
-**Option B — Standalone Python Scripts:**
-Build operator-kit agents as standalone Python scripts using `zhipuai` SDK:
-- Each agent is a Python script Claude Code shells out to via `Bash`
-- Scripts call GLM directly — no format translation needed
-- Claude Code orchestrates by reading stdout and passing context via args/stdin
-- Cline can also call these scripts natively (GLM-native)
+**Proxy layer** (`BlueSkyGTM/openai-proxy` on Railway):
+- Accepts standard `Authorization: Bearer <PROXY_SECRET_KEY>` (OpenAI SDK compatible)
+- Forwards to configurable upstream (`OPENAI_BASE_URL` env var in Railway)
+- `OPENAI_API_KEY` (Z.ai key) lives only in Railway — never in this repo or Claude Code
+- Swap upstream (OpenAI ↔ Z.ai) by changing one Railway env var, no code change
 
-## Context
+**Skills layer** (`skills/operator-kit/` in this repo):
+- Each skill is a gstack slash command with a SKILL.md + backing Python script
+- Scripts use standard `openai` Python SDK (`base_url=PROXY_URL`, `api_key=PROXY_KEY`)
+- Claude Code invokes skills via `/write-lesson`, `/scan-repo`, etc. — not raw agent dispatch
+- Skill names reflect the JOB, not the agent name — easier routing, clearer CLAUDE.md entries
 
-- `skills/operator-kit/` is currently empty (placeholder, `.gitkeep` only)
-- `stages/00-c-agent-setup/output/` is empty — agent briefs not yet written
-- Cline is in the stack and natively speaks GLM (OpenAI-compatible format)
-- Z.ai API key confirmed working via `zhipuai` SDK
-- `zhipuai` SDK installed at Python 3.14 site-packages
-- `references/runtime-guide.md` defines agent routing — currently uses `<!-- Agent: Name -->` declarations and Claude Code Agent tool invocations
-- Phase 0 runs entirely as Claude Code; GLM agents first active at Stage 01+
-- 498 lessons to be generated (Lyra content is the volume workhorse)
-- Model assignments: Lyra-content=GLM-5.1, Lyra-code=GLM-5, Echo=GLM-4.7-Flash, Hypatia=GLM-4.7, Newton=GLM-4.5-Air
+```
+Claude Code
+    │
+    ├── /write-lesson      → skills/operator-kit/write-lesson/
+    ├── /write-quiz        →   SKILL.md + scripts/glm_call.py
+    ├── /write-exercise    →   (Lyra content — GLM-5.1)
+    │
+    ├── /build-site-component → skills/operator-kit/build-site-component/
+    │                           (Lyra code — GLM-5)
+    │
+    ├── /scan-repo         → skills/operator-kit/scan-repo/
+    │                        (Echo — GLM-4.7-Flash)
+    │
+    ├── /quality-check     → skills/operator-kit/quality-check/
+    │                        (Hypatia — GLM-4.7)
+    │
+    └── /find-citations    → skills/operator-kit/find-citations/
+                             (Newton — GLM-4.5-Air)
+                                │
+                                ▼
+                    Railway proxy (openai-proxy)
+                    PROXY_URL = https://<project>.up.railway.app
+                    PROXY_KEY = <shared secret>
+                                │
+                                ▼ Authorization: Bearer <Z.ai key>
+                    Z.ai GLM endpoint
+                    https://open.bigmodel.cn/api/paas/v4/
+```
 
-## Constraints
+## Environment Variables
 
-- Must work within Claude Code's orchestration model
-- Must be runnable from Cline as well
-- Operator-kit needs to be built before Stage 01
-- No breaking changes to existing `phases/` lesson structure
-- `skills/operator-kit/` is tracked in git (never gitignored per CLAUDE.md)
+| Var | Where it lives | Value |
+|-----|---------------|-------|
+| `OPENAI_API_KEY` | Railway env only | Z.ai API key |
+| `OPENAI_BASE_URL` | Railway env only | `https://open.bigmodel.cn/api/paas/v4` |
+| `PROXY_SECRET_KEY` | Railway env only | Random shared secret |
+| `PROXY_URL` | `.env` (this repo, gitignored) | Railway deployment URL |
+| `PROXY_KEY` | `.env` (this repo, gitignored) | Same as Railway's `PROXY_SECRET_KEY` |
 
-## Decision Audit Trail
+## Proxy Update Required
 
-| # | Phase | Decision | Classification | Principle | Rationale | Rejected |
-|---|-------|----------|----------------|-----------|-----------|----------|
-| 1 | CEO | Option B (standalone scripts) over Option A (proxy) | Taste | P5+P3 | Proxy SSE+tool_use translation = significant bug surface; Stage 01-04 agents only need read-brief+write-files | Option A (proxy) |
-| 2 | CEO | MCP server deferred to TODOS.md pre-Stage 08 | Mechanical | P3 | Right long-term answer; premature for Stage 01; Stage 08 is the natural wiring stage | Option C now |
-| 3 | CEO | Scope includes updating runtime-guide routing model | Mechanical | P1 | CONTEXT.md files still expect Agent tool invocation — must update dispatch declaration format | Leave as footnote |
-| 4 | CEO | Use zhipuai SDK streaming, not raw stdout subprocess | Mechanical | P5 | Windows encoding + buffering risk on 498-lesson workload | Raw subprocess stdout |
-| 5 | Eng | Pin zhipuai==2.1.5.20250725 in requirements.txt | Mechanical | P1 | SDK updates can silently change agent behavior; reproducible runs required | Unversioned |
-| 6 | Eng | Add python-dotenv to requirements.txt | Mechanical | P1 | .env key loading needed across all agent scripts | Manual .env parse |
-| 7 | Eng | Context loader fails gracefully if project-keywords.json missing | Mechanical | P5 | 00-c outputs don't exist yet at operator-kit build time | Silent KeyError |
-| 8 | Eng | glm_client.py implements exponential backoff (3 retries) | Mechanical | P1 | 498 lessons = guaranteed rate limit hits; no retry = crashed pipeline | No retry |
-| 9 | Eng | Each agent is a separate file, not if/elif monolith | Mechanical | P5 | Independent brief updates, easier debugging, no cross-agent coupling | Monolith |
-| 10 | DX | Add .env.example to skills/operator-kit/ | Mechanical | P1 | TTHW blocked without it | Discover by reading code |
-| 11 | DX | Add skills/operator-kit/README.md with invocation examples | Mechanical | P1 | runtime-guide describes intent; operator-kit needs concrete usage | Undocumented |
-| 12 | DX | dispatch.py prints actionable error if zhipuai not installed | Mechanical | P5 | Raw ImportError is not actionable for operators | Raw ImportError |
+`BlueSkyGTM/openai-proxy` needs two changes before operator-kit skills can use it:
+1. **Auth**: accept `Authorization: Bearer` in addition to `x-proxy-auth`
+2. **Configurable upstream**: read `OPENAI_BASE_URL` env var instead of hardcoded OpenAI URL
+3. **Embeddings endpoint**: add `/v1/embeddings` route (needed for gbrain Z.ai embeddings later)
+
+Updated `index.js` ready at: `vault/proxy-index-update.js` — copy this file into
+the `BlueSkyGTM/openai-proxy` repo and push, then Railway auto-deploys.
+
+Railway env vars to set after pushing:
+```
+OPENAI_API_KEY     = c6f5e3a0c7f34384a329583a7b9274a7.firXV7TSgZb9QdwG
+OPENAI_BASE_URL    = https://open.bigmodel.cn/api/paas/v4
+PROXY_SECRET_KEY   = <generate a random string, e.g. openssl rand -hex 32>
+```
+
+Then add to `.env` in this repo:
+```
+PROXY_URL=https://<your-railway-project>.up.railway.app
+PROXY_KEY=<same value as PROXY_SECRET_KEY>
+```
+
+## Skill File Structure
+
+Each function-named skill follows the same pattern:
+
+```
+skills/operator-kit/<skill-name>/
+├── SKILL.md          — gstack skill definition (workflow, brief injection, model)
+└── run.py            — Python script: loads context, calls proxy, writes output
+```
+
+`run.py` shared pattern:
+```python
+import os, sys
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ["PROXY_KEY"],
+    base_url=os.environ["PROXY_URL"] + "/v1",
+)
+
+# model, system_prompt, and context are injected per-skill from SKILL.md brief
+response = client.chat.completions.create(
+    model=MODEL,          # e.g. "GLM-5.1"
+    messages=[...],
+    stream=True,
+)
+for chunk in response:
+    print(chunk.choices[0].delta.content or "", end="", flush=True)
+```
+
+## Skill → Model Assignments
+
+| Skill | Function | GLM Model | Active |
+|-------|----------|-----------|--------|
+| `/write-lesson` | Draft lesson docs + outlines | GLM-5.1 | Stage 01 |
+| `/write-quiz` | Quiz banks (FSRS-ready) | GLM-5.1 | Stage 04 |
+| `/write-exercise` | Exercise specs | GLM-5.1 | Stage 03 |
+| `/build-site-component` | Site components, Helix impl | GLM-5 | Stage 05 |
+| `/scan-repo` | Read-only codebase traversal | GLM-4.7-Flash | Stage 01+ |
+| `/quality-check` | Curriculum audit, gap detection | GLM-4.7 | Stage 09 |
+| `/find-citations` | Gap-fill research, citation finding | GLM-4.5-Air | Stage 01+ |
+
+## Decision Audit Trail (updated)
+
+| # | Decision | Rationale | Supersedes |
+|---|----------|-----------|------------|
+| 1 | Proxy architecture over direct key in env | Z.ai key lives in Railway only; rotate without touching repo | Original Option A (Anthropic format proxy) |
+| 2 | Standard `openai` SDK over `zhipuai` SDK | Proxy speaks OpenAI format; no JWT handling in scripts | Decision 4 (zhipuai SDK streaming) |
+| 3 | Function-named skills over agent-named scripts | Task routing via CLAUDE.md is clearer; `/write-lesson` beats `dispatch.py --agent lyra` | Original agent dispatch model |
+| 4 | One `run.py` per skill, shared client pattern | Same rationale as original D9 (independent updates, no coupling) | — |
+| 5 | MCP upgrade still deferred to pre-Stage 08 | Proxy + skills covers Stage 01-07 cleanly | — |
+| 6 | `OPENAI_BASE_URL` in Railway, not repo | Swap Z.ai ↔ OpenAI by changing one env var; zero code change | — |
+
+## Build Order
+
+1. Update `BlueSkyGTM/openai-proxy` with `vault/proxy-index-update.js`
+2. Set Railway env vars, get deployment URL
+3. Add `PROXY_URL` + `PROXY_KEY` to `.env`
+4. Scaffold `skills/operator-kit/` with shared `lib/glm_client.py` + per-skill dirs
+5. Write each skill's SKILL.md brief (sourced from `stages/00-c-agent-setup/output/`)
+6. Update `references/runtime-guide.md` routing declarations
+7. Smoke-test each skill before Stage 01
+
+Must complete before Stage 01.

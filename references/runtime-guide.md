@@ -4,24 +4,28 @@ How the orchestration layer connects. Read this once at workspace setup. Stage c
 
 ---
 
-## Agent Routing
+## Skill Routing
 
-Claude Code reads the `<!-- Agent: -->` declaration at the top of each stage CONTEXT.md and invokes the matching operator-kit agent via the Agent tool with the CONTEXT.md as its brief.
+Operator-kit skills are gstack slash commands backed by Python scripts. Each skill calls the GLM proxy on Railway — the Z.ai key never touches this repo. Phase 0 runs entirely as Claude Code; skills first deploy at Stage 01+.
 
-**Phase 0 runs entirely as Claude Code directly — no operator-kit agents.** Agents are built in 00-c and first deployed in Stage 01+.
+**Invocation:** Claude Code calls these as slash commands (e.g. `/write-lesson`), not via the Agent tool. Scripts in `skills/operator-kit/<skill>/run.py` make the actual GLM calls through the proxy.
 
-| Declaration | Agent | Model | Primary job | First active |
-|---|---|---|---|---|
-| `<!-- Agent: Claude Code -->` | Claude Code directly | — | All Phase 0 stages | Stages 00-a through 00-f |
-| `<!-- Agent: Lyra -->` | Lyra (content) | GLM-5.1 | Lesson drafts, exercise specs, quiz banks, outlines | Stage 01 |
-| `<!-- Agent: Lyra-code -->` | Lyra (code) | GLM-5 | Site components, Helix implementation, student state | Stage 05 |
-| `<!-- Agent: Echo -->` | Echo | GLM-4.7-Flash | Codebase archaeology, read-only file traversal | Stage 01+ |
-| `<!-- Agent: Hypatia -->` | Hypatia | GLM-4.7 | Curriculum audit, gap detection, quality challenge | Stage 09 |
-| `<!-- Agent: Newton -->` | Newton | GLM-4.5-Air | Gap-fill research, citation finding | Stage 01+ |
+**Proxy:** `BlueSkyGTM/openai-proxy` on Railway. Set `PROXY_URL` + `PROXY_KEY` in `.env` (gitignored). See `vault/operator-kit-architecture-plan.md` for Railway env var setup.
 
-**Newton:** Newton's primary job is gap-fill research — when Hypatia or any stage detects curriculum gaps (missing source material, undercited concepts, or topics the existing handbook doesn't cover), Newton activates to find citations. He uses the link repo (gtm-integration-citations.md) and GLM-4.5-Air as his research tool (replaces Perplexity — faster, tooling-native, better fit for the maker/checker loop pattern). Fills blanks without stopping the main build batch. His brief is written in 00-c for immediate deployment at Stage 01+.
+| Skill | Model | Primary job | First active |
+|---|---|---|---|
+| Claude Code directly (no skill) | — | All Phase 0 stages | Stages 00-a through 00-f |
+| `/write-lesson` | GLM-5.1 | Lesson drafts and outlines | Stage 01 |
+| `/write-exercise` | GLM-5.1 | Exercise specs | Stage 03 |
+| `/write-quiz` | GLM-5.1 | Quiz banks (FSRS-ready) | Stage 04 |
+| `/build-site-component` | GLM-5 | Site components, Helix implementation, student state | Stage 05 |
+| `/scan-repo` | GLM-4.7-Flash | Read-only codebase traversal, archaeology | Stage 01+ |
+| `/quality-check` | GLM-4.7 | Curriculum audit, gap detection, accuracy challenge | Stage 09 |
+| `/find-citations` | GLM-4.5-Air | Gap-fill research, citation finding | Stage 01+ |
 
-Agent brief files (written by 00-c): `stages/00-c-agent-setup/output/agent-briefs/`
+**`/find-citations`:** activates when `/quality-check` or any stage flags curriculum gaps (missing source material, undercited concepts, topics the handbook doesn't cover). Uses `gtm-integration-citations.md` as the link repo. Fills blanks without stopping the main build batch. Brief written in 00-c for immediate deployment at Stage 01+.
+
+Skill brief files (written by 00-c): `stages/00-c-agent-setup/output/agent-briefs/`
 Model config: `stages/00-c-agent-setup/output/model-config.md`
 
 ---
