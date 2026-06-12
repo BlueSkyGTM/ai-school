@@ -38,4 +38,4 @@ Generate one GTM lesson outline per mapped phase slot. Outlines only — no full
 |----------|----------|--------|
 | `gtm-lesson-outlines.md` | `output/` | One outline block per GTM lesson slot; exercise-only flags where applicable |
 | `manifest.json` | `output/` | 502 lesson slots (498 AI engineering + 4 MLOps appendage) with status (pending/done/blocked), phase, and lesson ID — consumed by Stage 02 for resumable batch processing |
-| `helix-stub.md` | `output/` | Minimal Helix invocation stub for Phase 01 lesson — one command to copy-paste to invoke Helix, placeholder text noting the full guide ships at Stage 05. Phase 01 students need to know how to call Helix before Stage 05 runs. |
+| `helix-stub.md` | `output/` | Zone 01 awareness note — NOT a Helix invocation stub. Zone 01 runs on standard Claude. Contents: one paragraph explaining that Helix activates at Zone 04 and what to expect when it arrives. No invocation command — Helix doesn't exist yet. |

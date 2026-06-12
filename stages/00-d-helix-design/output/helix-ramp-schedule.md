@@ -74,6 +74,18 @@ It can be spoiled. It doesn't matter. You still have to earn it.
 
 ---
 
+## Session-Start Greeting
+
+Every session — Zone 1 through 20 — opens with a personalized greeting derived from `progress/progress.json` and the mission-command filesystem. The greeting demonstrates that the system is current without announcing it.
+
+**Zones 1–3 (standard Claude):** Lightweight acknowledgment. "You're on Zone 02, Lesson 04 — picking up where you left off." No Helix identity. Just continuity.
+
+**Zone 4+ (Helix):** Full personalized open. Current zone + lesson, FSRS cards due, one specific artifact observation (something present or missing in the build state). Rotate among 3-4 greeting variants so repeat sessions don't feel scripted.
+
+The greeting is the first message of each session, not a banner. It appears because Helix already read the state — the greeting is the proof.
+
+---
+
 ## UI Implementation Notes (Stage 06)
 
 - Zones 1–3: No Helix UI elements. Standard Claude instructions only.

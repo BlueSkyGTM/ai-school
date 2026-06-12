@@ -33,6 +33,15 @@ Deferred scope from autoplan and stage reviews. Items here are not blocking curr
   - Add editor mode bypass to `gate-check-spec.md` (Stage 07 output)
   - **This is NOT operator mode.** Editor mode is a testing harness. Operator mode is earned by completing the course. The distinction must be explicit in the SKILL.md.
 
+## Pre-Stage-01 Operator Kit Stubs
+
+- [ ] **Write `/write-lesson`, `/write-exercise`, `/write-quiz` skill stubs** — lyra-content-brief.md documents these as invocation patterns but no skill files exist. Claude Code uses these to assemble the governed-maze handoff to GLM-5.1. Must exist before Stage 01 runs the first lesson batch. Skill files go in `.claude/skills/` or operator-kit, one per invocation pattern. Each skill: reads the brief excerpt relevant to the task type, assembles ≤500-token prompt, calls Z.ai, validates output structure.
+- [ ] **Write `/quality-check`, `/scan-repo`, `/find-citations`, `/build-site-component` skill stubs** — same pattern for Hypatia, Echo, Newton, Lyra-code. Needed before Stages 02, 03, 04, 05, 06, 08.
+
+## Stage 06 UI (FSRS Card UX)
+
+- [ ] **FSRS recall card — clickable answer + difficulty rating** — Stage 06 UI work. Helix presents a recall card rendered via Excalidraw or Mermaid. Student clicks the revealed answer, then rates difficulty (Again / Hard / Good / Easy). FSRS uses the rating to schedule the next interval. Implementation notes: card state machine (front → flip → rate), difficulty buttons map to FSRS ratings 1-4, card JSON format from `stages/00-d-helix-design/output/fsrs-integration-spec.md`. Design this in Stage 06 alongside the site readability pass.
+
 ## Phase 0 / Tooling
 
 - [ ] **Write 00-f tooling stage CONTEXT.md** — Stage for gbrain, graphify, context loader, Helix open brain setup. Deferred until operator-kit agents exist (Stage 01+). Now also needs loop engineering standards setup (LOOP.md is written; 00-f should wire it into the build pipeline operationally).

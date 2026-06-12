@@ -67,9 +67,10 @@ Outputs (to stages/00-c-agent-setup/output/):
 Inputs: exercise/lesson format specs, lyra-code-brief, fsrs-algorithm reference, vault/helix-architecture.md
 Outputs (LOCKED — to stages/00-d-helix-design/output/):
 - fsrs-integration-spec.md — concrete parameter values, not ranges
-- copy-paste-flag-format.md — EXACT string, locked permanently
+- copy-paste-flag-format.md — DEPRECATED 2026-06-12 (artifact-based verification replaces the flag entirely)
 - faculty-persona-spec.md — Helix identity, voice constraints
-- student-state-options.md — mechanism evaluation, decision-ready
+- student-state-options.md — mechanism evaluation, RESOLVED: repo-as-save-file
+- helix-ramp-schedule.md — Zone activation schedule, Zone 1-3 standard Claude, Zone 4+ full Helix
 
 ### 00-e-full — Vault Complete
 Inputs: all Phase 0 outputs, existing vault/ files

@@ -8,6 +8,7 @@ Complete the vault after Helix is designed. Adds Helix voice and student promise
 | Source | File/Location | Section/Scope | Why |
 |--------|--------------|---------------|-----|
 | All Phase 0 outputs | `../00-a-curriculum-archaeology/output/` through `../00-d-helix-design/output/` | Voice and identity artifacts | Source for Helix voice synthesis |
+| Helix ramp schedule | `../00-d-helix-design/output/helix-ramp-schedule.md` | Zone-specific voice behavior | helix-voice.md must account for Zone 1-3 lightweight register vs Zone 4+ full Helix register |
 | Vault seed | `../../vault/` | Existing variable-registry, course-identity-doc, student-archetype | Files to update |
 
 ## Process

@@ -68,6 +68,7 @@ Student input received
 ```
 
 **Modality notes:**
+- **SESSION START** — triggered when progress.json indicates this is the first message of a new session (no conversation history). Helix reads `progress/progress.json` + filesystem and opens with a personalized greeting: current zone, current lesson, what's due (FSRS cards), and one specific detail from their build state (e.g. "your ICP definition is in but the scraper scaffold is still missing"). No fanfare — just demonstrated awareness. Add variance: rotate among 3-4 greeting templates so returning students don't see identical phrasing every session. Zone 1-3 equivalent: the mission-command repo's `CLAUDE.md` includes a session-start instruction that reads `progress/progress.json` automatically — standard Claude opens with "you're on Zone 02, Lesson 04 — picking up where you left off." Same principle, no Helix identity. The CLAUDE.md injection is Stage 07 scope (student state implementation).
 - **CORRECT** — student was wrong-but-confident. Name the misconception first, then correct it with the specific mechanism (not a re-explanation of the whole concept). Differs from HINT which is for students who are stuck or uncertain.
 - **ORIENT** — student is disoriented. Helix surfaces: current lesson, current zone, lessons completed so far (from student state context). Then asks: "Do you want to continue here, or pick up from a specific lesson?" Never sends a student into REDIRECT when they're just lost.
 

@@ -10,7 +10,7 @@
 
 **Why the name removes ambiguity:** Centers the GTM engineer identity, not the AI tools. Students walk away with a job title, not a tool certification.
 
-**Student promise:** {{STUDENT_PROMISE}}
+**Student promise:** After completing this course, a self-taught GTM practitioner can build a production ABM signal engine that detects buying intent and triggers personalized outreach without manual intervention; audit any GTM tool's claimed enrichment behavior against its actual API mechanics and write tests to verify accuracy; and design autonomous agent systems that perform the research, scoring, copy generation, and pipeline management work currently billed at $8K–$15K/month retainers. Each capability is demonstrable in under 30 minutes to a technical hiring manager or potential client.
 
 ---
 

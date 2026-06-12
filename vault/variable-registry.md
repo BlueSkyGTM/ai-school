@@ -1,6 +1,5 @@
 # Variable Registry
-
-Populated by 00-e-seed. Updated by 00-e-full.
+<!-- Updated by 00-e-full | 2026-06-12 — all variables resolved -->
 
 | Variable | Value |
 |----------|-------|
