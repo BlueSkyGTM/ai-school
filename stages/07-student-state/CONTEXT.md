@@ -71,6 +71,8 @@ You cannot fake completion. An empty directory or a file with placeholder values
 | Business gate enforced | company.md with placeholders blocks operational Helix routing |
 | Redirect is specific | Missing component surfaces the first gap, not a generic locked message |
 | Anti-cheat is structural | Copied repo with someone else's context provides no usable state |
+| Rename mechanism specified | gate-check-spec.md includes `/rename <name>` Helix command, available only when progress.json shows all Stage 10 gates cleared; propagates through CLAUDE.md, STATE.md, and Helix self-references |
+| Editor mode bypass documented | gate-check-spec.md includes bypass logic: if `.editor-mode` file exists, all gate checks return cleared |
 
 ## Outputs
 

@@ -20,6 +20,19 @@ Deferred scope from autoplan and stage reviews. Items here are not blocking curr
 - [ ] **Add helix-ops-spec.md to Stage 05 outputs** — Operations mode for Helix post-graduation: RESEARCH/SCORE/BRIEF/DRAFT/STATUS/ESCALATE modalities. Same governed maze, different decision nodes. Reads mission-command context files (company.md, ICP.md, STATE.md). Add to Stage 05 CONTEXT.md as a required output alongside fsrs-integration-spec.md. Required before Stage 05 runs.
 - [ ] **Personal fork: fenton-gtm-command** — After gtm-mission-command scaffold exists, fork as private instance for Fenton Tax. This IS the n8n/Postgres pipeline rebuilt with Claude as orchestrator. Stage 10 validation confirms the mission command can replicate what n8n currently does.
 
+## Editor Mode (Pre-Stage-05 Requirement)
+
+- [ ] **Write `/edit-mode` skill** — `.claude/skills/editor-mode/SKILL.md`. Must exist before Stage 05 builds Helix, so the course author can test gate logic without completing prerequisites.
+  - `/edit-mode on` → creates `.editor-mode` file in the mission command worktree (gitignored — structurally cannot corrupt `progress.json`)
+  - `/edit-mode off` → removes the file
+  - `/edit-mode status` → reports what's bypassed
+  - `/edit-mode unlock <stage>` → simulates one gate as cleared without completing prerequisites
+  - Helix reads `.editor-mode` BEFORE any gate check — if present, all checks return `cleared: true`
+  - All Helix responses while active MUST be prefixed with `[EDITOR MODE — gate checks bypassed]`
+  - Add `.editor-mode` to `.gitignore` of the mission command scaffold (`gtm-mission-command`)
+  - Add editor mode bypass to `gate-check-spec.md` (Stage 07 output)
+  - **This is NOT operator mode.** Editor mode is a testing harness. Operator mode is earned by completing the course. The distinction must be explicit in the SKILL.md.
+
 ## Phase 0 / Tooling
 
 - [ ] **Write 00-f tooling stage CONTEXT.md** — Stage for gbrain, graphify, context loader, Helix open brain setup. Deferred until operator-kit agents exist (Stage 01+). Now also needs loop engineering standards setup (LOOP.md is written; 00-f should wire it into the build pipeline operationally).

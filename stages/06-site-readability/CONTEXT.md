@@ -63,7 +63,7 @@ This moment can be spoiled and it does not matter. Knowing it is coming does not
 
 Games oscillate: hard area → power spike → steamrolled → power spike earned. The curriculum must do the same. The AI engineering fundamentals (transformers, attention, embeddings) are genuinely hard. The GTM application phases that follow should feel like a power spike — students see exactly where the theory lands in Clay, in signal scoring, in outreach drafting. Then the signal engine work steamrolls them again before the mission command unlock feels earned.
 
-**Stage 06 must produce `output/pacing-map.md`** — a phase-by-phase difficulty rating (hard / medium / power spike) with the rationale. Stage 02 reads this before injecting lessons; if a cluster of hard phases has no relief, Stage 02 flags it rather than injecting blindly. The pacing map is not decoration — it is a Stage 02 input.
+**Stage 06 must produce `output/pacing-map.md`** — a phase-by-phase difficulty rating (hard / medium / power spike) with the rationale. The pacing map is not decoration — it is a pipeline input. On first run, it is consumed by Stage 09 (quality pass), which flags hard-phase clusters and corrects Stage 02 lesson content. On subsequent iterations, Stage 02 reads pacing-map.md before re-injecting lessons. Do not treat pacing-map.md as a first-run Stage 02 prerequisite — Stage 06 runs after Stage 02 and produces the map; Stage 09 closes the loop.
 
 ### What Gamification Means Here
 

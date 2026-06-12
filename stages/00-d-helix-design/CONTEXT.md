@@ -46,6 +46,7 @@ The audit check below enforces this by requiring an explicit confirmation line i
 | FSRS params validated | A worked example quiz card with computed intervals is present in fsrs-integration-spec.md |
 | Stage 07 criteria are decision-ready | student-state-options.md names criteria beyond "persistent, cheap, reliable" |
 | Human gate acknowledged | Human has reviewed student-state-options.md and recorded the mechanism decision before 00-e-full runs |
+| Helix ramp schedule produced | helix-ramp-schedule.md exists and specifies per-phase capability level for at least phases 01–10 |
 
 ## Outputs
 
@@ -55,3 +56,4 @@ The audit check below enforces this by requiring an explicit confirmation line i
 | `copy-paste-flag-format.md` | `output/` | LOCKED — exact string format Helix parses |
 | `faculty-persona-spec.md` | `output/` | Persona types, trigger conditions, voice rules |
 | `student-state-options.md` | `output/` | Mechanism candidates and evaluation criteria |
+| `helix-ramp-schedule.md` | `output/` | Per-phase Helix capability level: what Helix can do in each phase (tutor only / tutor + quiz scoring / tutor + light context-read / full context-read / Revelation 1 trigger). Required by Stage 06 to implement the gradual introduction. |

@@ -1,4 +1,4 @@
-<!-- /autoplan restore point: /Users/raymo/.gstack/projects/BlueSkyGTM-full-stack-gtm/main-autoplan-restore-20260611-142211.md -->
+<!-- /autoplan restore point: /Users/raymo/.gstack/projects/BlueSkyGTM-full-stack-gtm/main-autoplan-restore-20260611-215530.md -->
 # Plan: Phase 0 — Build the Ecosystem Before Releasing the Finish
 
 ## Decision
@@ -136,7 +136,7 @@ LOCKED outputs (00-d only): `copy-paste-flag-format.md` and `fsrs-integration-sp
 - **00-a spec refresh gate (Stage 06):** Before Stage 06 runs, re-run the 00-a audit checks against the live site to catch rendering stack drift. Stage 06 CONTEXT.md should reference the git hash recorded in design-system-snapshot.md.
 - **Agent wiring smoke test (Stage 08):** Add an integration check to Stage 08 that confirms project-keywords.json correctly injects files for each keyword before wiring agents.
 
-## GSTACK REVIEW REPORT
+## GSTACK REVIEW REPORT (Session 1 — 2026-06-11)
 
 **Phases run:** CEO, Eng, DX (no UI scope detected)
 **Dual voices:** Claude subagent only (Codex not installed — single-reviewer mode)
@@ -146,3 +146,24 @@ LOCKED outputs (00-d only): `copy-paste-flag-format.md` and `fsrs-integration-sp
 **Critical fixes applied:** FSRS validation gate, Stage 01 dry-run SC, 00-d human gate
 **High fixes applied:** vault inputs to 00-c, 00-a failure modes, student promise scaffold, CLAUDE.md entry point, re-run safety
 **Deferred to TODOS.md:** 00-a spec refresh, Stage 08 wiring smoke test
+
+## GSTACK REVIEW REPORT (Session 2 — 2026-06-11, gamification + editor mode)
+
+**Phases run:** CEO, Design, Eng, DX
+**Dual voices:** [codex-unavailable] — single-reviewer mode
+**Auto-decided:** 10 decisions
+**Taste decisions surfaced at gate:** 0
+**User challenges:** 0
+**Critical fixes applied:**
+  - Stage 06 pacing-map sequencing bug fixed (Stage 02 vs Stage 09 as consumer)
+  - Editor mode architecture defined (.editor-mode file, gitignored, Helix reads first)
+  - helix-ramp-schedule.md added to Stage 00-d required outputs + audit check
+**High fixes applied:**
+  - /edit-mode added to TODOS.md as pre-Stage-05 requirement
+  - Rename mechanism (Stage 07) added to audit checks
+  - Editor mode bypass added to Stage 07 gate-check-spec audit check
+  - loop-eng-check + /edit-mode routing stubs added to CLAUDE.md
+**Design gaps identified:**
+  - Progress UI ↔ repo sync mechanism deferred to Stage 07 student-state-options.md
+  - [EDITOR MODE] Helix prefix specified as required indicator
+**Deferred to TODOS.md:** editor mode SKILL.md (pre-Stage-05), loop-eng-check routing confirmed
