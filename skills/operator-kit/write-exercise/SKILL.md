@@ -10,19 +10,39 @@ Uses GLM-5.1 (reasoning). Active from Stage 03.
 
 ## Chain
 
+### Step 0 — Pre-flight
+```bash
+python3 -c "import openai" 2>/dev/null || { echo "ERROR: pip install openai"; exit 1; }
+[ -n "$ZHIPUAI_API_KEY" ] || { echo "ERROR: ZHIPUAI_API_KEY not set — check .env"; exit 1; }
+```
+
 ### Step 1 — Read lesson content
 ```bash
 LESSON="${1:-}"
-LESSON_CONTENT=$(cat "$LESSON" 2>/dev/null || echo "No lesson file specified.")
+[ -f "$LESSON" ] || { echo "ERROR: lesson file not found: $LESSON"; exit 1; }
 TOPIC=$(head -3 "$LESSON" 2>/dev/null | grep "^#" | sed 's/^#*//' | xargs)
+
+# Write content to temp file to avoid shell arg escaping issues
+cp "$LESSON" /tmp/zai_lesson_content.txt
 ```
 
-### Step 2 — Call GLM-5.1
+### Step 2 — Call GLM-5.1 + write output
 ```bash
-python3 - <<'PYEOF'
+OUTPUT_DIR="stages/03-exercise-design/output"
+mkdir -p "$OUTPUT_DIR"
+SLUG=$(echo "$TOPIC" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -cd 'a-z0-9-')
+OUTPUT_FILE="$OUTPUT_DIR/${SLUG}-exercises.md"
+
+python3 - "$TOPIC" /tmp/zai_lesson_content.txt <<'PYEOF' > "$OUTPUT_FILE"
 import os, sys
+
 sys.stdout.reconfigure(encoding='utf-8')
-from openai import OpenAI
+
+try:
+    from openai import OpenAI
+except ImportError:
+    print("ERROR: openai package not installed. Run: pip install openai")
+    sys.exit(1)
 
 client = OpenAI(
     api_key=os.environ["ZHIPUAI_API_KEY"],
@@ -30,7 +50,7 @@ client = OpenAI(
 )
 
 topic = sys.argv[1] if len(sys.argv) > 1 else ""
-lesson_content = sys.argv[2] if len(sys.argv) > 2 else ""
+lesson_content = open(sys.argv[2]).read() if len(sys.argv) > 2 else ""
 
 SYSTEM = """You design practical exercises for GTM engineering students. Each exercise:
 - Ties directly to a lesson's learning outcomes (never generic)
@@ -71,11 +91,16 @@ print()
 PYEOF
 ```
 
-### Step 3 — Write output
+### Step 3 — Validate + report
 ```bash
-OUTPUT_DIR="stages/03-exercise-design/output"
-mkdir -p "$OUTPUT_DIR"
-SLUG=$(echo "$TOPIC" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | tr -cd 'a-z0-9-')
-python3 [block above] "$TOPIC" "$LESSON_CONTENT" > "$OUTPUT_DIR/${SLUG}-exercises.md"
-echo "Written: $OUTPUT_DIR/${SLUG}-exercises.md"
+BYTES=$(wc -c < "$OUTPUT_FILE" 2>/dev/null || echo 0)
+if [ "$BYTES" -lt 200 ]; then
+  echo "ERROR: output too small ($BYTES bytes) — likely API failure. Check $OUTPUT_FILE"
+  rm -f /tmp/zai_lesson_content.txt
+  exit 1
+fi
+EXERCISES=$(grep -c "^## Exercise" "$OUTPUT_FILE" 2>/dev/null || echo 0)
+echo "Written: $OUTPUT_FILE ($EXERCISES exercises)"
+[ "$EXERCISES" -lt 2 ] && echo "WARN: expected 2-3 exercises, found $EXERCISES — check for truncation"
+rm -f /tmp/zai_lesson_content.txt
 ```

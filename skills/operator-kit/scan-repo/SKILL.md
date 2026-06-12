@@ -11,6 +11,12 @@ Uses GLM-4.7-Flash (fast, low cost). Active from Stage 01+.
 
 ## Chain
 
+### Step 0 — Pre-flight
+```bash
+python3 -c "import openai" 2>/dev/null || { echo "ERROR: pip install openai"; exit 1; }
+[ -n "$ZHIPUAI_API_KEY" ] || { echo "ERROR: ZHIPUAI_API_KEY not set — check .env"; exit 1; }
+```
+
 ### Step 1 — Collect file tree + target content
 ```bash
 QUERY="${1:-summarize the repo structure}"
@@ -23,23 +29,33 @@ CONTENT=""
 for f in $RELEVANT; do
   CONTENT="$CONTENT\n\n--- $f ---\n$(head -40 $f)"
 done
+
+# Write to temp files
+printf '%s' "$TREE" > /tmp/zai_scan_tree.txt
+printf '%b' "$CONTENT" > /tmp/zai_scan_content.txt
 ```
 
 ### Step 2 — Call GLM-4.7-Flash
 ```bash
-python3 - <<'PYEOF'
+python3 - "$QUERY" /tmp/zai_scan_tree.txt /tmp/zai_scan_content.txt <<'PYEOF'
 import os, sys
+
 sys.stdout.reconfigure(encoding='utf-8')
-from openai import OpenAI
+
+try:
+    from openai import OpenAI
+except ImportError:
+    print("ERROR: openai package not installed. Run: pip install openai")
+    sys.exit(1)
 
 client = OpenAI(
     api_key=os.environ["ZHIPUAI_API_KEY"],
     base_url=os.environ.get("ZAI_BASE_URL", "https://api.z.ai/api/coding/paas/v4"),
 )
 
-query = sys.argv[1] if len(sys.argv) > 1 else "summarize the repo structure"
-tree  = sys.argv[2] if len(sys.argv) > 2 else ""
-content = sys.argv[3] if len(sys.argv) > 3 else ""
+query   = sys.argv[1] if len(sys.argv) > 1 else "summarize the repo structure"
+tree    = open(sys.argv[2]).read() if len(sys.argv) > 2 else ""
+content = open(sys.argv[3]).read() if len(sys.argv) > 3 else ""
 
 SYSTEM = """You are a codebase navigator for a GTM engineering curriculum project.
 You read file trees and content snippets and give concise, actionable summaries.
@@ -67,6 +83,8 @@ for chunk in response:
         print(delta, end="", flush=True)
 print()
 PYEOF
+
+rm -f /tmp/zai_scan_tree.txt /tmp/zai_scan_content.txt
 ```
 
 ### Step 3 — Report

@@ -69,3 +69,7 @@ graphify-out/
 !scripts/verify_graph.py
 
 .vercel
+
+# Stray Python packages (created in wrong location)
+UsersraymoAppDataLocal*/
+UsersRaymoAppDataLocal*/
